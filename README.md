@@ -14,8 +14,8 @@ Extension will run contract use local chsimus, input what script and args which 
   * or click `Run Chsimu` button in context menu of file explorer
 
 * Input script and arg:
-  * input script path(required) + space + script args  
-  ![input](https://github.com/duiyuan/simulator-devtool/blob/main/publish/input.jpeg)
+  * input script path(required) + space + script args   
+  ![input](https://github.com/duiyuan/simulator-devtool/tree/main/publish/input.jpg)
 ## Extension Settings
 
 This extension contributes the following settings:
