@@ -15,7 +15,7 @@ Extension will run contract use local chsimus, input what script and args which 
 
 * Input script and arg:
   * input script path(required) + space + script args   
-  ![input](https://github.com/duiyuan/simulator-devtool/tree/main/publish/input.jpg)
+  ![input](https://pic1.imgdb.cn/item/6343c53916f2c2beb1c2db56.jpg)
 ## Extension Settings
 
 This extension contributes the following settings:
