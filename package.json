@@ -61,7 +61,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "build:local": "vsce package --no-git-tag-version"
   },
   "devDependencies": {
     "@types/vscode": "^1.71.0",

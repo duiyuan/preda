@@ -10,7 +10,6 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log(123);
 	const devChsimuCommand = vscode.commands.registerCommand(
 		'ChsimuDev.run',
 		async (uri: vscode.Uri) => {
@@ -21,7 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
 			if (!dirPath) {
 				dirPath = vscode.window?.activeTextEditor?.document.uri.fsPath || '';
 			}
-			const lastStr = dirPath.lastIndexOf('/') + 1;
+			const isWin = process.platform === 'win32';
+			const lastStr = dirPath.lastIndexOf(isWin ? '\\' : '/') + 1;
 			const fileName = dirPath.substring(lastStr);
 			const fileFloder = dirPath.substring(0, lastStr);
 			if (fileName.match(/\.prd/)) {
@@ -47,9 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
 					message: 'Dev Chain Simulator'
 				});
 				t.show();
-				t.sendText(`${chsimuPath} ${sPath} ${scriptArg}`);
-
-				dirPath && vscode.window.showInformationMessage(fileFloder);
+				t.sendText(`${chsimuPath} -log ${sPath} ${scriptArg || ''}`);
 			} else {
 				vscode.window.showErrorMessage('Run Chain Simulator: only run with prd file');
 			}
