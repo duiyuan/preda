@@ -4,6 +4,9 @@ import * as vscode from 'vscode';
 import path = require('path');
 import { existsSync } from 'fs';
 
+
+let terminal: vscode.Terminal | undefined;
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -23,8 +26,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const isWin = process.platform === 'win32';
 			const lastStr = dirPath.lastIndexOf(isWin ? '\\' : '/') + 1;
 			const fileName = dirPath.substring(lastStr);
-			const fileFloder = dirPath.substring(0, lastStr);
-			if (fileName.match(/\.prd/)) {
+			// const fileFloder = dirPath.substring(0, lastStr);
+			if (fileName.match(/\.script/)) {
 				// 获取Chsimu路径
 				const chsimuPath = vscode.workspace.getConfiguration('ChsimuDev').get('path') as string;
 
@@ -32,24 +35,19 @@ export function activate(context: vscode.ExtensionContext) {
 					return vscode.window.showErrorMessage('Run Chain Simulator: can not find Chsimu ' + chsimuPath);
 				}
 
-				// 获取用户输入的script 和 参数
-				const contractScript = await vscode.window.showInputBox({
-					placeHolder: "contract script and args",
-					prompt: "run contract with script and args. e.g.: test.script /count:1000",
+				// 获取用户输入的参数
+				const contractScriptArg = await vscode.window.showInputBox({
+					placeHolder: "contract script args",
+					prompt: "run contract with script args. e.g.: /count:1000",
 				});
-				const [scriptPath, scriptArg] = (contractScript || '').split(' ');
-				const sPath = path.resolve(fileFloder, scriptPath);
-				if(contractScript === '' || !existsSync(sPath)){
-					return vscode.window.showErrorMessage('Run Chain Simulator: can not find script ' + sPath);
-				}
 
-				const t = vscode.window.createTerminal({
+				terminal = terminal || vscode.window.createTerminal({
 					message: 'Dev Chain Simulator'
 				});
-				t.show();
-				t.sendText(`${chsimuPath} -log ${sPath} ${scriptArg || ''}`);
+				terminal.show();
+				terminal.sendText(`${chsimuPath} -log ${dirPath} ${contractScriptArg || ''}`);
 			} else {
-				vscode.window.showErrorMessage('Run Chain Simulator: only run with prd file');
+				vscode.window.showErrorMessage('Run Chain Simulator: only run with script file');
 			}
 		}
 	);

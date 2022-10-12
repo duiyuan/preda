@@ -14,8 +14,9 @@ Extension will run contract use local chsimus, input what script and args which 
   * or click `Run Chsimu` button in context menu of file explorer
 
 * Input script and arg:
-  * input script path(required) + space + script args   
+  * input script path(required) + space + script args
   ![input](https://pic1.imgdb.cn/item/6343c53916f2c2beb1c2db56.jpg)
+
 ## Extension Settings
 
 This extension contributes the following settings:

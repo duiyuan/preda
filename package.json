@@ -19,7 +19,7 @@
         "command": "ChsimuDev.run",
         "key": "ctrl+5",
         "mac": "cmd+5",
-        "when": "editorTextFocus && resourceExtname == .prd"
+        "when": "editorTextFocus && resourceExtname == .script"
       }
     ],
     "commands": [
@@ -33,14 +33,14 @@
         {
           "command": "ChsimuDev.run",
           "group": "1_modification",
-          "when": "resourceExtname == .prd"
+          "when": "resourceExtname == .script"
         }
       ],
       "editor/context": [
         {
           "command": "ChsimuDev.run",
           "group": "1_modification",
-          "when": "editorTextFocus && resourceExtname == .prd"
+          "when": "editorTextFocus && resourceExtname == .script"
         }
       ]
     },
