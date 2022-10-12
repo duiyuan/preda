@@ -26,7 +26,6 @@ export function activate(context: vscode.ExtensionContext) {
 			const isWin = process.platform === 'win32';
 			const lastStr = dirPath.lastIndexOf(isWin ? '\\' : '/') + 1;
 			const fileName = dirPath.substring(lastStr);
-			// const fileFloder = dirPath.substring(0, lastStr);
 			if (fileName.match(/\.script/)) {
 				// 获取Chsimu路径
 				const chsimuPath = vscode.workspace.getConfiguration('ChsimuDev').get('path') as string;
@@ -35,6 +34,10 @@ export function activate(context: vscode.ExtensionContext) {
 					return vscode.window.showErrorMessage('Run Chain Simulator: can not find Chsimu ' + chsimuPath);
 				}
 
+			  const lastStr = chsimuPath.lastIndexOf(isWin ? '\\' : '/') + 1;
+			  const chsimuFloder = chsimuPath.substring(0, lastStr);
+			  const chsimuName = chsimuPath.substring(lastStr);
+
 				// 获取用户输入的参数
 				const contractScriptArg = await vscode.window.showInputBox({
 					placeHolder: "contract script args",
@@ -42,10 +45,11 @@ export function activate(context: vscode.ExtensionContext) {
 				});
 
 				terminal = terminal || vscode.window.createTerminal({
-					message: 'Dev Chain Simulator'
+					message: 'Dev Chain Simulator',
+          cwd: chsimuFloder
 				});
 				terminal.show();
-				terminal.sendText(`${chsimuPath} -log ${dirPath} ${contractScriptArg || ''}`);
+				terminal.sendText(`${chsimuName} -log ${dirPath} ${contractScriptArg || ''}`);
 			} else {
 				vscode.window.showErrorMessage('Run Chain Simulator: only run with script file');
 			}
