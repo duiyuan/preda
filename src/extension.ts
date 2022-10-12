@@ -43,8 +43,10 @@ export function activate(context: vscode.ExtensionContext) {
 					placeHolder: "contract script args",
 					prompt: "run contract with script args. e.g.: /count:1000",
 				});
-
-				terminal = terminal || vscode.window.createTerminal({
+        if (terminal) {
+          terminal.dispose();
+        }
+				terminal = vscode.window.createTerminal({
 					message: 'Dev Chain Simulator',
           cwd: chsimuFloder
 				});
