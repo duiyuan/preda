@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
           cwd: chsimuFloder
 				});
 				terminal.show();
-				terminal.sendText(`${chsimuName} -log ${dirPath} ${contractScriptArg || ''}`);
+				terminal.sendText(`.${isWin ? '\\' : '/'}${chsimuName} -log ${dirPath} ${contractScriptArg || ''}`);
 			} else {
 				vscode.window.showErrorMessage('Run Chain Simulator: only run with script file');
 			}
