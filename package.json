@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:ChsimuDev.run"
+    "onCommand:ChsimuDev.run",
+    "onCommand:ChsimuDev.edit"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -20,12 +21,22 @@
         "key": "ctrl+5",
         "mac": "cmd+5",
         "when": "editorTextFocus && resourceExtname == .script"
+      },
+      {
+        "command": "ChsimuDev.edit",
+        "key": "ctrl+6",
+        "mac": "cmd+6",
+        "when": "editorTextFocus && resourceExtname == .script"
       }
     ],
     "commands": [
       {
         "command": "ChsimuDev.run",
         "title": "Run Chsimu"
+      },
+      {
+        "command": "ChsimuDev.edit",
+        "title": "Edit Chsimu"
       }
     ],
     "menus": {
@@ -34,11 +45,21 @@
           "command": "ChsimuDev.run",
           "group": "1_modification",
           "when": "resourceExtname == .script"
+        },
+        {
+          "command": "ChsimuDev.edit",
+          "group": "1_modification",
+          "when": "resourceExtname == .script"
         }
       ],
       "editor/context": [
         {
           "command": "ChsimuDev.run",
+          "group": "1_modification",
+          "when": "editorTextFocus && resourceExtname == .script"
+        },
+        {
+          "command": "ChsimuDev.edit",
           "group": "1_modification",
           "when": "editorTextFocus && resourceExtname == .script"
         }
