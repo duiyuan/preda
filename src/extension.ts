@@ -81,7 +81,7 @@ export function activate(context: vscode.ExtensionContext) {
             terminal.dispose();
           }
           // 创建并执行
-          terminal = vscode.window.createTerminal({
+          terminal = terminal || vscode.window.createTerminal({
             message: 'Run Chain Simulator',
             cwd: chsimuFloder
           });
@@ -151,9 +151,42 @@ export function activate(context: vscode.ExtensionContext) {
 
 	);
 
+  // compile
+  const compileChsimuCommand = vscode.commands.registerCommand(
+		'ChsimuDev.compile',
+		async (uri: vscode.Uri) => {
+      try {
+        const { currentFileName, currentFilePath } = getCurrentActiveFileAndFloder(uri);
+        
+        if (currentFileName.match(/\.prd/)) {
+          
+          const { chsimuFloder, chsimuName } = getChsimuFileFloder();
+
+          // 释放终端，防止卡住
+          if (terminal) {
+            terminal.dispose();
+          }
+          // 创建并执行
+          terminal = terminal || vscode.window.createTerminal({
+            message: 'Run Compile',
+            cwd: chsimuFloder
+          });
+          terminal.show();
+          terminal.sendText(`.${isWin ? '\\' : '/'}${chsimuName} -log ${currentFilePath}`);
+        } else {
+          vscode.window.showErrorMessage('Run Compile: only run with prd file');
+        }
+      }catch(e) {
+        console.log(e);
+      }
+		}
+
+	);
+
 	// 注册到监听队列中
 	context.subscriptions.push(runChsimuCommand);
 	context.subscriptions.push(editChsimuCommand);
+	context.subscriptions.push(compileChsimuCommand);
 
 
 }
