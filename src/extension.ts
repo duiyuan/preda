@@ -6,7 +6,6 @@ import { existsSync, writeFileSync } from 'fs';
 
 
 let terminal: vscode.Terminal | undefined;
-let inputBox: vscode.InputBox | undefined;
 const CONFIG_NAME = 'scriptArgs.json';
 
 const isWin = process.platform === 'win32';
@@ -81,7 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
             terminal.dispose();
           }
           // 创建并执行
-          terminal = terminal || vscode.window.createTerminal({
+          terminal = vscode.window.createTerminal({
             message: 'Run Chain Simulator',
             cwd: chsimuFloder
           });
@@ -112,7 +111,7 @@ export function activate(context: vscode.ExtensionContext) {
           const { chsimuFloder, chsimuName } = getChsimuFileFloder();
 
           // 获取用户输入的参数
-          inputBox = inputBox || vscode.window.createInputBox();
+          const inputBox = vscode.window.createInputBox();
           inputBox.placeholder = "contract script args";
           inputBox.prompt = "run contract with script args. e.g.: /count:1000";
           inputBox.value = configJson[currentFileName] || '';
@@ -121,7 +120,6 @@ export function activate(context: vscode.ExtensionContext) {
           inputBox.onDidAccept(() => {
             if (inputBox) {
               const contractScriptArg = inputBox.value;
-              console.log(contractScriptArg);
               // 释放终端，防止卡住
               if (terminal) {
                 terminal.dispose();
@@ -167,7 +165,7 @@ export function activate(context: vscode.ExtensionContext) {
             terminal.dispose();
           }
           // 创建并执行
-          terminal = terminal || vscode.window.createTerminal({
+          terminal = vscode.window.createTerminal({
             message: 'Run Compile',
             cwd: chsimuFloder
           });
