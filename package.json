@@ -12,7 +12,8 @@
   "activationEvents": [
     "onCommand:ChsimuDev.run",
     "onCommand:ChsimuDev.edit",
-    "onCommand:ChsimuDev.compile"
+    "onCommand:ChsimuDev.compile",
+    "onCommand:ChsimuDev.view"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -48,6 +49,10 @@
       {
         "command": "ChsimuDev.compile",
         "title": "Run Compile"
+      },
+      {
+        "command": "ChsimuDev.view",
+        "title": "View HTML"
       }
     ],
     "menus": {
@@ -66,6 +71,11 @@
           "command": "ChsimuDev.compile",
           "group": "1_modification",
           "when": "resourceExtname == .prd"
+        },
+        {
+          "command": "ChsimuDev.view",
+          "group": "1_modification",
+          "when": "resourceExtname == .html"
         }
       ],
       "editor/context": [
@@ -83,6 +93,11 @@
           "command": "ChsimuDev.compile",
           "group": "1_modification",
           "when": "editorTextFocus && resourceExtname == .prd"
+        },
+        {
+          "command": "ChsimuDev.view",
+          "group": "1_modification",
+          "when": "editorTextFocus && resourceExtname == .html"
         }
       ]
     },
@@ -106,17 +121,21 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.71.0",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "16.x",
+    "@types/vscode": "^1.71.0",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
+    "@vscode/test-electron": "^2.1.5",
     "eslint": "^8.20.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
-    "typescript": "^4.7.4",
-    "@vscode/test-electron": "^2.1.5"
+    "typescript": "^4.7.4"
   },
-  "publisher": "rick"
+  "publisher": "rick",
+  "dependencies": {
+    "@types/ejs": "^3.1.1",
+    "ejs": "^3.1.8"
+  }
 }
