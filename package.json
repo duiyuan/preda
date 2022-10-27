@@ -52,51 +52,51 @@
       },
       {
         "command": "ChsimuDev.view",
-        "title": "View HTML"
+        "title": "View Chsimu HTML"
       }
     ],
     "menus": {
       "explorer/context": [
         {
           "command": "ChsimuDev.run",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "resourceExtname == .script"
         },
         {
           "command": "ChsimuDev.edit",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "resourceExtname == .script"
         },
         {
           "command": "ChsimuDev.compile",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "resourceExtname == .prd"
         },
         {
           "command": "ChsimuDev.view",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "resourceExtname == .html"
         }
       ],
       "editor/context": [
         {
           "command": "ChsimuDev.run",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "editorTextFocus && resourceExtname == .script"
         },
         {
           "command": "ChsimuDev.edit",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "editorTextFocus && resourceExtname == .script"
         },
         {
           "command": "ChsimuDev.compile",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "editorTextFocus && resourceExtname == .prd"
         },
         {
           "command": "ChsimuDev.view",
-          "group": "1_modification",
+          "group": "1_ChsimuDev",
           "when": "editorTextFocus && resourceExtname == .html"
         }
       ]

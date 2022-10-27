@@ -55,17 +55,20 @@ export default class ViewLoader {
       null,
       this.context.subscriptions
     );
+    return this;
   }
 
   dispose() {
     this.panel?.dispose();
   }
 
-  async render() {
+  async render(): Promise<string> {
     const content = await fs.readFile(this.filepath, { encoding: "utf-8" });
-
-    return ejs.render(content, {
-      staticPath: this.panel?.webview.asWebviewUri(this.resourceUri),
-    });
+    const resourcePath = this.panel?.webview.asWebviewUri(this.resourceUri);
+    return ejs.render(
+      content,
+      { staticPath: resourcePath },
+      { beautify: true }
+    );
   }
 }

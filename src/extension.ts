@@ -2,8 +2,10 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 import path = require("path");
-import viewLoader from "./viewloader";
 import { existsSync, writeFileSync } from "fs";
+
+import ViewLoader from "./viewloader";
+import PlatUtil from "./platformUtil";
 
 let terminal: vscode.Terminal | undefined;
 const CONFIG_NAME = "scriptArgs.json";
@@ -82,11 +84,14 @@ export function activate(context: vscode.ExtensionContext) {
           if (terminal) {
             terminal.dispose();
           }
+          // const plat = new PlatUtil();
+          // const bashPath = await plat.terminalShellPath("cmd");
           // 创建并执行
           terminal = vscode.window.createTerminal({
             message: "Run Chain Simulator",
             cwd: chsimuFloder,
           });
+          // 创建并执行
           terminal.show();
           terminal.sendText(
             `.${isWin ? "\\" : "/"}${chsimuName} -log ${currentFilePath} ${
@@ -176,7 +181,7 @@ export function activate(context: vscode.ExtensionContext) {
           if (terminal) {
             terminal.dispose();
           }
-          // 创建并执行
+
           terminal = vscode.window.createTerminal({
             message: "Run Compile",
             cwd: chsimuFloder,
@@ -201,6 +206,11 @@ export function activate(context: vscode.ExtensionContext) {
         const { currentFileName, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
         vscode.window.showErrorMessage(currentFileName);
+        const webview = new ViewLoader({
+          context,
+          filepath: uri.fsPath,
+        });
+        webview.create();
       } catch (e) {
         console.log(e);
       }
