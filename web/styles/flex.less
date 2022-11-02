@@ -1,0 +1,60 @@
+/* flex 两侧分列  ul li */
+.ui-flex-divide {
+  .flex-divide;
+  > .ui-flex-divide-item {
+    flex: 1;
+  }
+  > .ui-flex-divide-item:last-of-type {
+    text-align: right;
+  }
+}
+
+/* flex 水平 靠右 */
+.ui-flex-end-center {
+  .flex-row(flex-end, center);
+}
+
+/* flex 水平 靠左 */
+.ui-flex-start-center {
+  .flex-row(flex-start, center);
+}
+
+.ui-flex-start {
+  .flex-row(flex-start, flex-start);
+}
+
+/* flex 垂直 上中 */
+.ui-column-start-center {
+  .flex-column(flex-start, center);
+}
+
+/* flex 垂直 上右 */
+.ui-column-start-end {
+  .flex-column(flex-start, flex-end);
+}
+
+/* flex 垂直 靠中 */
+.ui-column-center-center {
+  .flex-column(center, center);
+}
+
+.ui-column-center {
+  .flex-column(center, center);
+}
+
+.ui-center {
+  .flex-center;
+}
+
+.ui-flex-space-between {
+  .flex-row(space-between, center);
+}
+
+.ui-flex-space-around {
+  .flex-row(space-around, center);
+}
+
+.ui-ib {
+  display: inline-block;
+  vertical-align: middle;
+}

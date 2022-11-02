@@ -6,7 +6,6 @@ import { existsSync, writeFileSync } from "fs";
 
 import { spawn } from "./utils";
 import ViewLoader from "./viewloader";
-import PlatUtil from "./platformUtil";
 
 const { normalize, resolve } = path;
 
@@ -87,7 +86,7 @@ export function activate(context: vscode.ExtensionContext) {
           const contractScriptArg = configJson[currentFileName] || "";
           const { chsimuFloder, chsimuName } = getChsimuFileFloder();
 
-          const uiTemp = resolve(extessionPath, "resource/template.html");
+          const uiTemp = resolve(extessionPath, "out/web/index.html");
           const outTemp = resolve(currentFolder, "results/xx.html");
 
           const args = [

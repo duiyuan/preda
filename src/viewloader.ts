@@ -23,7 +23,7 @@ export default class ViewLoader {
     this.filepath = params.filepath;
     this.disposables = [];
     this.resourceUri = vscode.Uri.file(
-      path.join(this.context.extensionPath, "resource")
+      path.join(this.context.extensionPath, "out/web")
     );
   }
 
@@ -40,7 +40,7 @@ export default class ViewLoader {
         enableScripts: true,
         retainContextWhenHidden: true,
         localResourceRoots: [
-          vscode.Uri.file(path.join(this.context.extensionPath, "resource")),
+          vscode.Uri.file(path.join(this.context.extensionPath, "out/web")),
         ],
       }
     );
