@@ -4,10 +4,15 @@ import * as vscode from "vscode";
 import path = require("path");
 import { existsSync, writeFileSync } from "fs";
 
+import { spawn } from "./utils";
 import ViewLoader from "./viewloader";
 import PlatUtil from "./platformUtil";
 
+const { normalize, resolve } = path;
+
 let terminal: vscode.Terminal | undefined;
+let outputChannel: vscode.OutputChannel;
+
 const CONFIG_NAME = "scriptArgs.json";
 
 const isWin = process.platform === "win32";
@@ -32,10 +37,10 @@ const getCurrentActiveFileAndFolder = (uri: vscode.Uri) => {
   }
   const lastStr = currentFilePath.lastIndexOf(isWin ? "\\" : "/") + 1;
   const currentFileName = currentFilePath.substring(lastStr);
-  const currentFloder = currentFilePath.substring(0, lastStr);
+  const currentFolder = currentFilePath.substring(0, lastStr);
   return {
     currentFileName,
-    currentFloder,
+    currentFolder,
     currentFilePath,
   };
 };
@@ -65,39 +70,69 @@ const getChsimuFileFloder = () => {
 export function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
+  outputChannel = vscode.window.createOutputChannel("ChsimuDev");
 
   // run
   const runChsimuCommand = vscode.commands.registerCommand(
     "ChsimuDev.run",
     async (uri: vscode.Uri) => {
       try {
-        const { currentFileName, currentFloder, currentFilePath } =
+        const extessionPath = context.extensionPath;
+        const { currentFileName, currentFolder, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
 
         if (currentFileName.match(/\.script/)) {
-          const configPath = path.resolve(currentFloder, CONFIG_NAME);
+          const configPath = path.resolve(currentFolder, CONFIG_NAME);
           const configJson = existsSync(configPath) ? require(configPath) : {};
           const contractScriptArg = configJson[currentFileName] || "";
           const { chsimuFloder, chsimuName } = getChsimuFileFloder();
 
-          // 释放终端，防止卡住
-          if (terminal) {
-            terminal.dispose();
-          }
-          // const plat = new PlatUtil();
-          // const bashPath = await plat.terminalShellPath("cmd");
-          // 创建并执行
-          terminal = vscode.window.createTerminal({
-            message: "Run Chain Simulator",
-            cwd: chsimuFloder,
+          const uiTemp = resolve(extessionPath, "resource/template.html");
+          const outTemp = resolve(currentFolder, "results/xx.html");
+
+          const args = [
+            `-log ${currentFilePath}`,
+            `${contractScriptArg || ""}`,
+            `-viz_templ:${uiTemp}`,
+            `-viz:${outTemp}`,
+          ];
+          const invokeMsg = `==> Job Runing: ${chsimuName} ${args.join("")}`;
+
+          outputChannel.appendLine(invokeMsg);
+          spawn({
+            cmd: chsimuName,
+            option: { cwd: chsimuFloder, shell: true },
+            args,
+            onData: (data) => {
+              outputChannel.appendLine(data.toString());
+            },
+            onErr: (err) => {
+              outputChannel.appendLine(`==> Job Failed: ${err.toString()}`);
+            },
+            onExt: () => {
+              outputChannel.show();
+              outputChannel.appendLine(
+                `==> Job Done: ${outTemp} has been generated which will be auto open`
+              );
+            },
           });
-          // 创建并执行
-          terminal.show();
-          terminal.sendText(
-            `.${isWin ? "\\" : "/"}${chsimuName} -log ${currentFilePath} ${
-              contractScriptArg || ""
-            }`
-          );
+
+          // 释放终端，防止卡住
+          // if (terminal) {
+          //   terminal.dispose();
+          // }
+          // // // 创建并执行
+          // terminal = vscode.window.createTerminal({
+          //   message: "Run Chain Simulator",
+          //   cwd: chsimuFloder,
+          // });
+          // // // 创建并执行
+          // terminal.show();
+          // terminal.sendText(
+          //   `.${isWin ? "\\" : "/"}${chsimuName} -log ${currentFilePath} ${
+          //     contractScriptArg || ""
+          //   }`
+          // );
         } else {
           vscode.window.showErrorMessage(
             "Run Chain Simulator: only run with script file"
@@ -114,11 +149,11 @@ export function activate(context: vscode.ExtensionContext) {
     "ChsimuDev.edit",
     async (uri: vscode.Uri) => {
       try {
-        const { currentFileName, currentFloder, currentFilePath } =
+        const { currentFileName, currentFolder, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
 
         if (currentFileName.match(/\.script/)) {
-          const configPath = path.resolve(currentFloder, CONFIG_NAME);
+          const configPath = path.resolve(currentFolder, CONFIG_NAME);
           const configJson = existsSync(configPath) ? require(configPath) : {};
 
           const { chsimuFloder, chsimuName } = getChsimuFileFloder();
@@ -205,14 +240,10 @@ export function activate(context: vscode.ExtensionContext) {
       try {
         const { currentFileName, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
-        vscode.window.showErrorMessage(currentFileName);
-        const webview = new ViewLoader({
-          context,
-          filepath: uri.fsPath,
-        });
+        const webview = new ViewLoader({ context, filepath: uri.fsPath });
         webview.create();
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        vscode.window.showErrorMessage(e.toString());
       }
     }
   );
