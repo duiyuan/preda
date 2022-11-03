@@ -1,4 +1,4 @@
-type Message = import("../src/view/messages/messageTypes").Message;
+type Message = any;
 
 type VSCode = {
   postMessage<T extends Message = Message>(message: T): void;
@@ -137,9 +137,11 @@ type ContractSummary = {
 
 type Assets = Array<AssetsItem>;
 
-type AssetFilter = {
-  [key in keyof AssetsItem] ?: any
-} | ((assets: Assets) => Assets);
+type AssetFilter =
+  | {
+      [key in keyof AssetsItem]?: any;
+    }
+  | ((assets: Assets) => Assets);
 
 type AssetsItem = {
   Address: string;
