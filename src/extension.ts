@@ -106,6 +106,7 @@ export function activate(context: vscode.ExtensionContext) {
           const invokeMsg = `==> [Job Runing] ${chsimuName} ${args.join("")}`;
 
           outputChannel.appendLine(invokeMsg);
+          outputChannel.show();
           spawn({
             cmd: chsimuName,
             option: { cwd: chsimuFloder, shell: true },
@@ -125,6 +126,7 @@ export function activate(context: vscode.ExtensionContext) {
                 outputChannel.appendLine(
                   `==> [Job Done] Result has been output to ${outFilePath}`
                 );
+                outputChannel.appendLine("");
                 const file = new FileHandler({
                   filepath: outFilePath,
                   context,
