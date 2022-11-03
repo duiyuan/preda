@@ -4,8 +4,9 @@ import * as vscode from "vscode";
 import path = require("path");
 import { existsSync, writeFileSync } from "fs";
 
-import { spawn } from "./utils";
+import { spawn } from "./utils/process";
 import ViewLoader from "./viewloader";
+import { formatTime } from "./utils/time";
 
 const { normalize, resolve } = path;
 
@@ -87,15 +88,21 @@ export function activate(context: vscode.ExtensionContext) {
           const { chsimuFloder, chsimuName } = getChsimuFileFloder();
 
           const uiTemp = resolve(extessionPath, "out/web/index.html");
-          const outTemp = resolve(currentFolder, "results/xx.html");
+          const now = formatTime(Date.now(), "HH_mm_ss");
+          const fname = currentFileName.split(".")[0];
+          const outFilename = `${fname.replace(/\./g, "_")}_${now}`;
+          const outFilePath = resolve(
+            currentFolder,
+            `results/${outFilename}.html`
+          );
 
           const args = [
             `-log ${currentFilePath}`,
             `${contractScriptArg || ""}`,
             `-viz_templ:${uiTemp}`,
-            `-viz:${outTemp}`,
+            `-viz:${outFilePath}`,
           ];
-          const invokeMsg = `==> Job Runing: ${chsimuName} ${args.join("")}`;
+          const invokeMsg = `==> [Job Runing] ${chsimuName} ${args.join("")}`;
 
           outputChannel.appendLine(invokeMsg);
           spawn({
@@ -106,13 +113,24 @@ export function activate(context: vscode.ExtensionContext) {
               outputChannel.appendLine(data.toString());
             },
             onErr: (err) => {
-              outputChannel.appendLine(`==> Job Failed: ${err.toString()}`);
+              outputChannel.appendLine(`==> [Job Failed]: ${err.toString()}`);
             },
-            onExt: () => {
+            onExt: (code) => {
               outputChannel.show();
-              outputChannel.appendLine(
-                `==> Job Done: ${outTemp} has been generated which will be auto open`
-              );
+              if (code === 0) {
+                outputChannel.appendLine(
+                  `==> [Job Done] Result has been output to ${outFilePath}`
+                );
+                const view = new ViewLoader({ context, filepath: outFilePath });
+                view.create({
+                  pageData: {
+                    args: contractScriptArg,
+                    name: "abc",
+                  },
+                });
+                return;
+              }
+              outputChannel.appendLine(`==> [Job Failed] exit code: ${code}`);
             },
           });
 

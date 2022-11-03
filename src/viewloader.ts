@@ -1,7 +1,15 @@
 import * as vscode from "vscode";
 import * as fs from "fs/promises";
-import * as ejs from "ejs";
+import * as Mustache from "mustache";
 import * as path from "path";
+
+interface KeyValue<T = any> {
+  [props: string]: T;
+}
+
+interface CreateParams {
+  pageData: KeyValue;
+}
 
 interface ViewLoaderParams {
   filepath: string;
@@ -31,7 +39,8 @@ export default class ViewLoader {
     return this.panel;
   }
 
-  async create() {
+  async create(params?: CreateParams) {
+    const { pageData } = params || {};
     this.panel = vscode.window.createWebviewPanel(
       "ChsimuDev",
       "ChsimuDev View Dump",
@@ -44,7 +53,7 @@ export default class ViewLoader {
         ],
       }
     );
-    this.panel.webview.html = await this.render();
+    this.panel.webview.html = await this.render(pageData);
 
     // Reset when the current panel is closed
     this.panel.onDidDispose(
@@ -62,13 +71,12 @@ export default class ViewLoader {
     this.panel?.dispose();
   }
 
-  async render(): Promise<string> {
+  async render(data: KeyValue = {}): Promise<string> {
     const content = await fs.readFile(this.filepath, { encoding: "utf-8" });
     const resourcePath = this.panel?.webview.asWebviewUri(this.resourceUri);
-    return ejs.render(
-      content,
-      { staticPath: resourcePath },
-      { beautify: true }
-    );
+    return Mustache.render(content, {
+      staticPath: resourcePath,
+      ...data,
+    });
   }
 }
