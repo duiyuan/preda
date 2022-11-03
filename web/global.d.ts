@@ -10,3 +10,8 @@ type VSCode = {
 declare const vscode: VSCode;
 
 declare const PREDA_VIZ_LOG: any;
+
+declare const BuildContext: {
+  args: string;
+  contract: string;
+};

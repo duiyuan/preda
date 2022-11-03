@@ -1,24 +1,23 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { MemoryRouter as Router, Switch } from 'react-router-dom';
+import React, { useEffect, useState, useCallback } from "react";
+import { MemoryRouter as Router, Switch } from "react-router-dom";
 
-import { routes } from './routes/config';
-import { MessagesContext, MenuContext } from './context';
-import { RouteWithSubRoutes } from './routes/RouteWithSubRoutes';
+import { routes } from "./routes/config";
+import { MessagesContext, MenuContext } from "./context";
+import { RouteWithSubRoutes } from "./routes/RouteWithSubRoutes";
 
 export const App = () => {
-  const [messagesFromExtension, setMessagesFromExtension] = useState<string[]>([]);
-  const [menu, changeMenu] = useState<string>('block');
+  const [messagesFromExtension, setMessagesFromExtension] = useState<string[]>(
+    []
+  );
+  const [menu, changeMenu] = useState<string>("block");
 
-  useEffect(() => {
-  
-  }, []);
-
+  useEffect(() => {}, []);
 
   return (
-    <Router initialEntries={['/']}>
+    <Router initialEntries={["/"]}>
       <MenuContext.Provider value={menu}>
         <MessagesContext.Provider value={messagesFromExtension}>
-          <div style={{ paddingTop: 65 }}>
+          <div>
             <Switch>
               {routes.map((route, i) => (
                 <RouteWithSubRoutes key={i} {...route} />

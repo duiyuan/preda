@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chsimu Dev {{args}}</title>
+    <title>{{title}}</title>
+    <script>
+      let BuildContext = {
+        args: "{{args}}",
+        contract: "{{contract}}",
+      };
+    </script>
   </head>
   <body>
     <div id="root" class="wrap"></div>

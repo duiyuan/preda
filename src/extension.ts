@@ -6,6 +6,7 @@ import { existsSync, writeFileSync } from "fs";
 
 import { spawn } from "./utils/process";
 import ViewLoader from "./viewloader";
+import FileHandler from "./utils/filehandler";
 import { formatTime } from "./utils/time";
 
 const { normalize, resolve } = path;
@@ -115,19 +116,31 @@ export function activate(context: vscode.ExtensionContext) {
             onErr: (err) => {
               outputChannel.appendLine(`==> [Job Failed]: ${err.toString()}`);
             },
-            onExt: (code) => {
+            onExt: async (code) => {
               outputChannel.show();
+              // const staticPath = vscode.Uri.file(
+              //   path.join(context.extensionPath, "out/web")
+              // );
               if (code === 0) {
                 outputChannel.appendLine(
                   `==> [Job Done] Result has been output to ${outFilePath}`
                 );
-                const view = new ViewLoader({ context, filepath: outFilePath });
-                view.create({
-                  pageData: {
-                    args: contractScriptArg,
-                    name: "abc",
-                  },
+                const file = new FileHandler({
+                  filepath: outFilePath,
+                  context,
                 });
+                try {
+                  await file.inject({
+                    args: contractScriptArg,
+                    contract: currentFileName,
+                    staticPath: "{{staticPath}}",
+                    title: outFilename,
+                  });
+                } catch (ex: any) {
+                  vscode.window.showErrorMessage(ex.message);
+                }
+                const view = new ViewLoader({ context, filepath: outFilePath });
+                view.create();
                 return;
               }
               outputChannel.appendLine(`==> [Job Failed] exit code: ${code}`);

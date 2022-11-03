@@ -1,11 +1,8 @@
 import * as vscode from "vscode";
 import * as fs from "fs/promises";
-import * as Mustache from "mustache";
+import * as ejs from "ejs";
 import * as path from "path";
-
-interface KeyValue<T = any> {
-  [props: string]: T;
-}
+import * as Mustache from "mustache";
 
 interface CreateParams {
   pageData: KeyValue;
@@ -23,27 +20,32 @@ export default class ViewLoader {
   private filepath: string;
   private panel?: vscode.WebviewPanel;
   private disposables: vscode.Disposable[];
+  private filename: string;
 
   resourceUri: vscode.Uri;
 
   constructor(params: ViewLoaderParams) {
     this.context = params.context;
     this.filepath = params.filepath;
+    this.filename = path.basename(this.filepath, ".html");
     this.disposables = [];
     this.resourceUri = vscode.Uri.file(
       path.join(this.context.extensionPath, "out/web")
     );
+    this.init();
   }
 
   get currentPanel() {
     return this.panel;
   }
 
+  init() {}
+
   async create(params?: CreateParams) {
     const { pageData } = params || {};
     this.panel = vscode.window.createWebviewPanel(
       "ChsimuDev",
-      "ChsimuDev View Dump",
+      "ChsimuDev View " + this.filename,
       vscode.ViewColumn.One,
       {
         enableScripts: true,
@@ -74,9 +76,10 @@ export default class ViewLoader {
   async render(data: KeyValue = {}): Promise<string> {
     const content = await fs.readFile(this.filepath, { encoding: "utf-8" });
     const resourcePath = this.panel?.webview.asWebviewUri(this.resourceUri);
-    return Mustache.render(content, {
+    const joined = Object.assign(data, {
       staticPath: resourcePath,
-      ...data,
     });
+    // return ejs.render(content, joined);
+    return Mustache.render(content, joined);
   }
 }
