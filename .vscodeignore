@@ -11,3 +11,7 @@ vsc-extension-quickstart.md
 **/*.ts
 typing/**
 test/**
+pkg.sh
+pkg.bat
+.zip
+.vsce
