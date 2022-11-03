@@ -103,7 +103,7 @@ export function activate(context: vscode.ExtensionContext) {
             `-viz_templ:${uiTemp}`,
             `-viz:${outFilePath}`,
           ];
-          const invokeMsg = `==> [Job Runing] ${chsimuName} ${args.join("")}`;
+          const invokeMsg = `==> [Job Runing] ${chsimuName} ${args.join(" ")}`;
 
           outputChannel.appendLine(invokeMsg);
           outputChannel.show();
