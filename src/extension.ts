@@ -103,7 +103,7 @@ export function activate(context: vscode.ExtensionContext) {
             `-viz_templ:${uiTemp}`,
             `-viz:${outFilePath}`,
           ];
-          const invokeMsg = `==> [Job Runing] ${chsimuName} ${args.join(" ")}`;
+          const invokeMsg = `${chsimuName} ${args.join(" ")}`;
 
           outputChannel.appendLine(invokeMsg);
           outputChannel.show();
@@ -112,10 +112,11 @@ export function activate(context: vscode.ExtensionContext) {
             option: { cwd: chsimuFloder, shell: true },
             args,
             onData: (data) => {
-              outputChannel.appendLine(data.toString());
+              const message = data.toString();
+              outputChannel.appendLine(message);
             },
             onErr: (err) => {
-              outputChannel.appendLine(`==> [Job Failed]: ${err.toString()}`);
+              outputChannel.appendLine(`${err.toString()}`);
             },
             onExt: async (code) => {
               outputChannel.show();
@@ -124,7 +125,7 @@ export function activate(context: vscode.ExtensionContext) {
               // );
               if (code === 0) {
                 outputChannel.appendLine(
-                  `==> [Job Done] Result has been output to ${outFilePath}`
+                  `Result has been output to ${outFilePath}`
                 );
                 outputChannel.appendLine("");
                 const file = new FileHandler({
