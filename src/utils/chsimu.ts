@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { existsSync, writeFileSync } from "fs";
+import { existsSync, ensureDirSync } from "fs-extra";
 import * as path from "path";
 
 import { spawn } from "./process";
@@ -57,6 +57,11 @@ export const getChsimuFileFloder = () => {
   return { chsimuName, chsimuFloder };
 };
 
+export const getOutputPath = () => {
+  const chsimuConf = vscode.workspace.getConfiguration("ChsimuDev");
+  return chsimuConf.get<string>("output");
+};
+
 interface OutputParams {
   currentFilePath: string;
   currentFolder: string;
@@ -66,86 +71,87 @@ interface OutputParams {
   context: vscode.ExtensionContext;
 }
 
-export function outputToChannel(params: OutputParams) {
-  return new Promise((resolve, reject) => {
-    const {
-      currentFilePath,
-      contractScriptArg,
-      currentFolder,
-      currentFileName,
-      context,
-      channel = "ChsimuDev",
-    } = params;
+export async function outputToChannel(params: OutputParams) {
+  const {
+    currentFilePath,
+    contractScriptArg,
+    currentFolder,
+    currentFileName,
+    context,
+    channel = "ChsimuDev",
+  } = params;
 
-    const extesionPath = context.extensionPath;
-    const { chsimuFloder, chsimuName } = getChsimuFileFloder();
+  const extesionPath = context.extensionPath;
+  const { chsimuFloder, chsimuName } = getChsimuFileFloder();
+  const uiTemp = path.resolve(extesionPath, "out/web/index.html");
+  const now = formatTime(Date.now(), "YYYY_MM_DD_HH_mm_ss");
+  const fname = currentFileName.split(".")[0];
+  const outFilename = `${fname.replace(/\./g, "_")}_${now}`;
 
-    const uiTemp = path.resolve(extesionPath, "out/web/index.html");
-    const now = formatTime(Date.now(), "YYYY_MM_DD_HH_mm_ss");
-    const fname = currentFileName.split(".")[0];
-    const outFilename = `${fname.replace(/\./g, "_")}_${now}`;
-    const outFilePath = path.resolve(
-      currentFolder,
-      `results/${outFilename}.html`
-    );
-    const args = [
-      `-log ${currentFilePath}`,
-      `${contractScriptArg || ""}`,
-      `-viz_templ:${uiTemp}`,
-      `-viz:${outFilePath}`,
-    ];
-    const invokeMsg = `[${formatTime(
-      Date.now(),
-      "YYYY-MM-DD HH:mm:ss"
-    )}] ${chsimuName} ${args.join(" ")}`;
+  let outputDirPath = getOutputPath();
 
-    if (outputChannel) {
-      outputChannel.clear();
-    } else {
-      outputChannel = vscode.window.createOutputChannel(channel);
-    }
-    outputChannel.show();
-    outputChannel.appendLine(invokeMsg);
-    spawn({
-      cmd: chsimuName,
-      option: { cwd: chsimuFloder, shell: true },
-      args,
-      onData: (data) => {
-        const message = data.toString();
-        outputChannel.appendLine(message);
-      },
-      onErr: (err) => {
-        outputChannel.appendLine(`${err.toString()}`);
-        reject(err.toString());
-      },
-      onExt: async (code) => {
-        outputChannel.show();
+  // ensure output directory exist
+  if (outputDirPath) {
+    await ensureDirSync(outputDirPath, 775);
+  }
 
-        if (code === 0) {
-          outputChannel.appendLine(`Result has been output to ${outFilePath}`);
-          outputChannel.appendLine("");
-          const file = new FileHandler({
-            filepath: outFilePath,
-            context,
-          });
-          try {
-            await file.inject({
-              args: contractScriptArg,
-              contract: currentFileName,
-              staticPath: "{{staticPath}}",
-              title: outFilename,
-            });
-          } catch (ex: any) {
-            vscode.window.showErrorMessage(ex.message);
-          }
-          const view = new ViewLoader({ context, filepath: outFilePath });
-          view.create();
-          resolve(null);
-          return;
-        }
-        outputChannel.appendLine(`==> [Job Failed] exit code: ${code}`);
-        reject(code);
-      },
-    });
+  outputDirPath = outputDirPath
+    ? path.join(outputDirPath)
+    : path.resolve(currentFolder, `results`);
+
+  const outFilePath = path.resolve(outputDirPath, outFilename + ".html");
+
+  if (outputChannel) {
+    outputChannel.clear();
+  } else {
+    outputChannel = vscode.window.createOutputChannel(channel);
+  }
+
+  const args = [
+    `-log ${currentFilePath}`,
+    `${contractScriptArg || ""}`,
+    `-viz_templ:${uiTemp}`,
+    `-viz:${outFilePath}`,
+  ];
+  const invokeMsg = `[${formatTime(
+    Date.now(),
+    "YYYY-MM-DD HH:mm:ss"
+  )}] ${chsimuName} ${args.join(" ")}`;
+
+  outputChannel.show();
+  outputChannel.appendLine(invokeMsg);
+  spawn({
+    cmd: chsimuName,
+    option: { cwd: chsimuFloder, shell: true },
+    args,
+    onData: (data) => {
+      const message = data.toString();
+      outputChannel.appendLine(message);
+    },
+    onErr: (err) => {
+      outputChannel.appendLine(`${err.toString()}`);
+    },
+    onExt: async (code) => {
+      outputChannel.show();
+
+      if (code === 0) {
+        outputChannel.appendLine(`Result has been output to ${outFilePath}`);
+        outputChannel.appendLine("");
+        const file = new FileHandler({
+          filepath: outFilePath,
+          context,
+        });
+        await file.inject({
+          args: contractScriptArg,
+          contract: currentFileName,
+          staticPath: "{{staticPath}}",
+          title: outFilename,
+        });
+        const view = new ViewLoader({ context, filepath: outFilePath });
+        view.create();
+        return;
+      }
+      outputChannel.appendLine(`==> [Job Failed] exit code: ${code}`);
+    },
   });
 }

@@ -111,6 +111,11 @@
           "type": "string",
           "default": "",
           "description": "run Contract with local chsimu."
+        },
+        "ChsimuDev.output": {
+          "type": "string",
+          "default": "",
+          "description": "The path of output html files that record chisum results"
         }
       }
     }
@@ -157,7 +162,9 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@types/fs-extra": "^9.0.13",
     "ejs": "^3.1.8",
+    "fs-extra": "^10.1.0",
     "mustache": "^4.2.0"
   },
   "repository": "git@github.com:duiyuan/simulator-devtool.git"

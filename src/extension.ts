@@ -5,16 +5,11 @@ import path = require("path");
 import { existsSync, writeFileSync } from "fs";
 
 import { outputToChannel } from "./utils/chsimu";
-import { spawn } from "./utils/process";
 import ViewLoader from "./viewloader";
-import FileHandler from "./utils/filehandler";
-import { formatTime } from "./utils/time";
 import {
   getCurrentActiveFileAndFolder,
   getChsimuFileFloder,
 } from "./utils/chsimu";
-
-const { normalize, resolve } = path;
 
 let terminal: vscode.Terminal | undefined;
 let outputChannel: vscode.OutputChannel;
@@ -43,13 +38,18 @@ export function activate(context: vscode.ExtensionContext) {
           const configJson = existsSync(configPath) ? require(configPath) : {};
           const contractScriptArg = configJson[currentFileName] || "";
 
-          await outputToChannel({
-            context,
-            currentFileName,
-            currentFolder,
-            contractScriptArg,
-            currentFilePath,
-          });
+          try {
+            await outputToChannel({
+              context,
+              currentFileName,
+              currentFolder,
+              contractScriptArg,
+              currentFilePath,
+            });
+          } catch (ex: any) {
+            vscode.window.showErrorMessage(ex.message);
+          }
+
           // 释放终端，防止卡住
           // if (terminal) {
           //   terminal.dispose();
@@ -101,13 +101,18 @@ export function activate(context: vscode.ExtensionContext) {
               const contractScriptArg = inputBox.value;
               // 关闭input框
               inputBox.hide();
-              await outputToChannel({
-                context,
-                currentFileName,
-                currentFilePath,
-                currentFolder,
-                contractScriptArg,
-              });
+              try {
+                await outputToChannel({
+                  context,
+                  currentFileName,
+                  currentFilePath,
+                  currentFolder,
+                  contractScriptArg,
+                });
+              } catch (ex: any) {
+                vscode.window.showErrorMessage(ex.message);
+              }
+
               // 释放终端，防止卡住
               // if (terminal) {
               //   terminal.dispose();
