@@ -9,11 +9,22 @@ interface Params {
   context: vscode.ExtensionContext;
 }
 
-export default class FileHandler {
+export class File {
+  readFile() {
+    return promisify(fs.readFile);
+  }
+
+  writeFile() {
+    return promisify(fs.writeFile);
+  }
+}
+
+export default class FileHandler extends File {
   filepath: string;
   context: vscode.ExtensionContext;
 
   constructor(params: Params) {
+    super();
     this.filepath = params.filepath;
     this.context = params.context;
   }
@@ -30,14 +41,6 @@ export default class FileHandler {
     throw new Error(
       "inject data failded beacause file not exist:" + this.filepath
     );
-  }
-
-  readFile() {
-    return promisify(fs.readFile);
-  }
-
-  writeFile() {
-    return promisify(fs.writeFile);
   }
 
   async fileExist() {
