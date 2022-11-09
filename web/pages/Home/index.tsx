@@ -16,6 +16,8 @@ export const Home = () => {
         displayObjectSize={false}
         enableClipboard={false}
         displayDataTypes={false}
+        displayArrayKey={false}
+        collapsed={2}
         name={false}
         theme="chalk"
       />
