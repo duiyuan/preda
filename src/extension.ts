@@ -4,11 +4,11 @@ import * as vscode from "vscode";
 import path = require("path");
 import { existsSync, writeFileSync } from "fs";
 
-import { outputToChannel } from "./utils/chsimu";
 import ViewLoader from "./viewloader";
 import {
   getCurrentActiveFileAndFolder,
   getChsimuFileFloder,
+  outputToChannel,
 } from "./utils/chsimu";
 
 let terminal: vscode.Terminal | undefined;

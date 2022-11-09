@@ -39,7 +39,8 @@ export default class FileHandler extends File {
       return this.writeFile()(this.filepath, content);
     }
     throw new Error(
-      "inject data failded beacause file not exist:" + this.filepath
+      "Result output to html file failed for the file does not exist: " +
+        this.filepath
     );
   }
 

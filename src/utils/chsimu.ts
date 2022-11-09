@@ -92,7 +92,10 @@ export async function outputToChannel(params: OutputParams) {
 
   // ensure output directory exist
   if (outputDirPath) {
-    await ensureDirSync(outputDirPath, 775);
+    // const ffs = vscode.workspace.fs;
+    // const uri = vscode.Uri.file(outputDirPath);
+    // await ffs.createDirectory(uri);
+    await ensureDirSync(outputDirPath, 766);
   }
 
   outputDirPath = outputDirPath
@@ -131,24 +134,30 @@ export async function outputToChannel(params: OutputParams) {
     onErr: (err) => {
       outputChannel.appendLine(`${err.toString()}`);
     },
-    onExt: async (code) => {
+    onExt: (code) => {
       outputChannel.show();
 
       if (code === 0) {
-        outputChannel.appendLine(`Result has been output to ${outFilePath}`);
+        outputChannel.appendLine(`Result will output to ${outFilePath}`);
         outputChannel.appendLine("");
         const file = new FileHandler({
           filepath: outFilePath,
           context,
         });
-        await file.inject({
-          args: contractScriptArg,
-          contract: currentFileName,
-          staticPath: "{{staticPath}}",
-          title: outFilename,
-        });
-        const view = new ViewLoader({ context, filepath: outFilePath });
-        view.create();
+        file
+          .inject({
+            args: contractScriptArg,
+            contract: currentFileName,
+            staticPath: "{{staticPath}}",
+            title: outFilename,
+          })
+          .then(() => {
+            const view = new ViewLoader({ context, filepath: outFilePath });
+            view.create();
+          })
+          .catch((ex) => {
+            vscode.window.showErrorMessage(ex.message);
+          });
         return;
       }
       outputChannel.appendLine(`==> [Job Failed] exit code: ${code}`);

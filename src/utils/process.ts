@@ -1,4 +1,5 @@
 import * as cp from "child_process";
+import * as vscode from "vscode";
 
 export function exec(cmd: string, options?: cp.ExecOptions): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -22,7 +23,7 @@ interface SpawnOutput {
   args?: string[];
   onData: (data: Buffer) => void;
   onErr: (err: Error | Buffer) => void;
-  onExt: (code: number | null) => void;
+  onExt: (code: number | null) => Promise<void> | void;
 }
 
 export function spawn(params: SpawnOutput): cp.ChildProcess | null {
