@@ -113,8 +113,8 @@ export async function outputToChannel(params: OutputParams) {
   const args = [
     `-log ${currentFilePath}`,
     `${contractScriptArg || ""}`,
-    `-viz_templ:${uiTemp}`,
-    `-viz:${outFilePath}`,
+    `-viz_templ:"${uiTemp}"`,
+    `-viz:"${outFilePath}"`,
   ];
   const invokeMsg = `[${formatTime(
     Date.now(),
