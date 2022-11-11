@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // run
   const runChsimuCommand = vscode.commands.registerCommand(
-    "ChsimuDev.run",
+    "Preda.run",
     async (uri: vscode.Uri) => {
       try {
         const extessionPath = context.extensionPath;
@@ -79,7 +79,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // edit
   const editChsimuCommand = vscode.commands.registerCommand(
-    "ChsimuDev.edit",
+    "Preda.edit",
     async (uri: vscode.Uri) => {
       try {
         const { currentFileName, currentFolder, currentFilePath } =
@@ -146,7 +146,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // compile
   const compileChsimuCommand = vscode.commands.registerCommand(
-    "ChsimuDev.compile",
+    "Preda.compile",
     async (uri: vscode.Uri) => {
       try {
         const { currentFileName, currentFilePath } =
@@ -161,7 +161,7 @@ export function activate(context: vscode.ExtensionContext) {
           }
 
           terminal = vscode.window.createTerminal({
-            message: "Run Compile",
+            message: "Preda Compile",
             cwd: chsimuFloder,
           });
           terminal.show();
@@ -169,7 +169,9 @@ export function activate(context: vscode.ExtensionContext) {
             `.${isWin ? "\\" : "/"}${chsimuName} -log ${currentFilePath}`
           );
         } else {
-          vscode.window.showErrorMessage("Run Compile: only run with prd file");
+          vscode.window.showErrorMessage(
+            "Preda Compile: only run with prd file"
+          );
         }
       } catch (e) {
         console.log(e);
@@ -178,7 +180,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   const viewHtmlCommand = vscode.commands.registerCommand(
-    "ChsimuDev.view",
+    "Preda.view",
     async (uri: vscode.Uri) => {
       try {
         const webview = new ViewLoader({ context, filepath: uri.fsPath });

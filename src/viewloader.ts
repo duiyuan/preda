@@ -44,8 +44,8 @@ export default class ViewLoader {
   async create(params?: CreateParams) {
     const { pageData } = params || {};
     this.panel = vscode.window.createWebviewPanel(
-      "ChsimuDev",
-      "ChsimuDev View " + this.filename,
+      "Preda",
+      "Preda View File: " + this.filename,
       vscode.ViewColumn.One,
       {
         enableScripts: true,
