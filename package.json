@@ -1,11 +1,12 @@
 {
-  "name": "chsimudev",
-  "displayName": "ChsimuDev",
+  "name": "preda",
+  "displayName": "Preda",
   "description": "",
   "version": "0.0.9",
   "engines": {
     "vscode": "^1.56.0"
   },
+  "icon": "resource/images/logo.png",
   "categories": [
     "Testing",
     "Debuggers",
