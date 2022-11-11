@@ -2,18 +2,11 @@
 
 Extension will run contract use local chsimus, input what script and args which you run with the constract.
 
-## development
-
-```
-$ // do it when you never do install before
-$ yarn && cd web && yarn
-```
-
 ## Usages
 
 - setting chimu path:
 
-  - setting > extension > ChsimuDev > path
+  - setting > extension > Preda > path
 
 - To run code:
 
@@ -30,7 +23,7 @@ $ yarn && cd web && yarn
 
 This extension contributes the following settings:
 
-- `ChsimuDev.path`: extension will run contract use local chsimu.
+- `Preda.path`: extension will run contract use local chsimu.
 
 > Tip: Make sure this absolute path can find your local chsimu.
 

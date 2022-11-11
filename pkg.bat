@@ -1,2 +1,2 @@
-vsce package chsimudev.vsix
+vsce package preda.vsix
 

@@ -1,2 +1,2 @@
 #!/bin/bash
-vsce package chsimudev.vsix
+vsce package preda.vsix

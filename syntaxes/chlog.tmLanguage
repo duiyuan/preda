@@ -110,7 +110,7 @@
             </dict>
             <dict>
                 <key>match</key>
-                <string>\b(?i:(warning|warn|test|debug|null|undefined|NaN))(\:|\b)</string>
+                <string>\b(?i:(warning|warn|debug|null|undefined|NaN))(\:|\b)</string>
                 <key>name</key>
                 <string>invalid.deprecated</string>
             </dict>
@@ -127,11 +127,17 @@
                 <string>comment.line</string>
             </dict>
             <dict>
-                <!-- Generic URI/URL -->
                 <key>match</key>
-                <string>\b(?i:([a-z]|[0-9])+\:((\/\/)|((\/\/)?(\S)))+)</string>
+                <string>\b(?i:([a-z]|[0-9])+\:)</string>
                 <key>name</key>
                 <string>storage</string>
+            </dict>
+            <dict>
+                <!-- Field -->
+                <key>match</key>
+                <string>\b(?i:(\w+#\d+)\:)</string>
+                <key>name</key>
+                <string>keyword</string>
             </dict>
             <dict>
                 <!-- output from (npm install) log -->

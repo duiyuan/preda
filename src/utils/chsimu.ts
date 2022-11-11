@@ -42,11 +42,12 @@ export const getPathFloderAndName = (path: string) => {
 export const getChsimuFileFloder = () => {
   // 获取Chsimu路径
   const chsimuPath = vscode.workspace
-    .getConfiguration("ChsimuDev")
+    .getConfiguration("Preda")
     .get("path") as string;
 
   if (!chsimuPath || !existsSync(chsimuPath)) {
-    const errorText = "Run Chain Simulator: can not find Chsimu " + chsimuPath;
+    const errorText =
+      "settings.Preda.Path is unset, you should specify it in Preference before using the extension";
     vscode.window.showErrorMessage(errorText);
     throw new Error(errorText);
   }
@@ -58,7 +59,7 @@ export const getChsimuFileFloder = () => {
 };
 
 export const getOutputPath = () => {
-  const chsimuConf = vscode.workspace.getConfiguration("ChsimuDev");
+  const chsimuConf = vscode.workspace.getConfiguration("Preda");
   return chsimuConf.get<string>("output");
 };
 
@@ -78,7 +79,7 @@ export async function outputToChannel(params: OutputParams) {
     currentFolder,
     currentFileName,
     context,
-    channel = "ChsimuDev",
+    channel = "Preda",
   } = params;
 
   const extesionPath = context.extensionPath;
@@ -160,7 +161,7 @@ export async function outputToChannel(params: OutputParams) {
           });
         return;
       }
-      outputChannel.appendLine(`==> [Job Failed] exit code: ${code}`);
+      outputChannel.appendLine(`[Failed] exit code: ${code}`);
     },
   });
 }
