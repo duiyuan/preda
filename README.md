@@ -1,6 +1,6 @@
 # PREDA Dev Environment
 
-This is a local developement environment for the PREDA smart contract programming language. PREDA is designed for parallel execution of smart contract transactions on sharding blockchains. The PREDA developement environment includes the prebuilt PREDA compilers and execution engines for Windows, Linux, and MacOS, VSCode extensions, and exmaple smart contracts and execution scripts. After the installation, programmers can edit, compile, and execute PREDA smart contracts in VSCode and check the execution results, e.g., address states on chain.
+This is a local development environment for the PREDA smart contract programming language. PREDA is designed for parallel execution of smart contract transactions on sharding blockchains. The PREDA development environment includes the pre-built PREDA compilers and execution engines for Windows, Linux, and macOS, VSCode extensions, and sample smart contracts and execution scripts. After installation, programmers can use VSCode to edit, compile, and execute PREDA smart contracts in a local blockchain simulator and check the execution results, e.g., address states on the chain.
 
 ## Usages
 
