@@ -29,19 +29,19 @@ This is a local developement environment for the PREDA smart contract programmin
 
 ### Set random seed
 
-**Description：**
+**Description:**
 
 Set the seed to use for random generation, select the timestamp as seed as default 
 
-**Command：**
+**Command:**
 
 ```
 random.reseed [seed]
 ```
 
-**Parameters：**
+**Parameters:**
 
-- Seed: the default seed is timestamp, but you can set as any value manually 
+- Seed: the default seed is timestamp, but you can set as any value manually
 
 **Example：**
 
@@ -52,11 +52,11 @@ random.reseed 88
 
 ------
 
-### Allocate address
+### Allocate Address
 
 **Description：**
 
-Generate a specific number of addresses 
+Generate specific numbers of addresses 
 
 **Command：**
 
@@ -76,7 +76,7 @@ allocate.address 100
 
 ------
 
-### Use address
+### Use Address
 
 **Description：**
 
@@ -109,11 +109,11 @@ state.set address.ERC20 @20 { balance:"50000000000000" }
 
 ------
 
-### Set gaslimit
+### Set Gaslimit
 
 **Description：**
 
-Set a limit for all transaction's gaslimit in a block 
+Set the gaslimit which is the maximum amount of gas that transactions in a block can consume
 
 **Command：**
 
@@ -133,7 +133,7 @@ chain.gaslimit 256
 
 ------
 
-### Deploy contracts
+### Deploy Contracts
 
 **Description：**
 
@@ -147,7 +147,7 @@ chain.deploy contract_name
 
 **Parameters：**
 
-- contract_name: the name of the contract, multiple names can be set at the same time, space-separated
+- contract_name: the name of the contract, which supports multiple names to be set at the same time, with space-separated.
 
 **Example：**
 
@@ -168,7 +168,7 @@ Linking and deploying ...
 
 ------
 
-### Call a contract function
+### Call a Contract Function
 
 **Description：**
 
@@ -183,9 +183,9 @@ contract_name.contract_function[*call_number] @address_order contract_params
 **Parameters：**
 
 - contract_name: the name of the contract
-- contract_function: the name of the contract 
-- call_number: number of calls, with optional parameter for selection
-- address_order: address number of the executed address
+- contract_function: the name of the contract functions 
+- call_number: the number of call times, which is an optional parameter
+- address_order: the serial number for address 
 - contract_params: contract input parameters 
 
 **Example：**
@@ -249,7 +249,7 @@ Stopwatch restarted
 
 ------
 
-### Print log
+### Print Log
 
 **Description：**
 
@@ -273,7 +273,7 @@ log this is log
 
 ------
 
-### Print highlight log
+### Print Highlight Log
 
 **Description：**
 
@@ -297,13 +297,27 @@ log.highlight this is highlight log
 
 ------
 
-### Set address state
+### Set State
 
 **Description：**
 
-Set the address state for addresses on the blockchain, which typically used to initialize the address contract state. 
+Set the state for the blockchain, which is used to initialize the contract state. 
 
 **Command：**
+
+Set the global state 
+
+```
+state.set global.contract_name { state_name:state_value } 
+```
+
+Set the shard state 
+
+```
+state.set shard.contract_name @shard_order { state_name:state_value } 
+```
+
+Set the address state 
 
 ```
 state.set address.contract_name @address_order { state_name:state_value } 
@@ -312,11 +326,20 @@ state.set address.contract_name @address_order { state_name:state_value }
 **Parameters：**
 
 - contract_name: the name of the contract 
+- shard_order：the serial number for shard
 - address_order: the serial number for address 
 - state_name: the name of the state to be set 
 - state_value: the value of the state to be set 
 
 **Exmaple：**
+
+```
+state.set global.Ballot { current_case:1 }
+```
+
+```
+state.set shard.Ballot @0 { votedWeights:[2, 3, 5] }
+```
 
 ```
 state.set address.SimpleStorage @0 { storedData:10000 } 
@@ -328,7 +351,7 @@ state.set address.SimpleStorage @0 { storedData:10000 }
 
 **Description：**
 
-Stop the stopwatch to restart 
+Reset the timer and start timing
 
 **Command：**
 
@@ -348,7 +371,7 @@ stopwatch.restart
 
 **Description：**
 
-Report the current time consumption and test performance data 
+Report the time and performance data 
 
 **Command：**
 
@@ -371,7 +394,7 @@ Order: 2, TPS:20000, uTPS:20000
 
 ------
 
-### print block info
+### Print Block Info
 
 **Description:**
 
@@ -422,7 +445,7 @@ log.block @all
 
 ------
 
-### print shard state
+### Print Shard State
 
 **Description:**
 
@@ -467,7 +490,7 @@ log.shard @g
 
 ------
 
-### print address state
+### Print Address State
 
 **Description:**
 
