@@ -208,10 +208,10 @@
   resolved "https://registry.npmmirror.com/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz#75b4c27948c81e88ccd3a8902047bcd797f38d32"
   integrity sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw==
 
-"@dioxide-js/react-json-view@^1.22.1":
-  version "1.22.1"
-  resolved "https://registry.npmmirror.com/@dioxide-js/react-json-view/-/react-json-view-1.22.1.tgz#89104fbd1723ed4888afb81ba818bd25242b47ac"
-  integrity sha512-GWnFf7CeO4sF2yfEwH5bOyyFdR8I3aQV8ZCE6kPTbLRcLJ6807rDN2kwPv0O27wewXbekmllBud23vjUsE/ScA==
+"@dioxide-js/react-json-view@^1.23.0":
+  version "1.23.0"
+  resolved "https://registry.npmmirror.com/@dioxide-js/react-json-view/-/react-json-view-1.23.0.tgz#9b4c84a587ec951dd22d9b3f9ef290d8499e6d0c"
+  integrity sha512-OrNbDBUXxeBUKkeIamPKiA6vSkKUSnsXITbFn2Fnxa32Q//Txx9NlFROcUdfEiLQIK8esaEc2xh3TFivgxx7mA==
   dependencies:
     babel-loader "^8.2.5"
     flux "^4.0.1"

@@ -125,7 +125,7 @@ export async function outputToChannel(params: OutputParams) {
   outputChannel.show();
   outputChannel.appendLine(invokeMsg);
   spawn({
-    cmd: chsimuName,
+    cmd: isWin ? chsimuName : "./" + chsimuName,
     option: { cwd: chsimuFloder, shell: true },
     args,
     onData: (data) => {

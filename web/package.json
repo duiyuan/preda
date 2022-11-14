@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dioxide-js/react-json-view": "^1.22.1",
+    "@dioxide-js/react-json-view": "^1.23.0",
     "resolve-url-loader": "^5.0.0"
   },
   "devDependencies": {
