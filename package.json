@@ -2,7 +2,7 @@
   "name": "preda",
   "displayName": "Preda",
   "description": "The extension run as the local development environment for the PREDA smart contract programming language",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "engines": {
     "vscode": "^1.56.0"
   },
@@ -107,14 +107,14 @@
     },
     "languages": [
       {
-        "id": "chsimulog",
+        "id": "predalog",
         "aliases": [
-          "chlog"
+          "plog"
         ],
-        "configuration": "./chlog.configuration.json",
         "extensions": [
           ".log"
         ],
+        "configuration": "./plog.configuration.json",
         "mimetypes": [
           "log",
           "text/log",
@@ -132,14 +132,14 @@
           ".prd",
           ".script"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./preda-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "chsimulog",
-        "scopeName": "chsimu.log",
-        "path": "./syntaxes/chlog.tmLanguage"
+        "language": "predalog",
+        "scopeName": "source.predalog",
+        "path": "./syntaxes/plog.tmLanguage.json"
       },
       {
         "language": "preda",
