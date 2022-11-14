@@ -264,7 +264,7 @@
           "name": "storage.type.function.preda"
         },
         {
-          "match": "\\b(public|export|shard|const)\\b",
+          "match": "\\b(public|export|shard|const|global)\\b",
           "name": "storage.type.modifier.preda"
         }
       ]
