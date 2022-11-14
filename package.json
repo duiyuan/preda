@@ -153,12 +153,12 @@
         "Preda.path": {
           "type": "string",
           "default": "",
-          "description": "run Contract with local preda."
+          "description": "Run contracts with the local preda environment."
         },
         "Preda.output": {
           "type": "string",
           "default": "",
-          "description": "The path of output html files that record preda results"
+          "description": "The path to output html files that contain preda contract execution results."
         }
       }
     }
