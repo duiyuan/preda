@@ -10,6 +10,8 @@ This is a local development environment for the PREDA smart contract programming
   - or right click the Text Editor and then click `PREDA: Compile` in editor context menu
   - or click `PREDA: Compile` button in editor title menu
   - or click `PREDA: Compile` button in context menu of file explorer
+ ![Alt text](./resource/images/compile.png?raw=true "Compile") 
+  
 
 - To set arguments for PREDA script (.script):
    - use shortcut `Ctrl+6` / `Command + 6`
@@ -17,6 +19,7 @@ This is a local development environment for the PREDA smart contract programming
    - or click `PREDA: Set Args` button in editor title menu
    - or click `PREDA: Set Args` button in context menu of file explorer
    - the arguments will be stored in a local file `scriptArgs.json` and be reused for further execution
+   ![Alt text](./resource/images/edit.png?raw=true "Set Args") 
  
  - To run PREDA script (.srcipt):
  
@@ -25,6 +28,8 @@ This is a local development environment for the PREDA smart contract programming
    - or click `PREDA: Run` button in editor title menu
    - or click `PREDA: Run` button in context menu of file explorer
    - a new VSCode Tab will be automatically launched after the execuiton of the PREDA script
+   ![Alt text](./resource/images/run.png?raw=true "Run") 
+   
 ## PREDA script syntax
 
 ### Set random seed
