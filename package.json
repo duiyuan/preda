@@ -44,19 +44,19 @@
     "commands": [
       {
         "command": "Preda.run",
-        "title": "Preda: Run"
+        "title": "PREDA: Run"
       },
       {
         "command": "Preda.edit",
-        "title": "Preda: Edit Args"
+        "title": "PREDA: Set Args"
       },
       {
         "command": "Preda.compile",
-        "title": "Preda: Compile File"
+        "title": "PREDA: Compile"
       },
       {
         "command": "Preda.view",
-        "title": "Preda: View File"
+        "title": "PREDA: View File"
       }
     ],
     "menus": {
