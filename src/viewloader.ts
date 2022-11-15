@@ -45,7 +45,7 @@ export default class ViewLoader {
     const { pageData } = params || {};
     this.panel = vscode.window.createWebviewPanel(
       "Preda",
-      "Preda View File: " + this.filename,
+      "Preda Viz: " + this.filename,
       vscode.ViewColumn.One,
       {
         enableScripts: true,

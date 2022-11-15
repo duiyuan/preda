@@ -45,9 +45,15 @@ export const getChsimuFileFloder = () => {
     .getConfiguration("Preda")
     .get("path") as string;
 
-  if (!chsimuPath || !existsSync(chsimuPath)) {
+  if (!chsimuPath) {
+    const errorText = "settings.preda.path is unset ";
+    vscode.window.showErrorMessage(errorText);
+    throw new Error(errorText);
+  }
+
+  if (!existsSync(chsimuPath)) {
     const errorText =
-      "settings.Preda.Path is unset, you should specify it in Preference before using the extension";
+      "The executable program(" + chsimuPath + ") doesn't exist";
     vscode.window.showErrorMessage(errorText);
     throw new Error(errorText);
   }
@@ -58,10 +64,10 @@ export const getChsimuFileFloder = () => {
   return { chsimuName, chsimuFloder };
 };
 
-export const getOutputPath = () => {
-  const chsimuConf = vscode.workspace.getConfiguration("Preda");
-  return chsimuConf.get<string>("output");
-};
+// export const getOutputPath = () => {
+//   const chsimuConf = vscode.workspace.getConfiguration("Preda");
+//   return chsimuConf.get<string>("output");
+// };
 
 interface OutputParams {
   currentFilePath: string;
@@ -87,22 +93,16 @@ export async function outputToChannel(params: OutputParams) {
   const uiTemp = path.resolve(extesionPath, "out/web/index.html");
   const now = formatTime(Date.now(), "YYYY_MM_DD_HH_mm_ss");
   const fname = currentFileName.split(".")[0];
-  const outFilename = `${fname.replace(/\./g, "_")}_${now}`;
+  const outFilename = `${fname}_latest_run`;
 
-  let outputDirPath = getOutputPath();
+  // let outputDirPath = getOutputPath();
 
   // ensure output directory exist
-  if (outputDirPath) {
-    // const ffs = vscode.workspace.fs;
-    // const uri = vscode.Uri.file(outputDirPath);
-    // await ffs.createDirectory(uri);
-    await ensureDirSync(outputDirPath, 766);
-  }
+  // if (outputDirPath) {
+  //   await ensureDirSync(outputDirPath, 766);
+  // }
 
-  outputDirPath = outputDirPath
-    ? path.join(outputDirPath)
-    : path.resolve(currentFolder, `results`);
-
+  const outputDirPath = path.resolve(currentFolder);
   const outFilePath = path.resolve(outputDirPath, outFilename + ".html");
 
   if (outputChannel) {
@@ -126,7 +126,7 @@ export async function outputToChannel(params: OutputParams) {
   outputChannel.appendLine(invokeMsg);
   spawn({
     cmd: isWin ? chsimuName : "./" + chsimuName,
-    option: { cwd: chsimuFloder, shell: true, stdio: "pipe" },
+    option: { cwd: chsimuFloder, shell: true },
     args,
     onData: (data) => {
       const message = data.toString();

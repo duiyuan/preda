@@ -139,7 +139,7 @@
       {
         "language": "predalog",
         "scopeName": "source.predalog",
-        "path": "./syntaxes/plog.tmLanguage.json"
+        "path": "./syntaxes/chlog.tmLanguage"
       },
       {
         "language": "preda",
@@ -154,11 +154,6 @@
           "type": "string",
           "default": "",
           "description": "Run contracts with the local preda environment."
-        },
-        "Preda.output": {
-          "type": "string",
-          "default": "",
-          "description": "The path to output html files that contain preda contract execution results."
         }
       }
     }
