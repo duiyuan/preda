@@ -107,14 +107,14 @@
     },
     "languages": [
       {
-        "id": "chsimulog",
+        "id": "predalog",
         "aliases": [
-          "chlog"
+          "plog"
         ],
-        "configuration": "./chlog.configuration.json",
         "extensions": [
           ".log"
         ],
+        "configuration": "./plog.configuration.json",
         "mimetypes": [
           "log",
           "text/log",
@@ -132,13 +132,13 @@
           ".prd",
           ".script"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./preda-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "chsimulog",
-        "scopeName": "chsimu.log",
+        "language": "predalog",
+        "scopeName": "source.predalog",
         "path": "./syntaxes/chlog.tmLanguage"
       },
       {
@@ -154,11 +154,6 @@
           "type": "string",
           "default": "",
           "description": "Run contracts with the local preda environment."
-        },
-        "Preda.output": {
-          "type": "string",
-          "default": "",
-          "description": "The path to output html files that contain preda contract execution results."
         }
       }
     }

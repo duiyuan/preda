@@ -3,7 +3,7 @@
 <plist version="1.0">
     <dict>
         <key>scopeName</key>
-        <string>chsimu.log</string>
+        <string>source.predalog</string>
         <key>fileTypes</key>
         <array>
             <string>log</string>
@@ -12,6 +12,13 @@
         <string>Log file</string>
         <key>patterns</key>
         <array>
+            <dict>
+                <!-- digit)-->
+                <key>match</key>
+                <string>(\))</string>
+                <key>name</key>
+                <string>keyword</string>
+            </dict>
             <dict>
                 <!-- Quoted strings with " -->
                 <key>match</key>
@@ -127,13 +134,14 @@
                 <string>comment.line</string>
             </dict>
             <dict>
+                <!-- Field Key (Key: Value)-->
                 <key>match</key>
-                <string>\b(?i:([a-z]|[0-9])+\:)</string>
+                <string>\b(?i:(([a-z]\s?)|[0-9])+\:)</string>
                 <key>name</key>
                 <string>storage</string>
             </dict>
             <dict>
-                <!-- Field -->
+                <!-- Field Key (Shd#0: Value)-->
                 <key>match</key>
                 <string>\b(?i:(\w+#\d+)\:)</string>
                 <key>name</key>
