@@ -112,7 +112,7 @@ export async function outputToChannel(params: OutputParams) {
   }
 
   const args = [
-    `-log ${currentFilePath}`,
+    `-log "${currentFilePath}"`,
     `${contractScriptArg || ""}`,
     `-viz_templ:"${uiTemp}"`,
     `-viz:"${outFilePath}"`,

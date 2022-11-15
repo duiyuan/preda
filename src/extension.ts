@@ -166,7 +166,7 @@ export function activate(context: vscode.ExtensionContext) {
           });
           terminal.show();
           terminal.sendText(
-            `.${isWin ? "\\" : "/"}${chsimuName} -log ${currentFilePath}`
+            `.${isWin ? "\\" : "/"}${chsimuName} -log “${currentFilePath}”`
           );
         } else {
           vscode.window.showErrorMessage(
