@@ -1,6 +1,6 @@
 {
   "name": "preda",
-  "displayName": "Preda",
+  "displayName": "PREDA Language Preview Toolchain",
   "description": "The extension run as the local development environment for the PREDA smart contract programming language",
   "version": "0.0.14",
   "engines": {
