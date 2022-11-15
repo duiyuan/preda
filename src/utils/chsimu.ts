@@ -45,9 +45,15 @@ export const getChsimuFileFloder = () => {
     .getConfiguration("Preda")
     .get("path") as string;
 
-  if (!chsimuPath || !existsSync(chsimuPath)) {
+  if (!chsimuPath) {
+    const errorText = "settings.preda.path is unset ";
+    vscode.window.showErrorMessage(errorText);
+    throw new Error(errorText);
+  }
+
+  if (!existsSync(chsimuPath)) {
     const errorText =
-      "settings.Preda.Path is unset, you should specify it in Preference before using the extension";
+      "The executable program(" + chsimuPath + ") doesn't exist";
     vscode.window.showErrorMessage(errorText);
     throw new Error(errorText);
   }
