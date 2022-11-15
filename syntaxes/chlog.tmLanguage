@@ -3,7 +3,7 @@
 <plist version="1.0">
     <dict>
         <key>scopeName</key>
-        <string>chsimu.log</string>
+        <string>source.predalog</string>
         <key>fileTypes</key>
         <array>
             <string>log</string>
