@@ -13,11 +13,18 @@
         <key>patterns</key>
         <array>
             <dict>
-                <!-- digit)-->
+                <!-- contract -->
                 <key>match</key>
-                <string>(\))</string>
+                <string>(contract\s`\w+`:.*)</string>
                 <key>name</key>
-                <string>keyword</string>
+                <string>markup.heading</string>
+            </dict>
+            <dict>
+                <!-- digit end with ) (1))-->
+                <key>match</key>
+                <string>(\d+\))</string>
+                <key>name</key>
+                <string>constant.numeric</string>
             </dict>
             <dict>
                 <!-- Quoted strings with " -->
