@@ -3501,11 +3501,6 @@ js-base64@^2.4.9:
   resolved "https://registry.npmmirror.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-tree@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.npmmirror.com/js-tree/-/js-tree-2.0.2.tgz#25cd00c55a236bd3e02578b25d1c6721803c4085"
-  integrity sha512-+pqyPOy8vZXW5v+M16rpSFsUO7rtxxnDAKn70DtSkDYhlMUs7QHhprcq/b4FBCbZMeyFv2Pfg8NWgIle9qLMbw==
-
 js-yaml@^3.13.1:
   version "3.14.1"
   resolved "https://registry.npmmirror.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
@@ -5236,7 +5231,7 @@ rc-textarea@^0.4.0, rc-textarea@~0.4.5:
     rc-util "^5.24.4"
     shallowequal "^1.1.0"
 
-rc-tooltip@~5.2.0:
+rc-tooltip@^5.2.2, rc-tooltip@~5.2.0:
   version "5.2.2"
   resolved "https://registry.npmmirror.com/rc-tooltip/-/rc-tooltip-5.2.2.tgz#e5cafa8ecebf78108936a0bcb93c150fa81ac93b"
   integrity sha512-jtQzU/18S6EI3lhSGoDYhPqNpWajMtS5VV/ld1LwyfrDByQpYmw/LW6U7oFXXLukjfDHQ7Ju705A82PRNFWYhg==
@@ -5527,15 +5522,6 @@ react-transition-group@^4.3.0:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
-
-react-ui-tree@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmmirror.com/react-ui-tree/-/react-ui-tree-4.0.0.tgz#99e36a68e274409485614ab1f31f52fdf884907e"
-  integrity sha512-2y649h0psahtYb4NW5KK/zcwnzH0Di4a0PPzsorNyHzLGr5fXGB4MyubMcZ1BGD5nZFIATalvCeSJ/YDvIriVw==
-  dependencies:
-    classnames "^2.2.5"
-    js-tree "^2.0.1"
-    prop-types "^15.5.10"
 
 react@^16.8.3:
   version "16.14.0"

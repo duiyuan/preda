@@ -53,7 +53,7 @@ const mockdata = [{
           "Contract": "Ballot",
           "Function": "vote",
           "Arguments": {
-              "proposal_index": 1,
+              "proposal_index": 2,
               "case_num": 1
           }
       },
@@ -70,7 +70,7 @@ const mockdata = [{
           "Contract": "Ballot",
           "Function": "vote",
           "Arguments": {
-              "proposal_index": 2,
+              "proposal_index": 3,
               "case_num": 1
           }
       },
@@ -87,7 +87,7 @@ const mockdata = [{
           "Contract": "Ballot",
           "Function": "vote",
           "Arguments": {
-              "proposal_index": 2,
+              "proposal_index": 5,
               "case_num": 1
           }
       },
@@ -156,7 +156,7 @@ export const Home = () => {
       {
         mockdata.map(d => {
           if (d.type === 'Section') {
-            return <p>{d.content.toString()}</p>
+            return <p className="section">{d.content.toString()}</p>
           } 
           if (d.type === 'Trace') {
             return <div className="box"><Tree data={d.content} /></div>
