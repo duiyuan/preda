@@ -139,7 +139,7 @@ export async function outputToChannel(params: OutputParams) {
       outputChannel.show();
 
       if (code === 0) {
-        outputChannel.appendLine(`Result will output to ${outFilePath}`);
+        outputChannel.appendLine(`Result will output to "${outFilePath}"`);
         outputChannel.appendLine("");
         const file = new FileHandler({
           filepath: outFilePath,
