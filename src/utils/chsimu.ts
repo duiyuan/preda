@@ -130,7 +130,7 @@ export async function outputToChannel(params: OutputParams) {
     args,
     onData: (data) => {
       const message = data.toString();
-      outputChannel.appendLine(message);
+      outputChannel.append(message);
     },
     onErr: (err) => {
       outputChannel.appendLine(`${err.toString()}`);
