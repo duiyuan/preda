@@ -114,7 +114,7 @@
         "extensions": [
           ".log"
         ],
-        "configuration": "./plog.configuration.json",
+        "configuration": "./log.configuration.json",
         "mimetypes": [
           "log",
           "text/log",
@@ -129,7 +129,13 @@
           "preda"
         ],
         "extensions": [
-          ".prd",
+          ".prd"
+        ],
+        "configuration": "./preda-configuration.json"
+      },
+      {
+        "id": "ts",
+        "extensions": [
           ".prdts"
         ],
         "configuration": "./preda-configuration.json"
@@ -137,14 +143,19 @@
     ],
     "grammars": [
       {
-        "language": "predalog",
-        "scopeName": "source.predalog",
-        "path": "./syntaxes/chlog.tmLanguage"
-      },
-      {
         "language": "preda",
         "scopeName": "source.preda",
         "path": "./syntaxes/preda.tmLanguage.json"
+      },
+      {
+        "language": "predalog",
+        "scopeName": "source.predalog",
+        "path": "./syntaxes/log.tmLanguage"
+      },
+      {
+        "language": "ts",
+        "scopeName": "source.ts",
+        "path": "./syntaxes/ts.tmLanguage"
       }
     ],
     "configuration": {
