@@ -20,22 +20,6 @@
                 <string>comment.line</string>
             </dict>
             <dict>
-                <!-- comment-block in multiple line -->
-                <key>begin</key>
-                <string>\/\*</string>
-                <key>end</key>
-                <string>\*\/</string>
-                <key>name</key>
-                <string>comment.block</string>
-            </dict>
-            <dict>
-                <!-- comment-block in the same line -->
-                <key>match</key>
-                <string>(?m:(\/\*[\s\S]*\*\/))</string>
-                <key>name</key>
-                <string>comment.block</string>
-            </dict>
-            <dict>
                 <!-- square brackets eg. [PRD]:-->
                 <key>match</key>
                 <string>(?i:\[[a-z0-9]+:?[a-z0-9]+\]:)</string>
