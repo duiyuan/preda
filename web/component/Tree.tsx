@@ -3,6 +3,7 @@ import { TreevizReact } from 'treeviz-react';
 import Tooltip from './Tooltip'
 import * as reactDom from 'react-dom'
 import ReactJson from "@dioxide-js/react-json-view";
+import {toShard} from '@/utils/strings'
 
 type TreeData = {
   data: any
@@ -12,7 +13,7 @@ type TreeData = {
 const Tree = ({ data, name }: TreeData) => {
 
   return (
-    <>
+    <div className="svg-box">
       <p style={{marginBottom: '10px'}}>{name}</p>
       <TreevizReact
         data={data}
@@ -25,25 +26,31 @@ const Tree = ({ data, name }: TreeData) => {
         secondaryAxisNodeSpacing={2}
         linkShape="quadraticBeziers"
         renderNode={(node: any) => {
+            const content = (
+              <>
+                <div className='tree-text'>Shard: <strong>{toShard(node.data.tx_info.ShardIndex || 0)} / {(node.data.tx_info.ShardOrder || 0) ** 2 + 1}</strong></div>
+                <div className='tree-text'>Contract: <strong>{node.data.tx_info.Contract}</strong></div>
+                <div className='tree-text'>Function: <strong>{node.data.tx_info.Function}</strong></div>
+              </>
+            )
             setTimeout(() => {
               reactDom.render(
-              // <Tooltip placement={'top'} trigger="hover" overlay={
-              //   <ReactJson
-              //     src={node.data.tx_info.Arguments}
-              //     style={{ background: "none" }}
-              //     displayObjectSize={false}
-              //     enableClipboard={false}
-              //     displayDataTypes={false}
-              //     displayArrayKey={false}
-              //     collapsed={2}
-              //     name={false}
-              //     theme="chalk"
-              //   />}>
-                <>
-                  <div className='tree-text'>Contract: <strong>{node.data.tx_info.Contract}</strong></div>
-                  <div className='tree-text'>Function: <strong>{node.data.tx_info.Function}</strong></div>
-                </>
-              // </Tooltip>
+                node.data.tx_info.Arguments ? (
+                  <Tooltip placement={'top'} trigger="hover" overlay={
+                    <ReactJson
+                      src={node.data.tx_info.Arguments}
+                      style={{ background: "none" }}
+                      displayObjectSize={false}
+                      enableClipboard={false}
+                      displayDataTypes={false}
+                      displayArrayKey={false}
+                      collapsed={2}
+                      name={false}
+                      theme="chalk"
+                    />}>
+                    {content}
+                  </Tooltip>
+                 ) : content
               , document.querySelector(`.tree-node.tree-${node.data.tx_id}`))
             }, 500)
             return `
@@ -58,7 +65,7 @@ const Tree = ({ data, name }: TreeData) => {
         linkWidth={(node) => 4}
       />
 
-  </>
+  </div>
   )
 }
 
