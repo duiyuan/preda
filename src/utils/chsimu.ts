@@ -104,6 +104,7 @@ export async function outputToChannel(params: OutputParams) {
 
   const outputDirPath = path.resolve(currentFolder);
   const outFilePath = path.resolve(outputDirPath, outFilename + ".html");
+  const logPath = path.resolve(outputDirPath, outFilename + ".log");
 
   if (outputChannel) {
     outputChannel.clear();
@@ -116,6 +117,7 @@ export async function outputToChannel(params: OutputParams) {
     `${contractScriptArg || ""}`,
     `-viz_templ:"${uiTemp}"`,
     `-viz:"${outFilePath}"`,
+    `-log:"${logPath}"`,
   ];
   const invokeMsg = `[${formatTime(
     Date.now(),

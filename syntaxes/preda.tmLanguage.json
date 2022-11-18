@@ -30,14 +30,15 @@
       "include": "#string"
     },
     {
+      "include": "#declaration"
+    },
+    {
       "include": "#type"
     },
     {
       "include": "#global"
     },
-    {
-      "include": "#declaration"
-    },
+
     {
       "include": "#function-call"
     },
@@ -207,6 +208,9 @@
     "declaration": {
       "patterns": [
         {
+          "include": "#declaration-scope"
+        },
+        {
           "include": "#declaration-contract"
         },
         {
@@ -217,6 +221,14 @@
         },
         {
           "include": "#declaration-function"
+        }
+      ]
+    },
+    "declaration-scope": {
+      "patterns": [
+        {
+          "match": "\\s@(?:(shard)|(global)|(address))\\s",
+          "name": "storage.type.modifier.preda"
         }
       ]
     },
