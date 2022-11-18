@@ -12,3 +12,8 @@ export function mapToStringArray(obj: any): string[] {
 export function trimEndSlash(url: string) {
   return url.replace(/(\/+)$/, '');
 }
+
+export function toShard(value: string | number, withUnit = true) {
+  const unit = withUnit ? '#' : ''
+  return unit + (String(value) === '65535' ? 'g' : String(value))
+}

@@ -9,3 +9,5 @@ interface Window {
     contract: string;
   };
 }
+
+declare module 'react-ui-tree'

@@ -9,7 +9,10 @@
   "license": "ISC",
   "dependencies": {
     "@dioxide-js/react-json-view": "^1.23.0",
-    "resolve-url-loader": "^5.0.0"
+    "classnames": "^2.3.2",
+    "rc-tooltip": "^5.2.2",
+    "resolve-url-loader": "^5.0.0",
+    "treeviz-react": "^0.4.0"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
