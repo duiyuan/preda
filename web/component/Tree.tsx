@@ -28,7 +28,7 @@ const Tree = ({ data, name }: TreeData) => {
         renderNode={(node: any) => {
             const content = (
               <>
-                <div className='tree-text'>Shard: <strong>{toShard(node.data.tx_info.ShardIndex || 0)} / {(node.data.tx_info.ShardOrder || 0) ** 2 + 1}</strong></div>
+                <div className='tree-text'>Shard: <strong>{toShard(node.data.tx_info.ShardIndex || 0)}/{(node.data.tx_info.ShardOrder || 0) ** 2 + 1}</strong></div>
                 <div className='tree-text'>Contract: <strong>{node.data.tx_info.Contract}</strong></div>
                 <div className='tree-text'>Function: <strong>{node.data.tx_info.Function}</strong></div>
               </>
