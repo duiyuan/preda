@@ -5472,7 +5472,7 @@ export const Home = () => {
     <div className="ui-color-regular">
       <div className="invoke_context">{json.stringify(BuildContext)}</div>
       {
-        (mockdata as VizLog[]).map((d, i) => {
+        (PREDA_VIZ_LOG as VizLog[]).map((d, i) => {
           if (d.type === 'Section') {
             return <p className="section" key={d.type + i}>{d.content.toString()}</p>
           } 
