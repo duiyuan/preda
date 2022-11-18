@@ -112,7 +112,7 @@ export async function outputToChannel(params: OutputParams) {
   }
 
   const args = [
-    `-log "${currentFilePath}"`,
+    `"${currentFilePath}"`,
     `${contractScriptArg || ""}`,
     `-viz_templ:"${uiTemp}"`,
     `-viz:"${outFilePath}"`,
@@ -130,7 +130,7 @@ export async function outputToChannel(params: OutputParams) {
     args,
     onData: (data) => {
       const message = data.toString();
-      outputChannel.appendLine(message);
+      outputChannel.append(message);
     },
     onErr: (err) => {
       outputChannel.appendLine(`${err.toString()}`);
@@ -139,7 +139,7 @@ export async function outputToChannel(params: OutputParams) {
       outputChannel.show();
 
       if (code === 0) {
-        outputChannel.appendLine(`Result will output to ${outFilePath}`);
+        outputChannel.appendLine(`Result will output to "${outFilePath}"`);
         outputChannel.appendLine("");
         const file = new FileHandler({
           filepath: outFilePath,

@@ -1,8 +1,8 @@
 {
   "name": "preda",
   "displayName": "PREDA Language Preview Toolchain",
-  "description": "The extension run as the local development environment for the PREDA smart contract programming language",
-  "version": "0.0.14",
+  "description": "Local development environment for the PREDA smart contract programming language",
+  "version": "0.0.20",
   "engines": {
     "vscode": "^1.56.0"
   },
@@ -26,13 +26,13 @@
         "command": "Preda.run",
         "key": "ctrl+5",
         "mac": "cmd+5",
-        "when": "editorTextFocus && resourceExtname == .script"
+        "when": "editorTextFocus && resourceExtname == .prdts"
       },
       {
         "command": "Preda.edit",
         "key": "ctrl+6",
         "mac": "cmd+6",
-        "when": "editorTextFocus && resourceExtname == .script"
+        "when": "editorTextFocus && resourceExtname == .prdts"
       },
       {
         "command": "Preda.compile",
@@ -64,12 +64,12 @@
         {
           "command": "Preda.run",
           "group": "1_Preda",
-          "when": "resourceExtname == .script"
+          "when": "resourceExtname == .prdts"
         },
         {
           "command": "Preda.edit",
           "group": "1_Preda",
-          "when": "resourceExtname == .script"
+          "when": "resourceExtname == .prdts"
         },
         {
           "command": "Preda.compile",
@@ -86,12 +86,12 @@
         {
           "command": "Preda.run",
           "group": "1_Preda",
-          "when": "editorTextFocus && resourceExtname == .script"
+          "when": "editorTextFocus && resourceExtname == .prdts"
         },
         {
           "command": "Preda.edit",
           "group": "1_Preda",
-          "when": "editorTextFocus && resourceExtname == .script"
+          "when": "editorTextFocus && resourceExtname == .prdts"
         },
         {
           "command": "Preda.compile",
@@ -114,7 +114,7 @@
         "extensions": [
           ".log"
         ],
-        "configuration": "./plog.configuration.json",
+        "configuration": "./log.configuration.json",
         "mimetypes": [
           "log",
           "text/log",
@@ -129,22 +129,33 @@
           "preda"
         ],
         "extensions": [
-          ".prd",
-          ".script"
+          ".prd"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "ts",
+        "extensions": [
+          ".prdts"
         ],
         "configuration": "./preda-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "predalog",
-        "scopeName": "source.predalog",
-        "path": "./syntaxes/chlog.tmLanguage"
-      },
-      {
         "language": "preda",
         "scopeName": "source.preda",
         "path": "./syntaxes/preda.tmLanguage.json"
+      },
+      {
+        "language": "predalog",
+        "scopeName": "source.predalog",
+        "path": "./syntaxes/log.tmLanguage"
+      },
+      {
+        "language": "ts",
+        "scopeName": "source.ts",
+        "path": "./syntaxes/ts.tmLanguage"
       }
     ],
     "configuration": {

@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
         const { currentFileName, currentFolder, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
 
-        if (currentFileName.match(/\.script/)) {
+        if (currentFileName.match(/\.prdts/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);
           const configJson = existsSync(configPath) ? require(configPath) : {};
           const contractScriptArg = configJson[currentFileName] || "";
@@ -85,7 +85,7 @@ export function activate(context: vscode.ExtensionContext) {
         const { currentFileName, currentFolder, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
 
-        if (currentFileName.match(/\.script/)) {
+        if (currentFileName.match(/\.prdts/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);
           const configJson = existsSync(configPath) ? require(configPath) : {};
 

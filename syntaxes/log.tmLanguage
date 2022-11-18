@@ -13,11 +13,25 @@
         <key>patterns</key>
         <array>
             <dict>
-                <!-- digit)-->
+                <!-- square brackets eg. [PRD]:-->
                 <key>match</key>
-                <string>(\))</string>
+                <string>(?i:\[[a-z0-9]+:?[a-z0-9]+\]:)</string>
                 <key>name</key>
-                <string>keyword</string>
+                <string>support.function</string>
+            </dict>
+            <dict>
+                <!-- square brackets eg. [pds:c34]-->
+                <key>match</key>
+                <string>(?i:\[[a-z0-9]+:?[a-z0-9]+\])</string>
+                <key>name</key>
+                <string>markup.raw</string>
+            </dict>
+            <dict>
+                <!-- contract -->
+                <key>match</key>
+                <string>(contract\s`\w+`:.*)</string>
+                <key>name</key>
+                <string>markup.heading</string>
             </dict>
             <dict>
                 <!-- Quoted strings with " -->
@@ -83,6 +97,13 @@
                 <string>constant.numeric</string>
             </dict>
             <dict>
+                <!-- Number -->
+                <key>match</key>
+                <string>(#?\d+\)?)</string>
+                <key>name</key>
+                <string>constant.numeric</string>
+            </dict>
+            <dict>
                 <!-- Numeric (decimal) -->
                 <key>match</key>
                 <string>\b\d+\.?\d*?\b</string>
@@ -136,7 +157,7 @@
             <dict>
                 <!-- Field Key (Key: Value)-->
                 <key>match</key>
-                <string>\b(?i:(([a-z]\s?)|[0-9])+\:)</string>
+                <string>\b(?i:((-?[a-z_]\s?)|[0-9])+\:)</string>
                 <key>name</key>
                 <string>storage</string>
             </dict>
