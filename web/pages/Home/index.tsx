@@ -3,19 +3,6 @@ import ReactJson from "@dioxide-js/react-json-view";
 import json from "json-bigint";
 import Tree from "../../component/Tree"
 
-const data = [
-  {
-    "module": "react-ui-tree",
-    "children": [{
-      "collapsed": true,
-      "module": "dist",
-      "children": [{
-        "module": "node.js"
-      }]
-    }]
-  }
-]
-
 import "./style.css";
 
 const { useEffect, useState } = React;
@@ -25,74 +12,124 @@ const mockdata = [{
 },
 {
   "type": "Trace",
-  "content": [{
-      "tx_id": 1,
-      "tx_info": {
-          "InvokeResult": "Success",
-          "InvokeContextType": "Normal",
-          "Target": "k9t42t90p2bpr1qax573zxghjbv6t7rhgbj9qs6k29as7cyjz5217kh4h0",
-          "BuildNum": 1,
-          "Timestamp": 1668482898555,
-          "Contract": "Ballot",
-          "Function": "vote",
-          "Arguments": {
-              "proposal_index": 1,
-              "case_num": 1
-          }
-      },
-      "father": null
-  },
-  {
-      "tx_id": 2,
-      "tx_info": {
-          "InvokeResult": "Success",
-          "InvokeContextType": "Normal",
-          "Target": "nmv5yqc1knex4n4d0xqr4keg61ryp6y5k676z0vtmrjvtjm9ar3h7mp09g",
-          "BuildNum": 1,
-          "Timestamp": 1668482898556,
-          "Contract": "Ballot",
-          "Function": "vote",
-          "Arguments": {
-              "proposal_index": 2,
-              "case_num": 1
-          }
-      },
-      "father": 1
-  },
-  {
-      "tx_id": 3,
-      "tx_info": {
-          "InvokeResult": "Success",
-          "InvokeContextType": "Normal",
-          "Target": "g6sxwc4ad22d2vcr27cwd34gypympnedq9zxg4zdvadmr92vbz206hct38",
-          "BuildNum": 1,
-          "Timestamp": 1668482898556,
-          "Contract": "Ballot",
-          "Function": "vote",
-          "Arguments": {
-              "proposal_index": 3,
-              "case_num": 1
-          }
-      },
-      "father": 1
-  },
-  {
-      "tx_id": 4,
-      "tx_info": {
-          "InvokeResult": "Success",
-          "InvokeContextType": "Normal",
-          "Target": "p93atpcfvfkyy6pamwg6v06czj92ew1fwsp665xyys91ej1d9rvq71tq3m",
-          "BuildNum": 1,
-          "Timestamp": 1668482898554,
-          "Contract": "Ballot",
-          "Function": "vote",
-          "Arguments": {
-              "proposal_index": 5,
-              "case_num": 1
-          }
-      },
-      "father": 3
-  }]
+  "content":  {
+    "TxnTrace_txn5": 
+    [
+       {
+          "tx_id": 1,
+          "tx_info": 
+          {
+             "InvokeContextType": "Scheduled",
+             "Target": "mgswk1dp29jmy3xbgnhd74zpr3nh4ekd19a2pzaj0kp85dew1drb72z6km",
+             "BuildNum": 1,
+             "Timestamp": 1668704133842,
+             "Contract": "Ballot",
+             "Function": "finalize"
+          },
+          "father": null
+       },
+       {
+          "tx_id": 2,
+          "tx_info": 
+          {
+             "InvokeContextType": "RelayInbound",
+             "Initiator": "mgswk1dp29jmy3xbgnhd74zpr3nh4ekd19a2pzaj0kp85dew1drb72z6km",
+             "OriginateHeight": 27,
+             "OriginateShardIndex": 2,
+             "OriginateShardOrder": 2,
+             "BuildNum": 1,
+             "Timestamp": 1668704265406,
+             "Contract": "Ballot",
+             "Function": "__relaylambda_4"
+          },
+          "father": 1
+       },
+       {
+          "tx_id": 3,
+          "tx_info": 
+          {
+             "InvokeContextType": "RelayInbound",
+             "Initiator": "mgswk1dp29jmy3xbgnhd74zpr3nh4ekd19a2pzaj0kp85dew1drb72z6km",
+             "OriginateHeight": 28,
+             "OriginateShardIndex": 65535,
+             "OriginateShardOrder": 2,
+             "BuildNum": 1,
+             "Timestamp": 1668704270406,
+             "Contract": "Ballot",
+             "Function": "__relaylambda_5"
+          },
+          "father": 2
+       },
+       {
+          "tx_id": 4,
+          "tx_info": 
+          {
+             "InvokeContextType": "RelayInbound",
+             "Initiator": "mgswk1dp29jmy3xbgnhd74zpr3nh4ekd19a2pzaj0kp85dew1drb72z6km",
+             "OriginateHeight": 28,
+             "OriginateShardIndex": 0,
+             "OriginateShardOrder": 2,
+             "BuildNum": 1,
+             "Timestamp": 1668704270406,
+             "Contract": "Ballot",
+             "Function": "__relaylambda_6",
+             "Arguments": {"shardVotes": [30, 18, 27]}
+          },
+          "father": 3
+       },
+       {
+          "tx_id": 5,
+          "tx_info": 
+          {
+             "InvokeContextType": "RelayInbound",
+             "Initiator": "mgswk1dp29jmy3xbgnhd74zpr3nh4ekd19a2pzaj0kp85dew1drb72z6km",
+             "OriginateHeight": 28,
+             "OriginateShardIndex": 1,
+             "OriginateShardOrder": 2,
+             "BuildNum": 1,
+             "Timestamp": 1668704270406,
+             "Contract": "Ballot",
+             "Function": "__relaylambda_6",
+             "Arguments": {"shardVotes": [24, 27, 24]}
+          },
+          "father": 3
+       },
+       {
+          "tx_id": 6,
+          "tx_info": 
+          {
+             "InvokeContextType": "RelayInbound",
+             "Initiator": "mgswk1dp29jmy3xbgnhd74zpr3nh4ekd19a2pzaj0kp85dew1drb72z6km",
+             "OriginateHeight": 28,
+             "OriginateShardIndex": 2,
+             "OriginateShardOrder": 2,
+             "BuildNum": 1,
+             "Timestamp": 1668704270406,
+             "Contract": "Ballot",
+             "Function": "__relaylambda_6",
+             "Arguments": {"shardVotes": [39, 6, 30]}
+          },
+          "father": 3
+       },
+       {
+          "tx_id": 7,
+          "tx_info": 
+          {
+             "InvokeContextType": "RelayInbound",
+             "Initiator": "mgswk1dp29jmy3xbgnhd74zpr3nh4ekd19a2pzaj0kp85dew1drb72z6km",
+             "OriginateHeight": 28,
+             "OriginateShardIndex": 3,
+             "OriginateShardOrder": 2,
+             "BuildNum": 1,
+             "Timestamp": 1668704270406,
+             "Contract": "Ballot",
+             "Function": "__relaylambda_6",
+             "Arguments": {"shardVotes": [33, 30, 12]}
+          },
+          "father": 3
+       }
+    ]
+ }
 },
 {
   "type": "Run",
@@ -154,15 +191,21 @@ export const Home = () => {
     <div className="ui-color-regular">
       <div className="invoke_context">{json.stringify(BuildContext)}</div>
       {
-        mockdata.map(d => {
+        mockdata.map((d, i) => {
           if (d.type === 'Section') {
-            return <p className="section">{d.content.toString()}</p>
+            return <p className="section" key={d.type + i}>{d.content.toString()}</p>
           } 
           if (d.type === 'Trace') {
-            return <div className="box"><Tree data={d.content} /></div>
+            return (
+              <div className="box"  key={d.type + i}>
+                {Object.keys(d.content).map(trace => (
+                  <Tree data={(d.content as any)[trace]} name={trace} key={trace} />
+                ))}
+              </div>
+            )
           }
           return (
-            <div className="box">
+            <div className="box"  key={d.type + i}>
               <ReactJson
                 src={(d.content as object)}
                 style={{ background: "none" }}
