@@ -35,7 +35,12 @@ export function activate(context: vscode.ExtensionContext) {
 
         if (currentFileName.match(/\.prdts/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);
-          const configJson = existsSync(configPath) ? require(configPath) : {};
+          let configJson: any = {};
+          if (existsSync(configPath)) {
+            delete require.cache[require.resolve(configPath)];
+            configJson = require(configPath);
+          }
+    
           const contractScriptArg = configJson[currentFileName] || "";
 
           try {
@@ -87,7 +92,11 @@ export function activate(context: vscode.ExtensionContext) {
 
         if (currentFileName.match(/\.prdts/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);
-          const configJson = existsSync(configPath) ? require(configPath) : {};
+          let configJson: any = {};
+          if (existsSync(configPath)) {
+            delete require.cache[require.resolve(configPath)];
+            configJson = require(configPath);
+          }
 
           // 获取用户输入的参数
           const inputBox = vscode.window.createInputBox();
