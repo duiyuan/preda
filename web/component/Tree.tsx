@@ -19,9 +19,9 @@ const Tree = ({ data, name }: TreeData) => {
         data={data}
         idKey={'tx_id'}
         relationnalField={'father'}
-        nodeWidth={200}
-        nodeHeight={80}
-        areaHeight={300}
+        nodeWidth={240}
+        nodeHeight={100}
+        areaHeight={400}
         mainAxisNodeSpacing={1.5}
         secondaryAxisNodeSpacing={2}
         linkShape="quadraticBeziers"
