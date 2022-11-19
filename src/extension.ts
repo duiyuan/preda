@@ -92,7 +92,7 @@ export function activate(context: vscode.ExtensionContext) {
           // 获取用户输入的参数
           const inputBox = vscode.window.createInputBox();
           inputBox.placeholder = "contract script args";
-          inputBox.prompt = "run contract with script args. e.g.: /count:1000";
+          inputBox.prompt = "run contract with script args. e.g.: -count:1000";
           inputBox.value = configJson[currentFileName] || "";
           inputBox.ignoreFocusOut = true;
           inputBox.show();
