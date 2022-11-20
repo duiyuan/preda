@@ -21,12 +21,12 @@
   }
 }
 .tree-node {
-  width: auto;
-  height: auto;
+  width: 240px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background:rgba(72, 179, 236, 1);
+  background:#1673D8;
   border-radius: 5px;
   flex-direction: column;
   position: relative;
@@ -43,4 +43,13 @@
       padding-left: 6px;
     }
   }
+  &:not(.tree-1):after {
+    content: '>';
+    position: absolute;
+    top: 25px;
+    left: -17px;
+    color: #dddddd;
+    font-size: 30px;
+    transform: scaleY(1.5);
+  } 
 }

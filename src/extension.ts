@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
         const { currentFileName, currentFolder, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
 
-        if (currentFileName.match(/\.prdts/)) {
+        if (currentFileName.match(/\.prdts|\.prd/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);
           let configJson: any = {};
           if (existsSync(configPath)) {
@@ -90,7 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
         const { currentFileName, currentFolder, currentFilePath } =
           getCurrentActiveFileAndFolder(uri);
 
-        if (currentFileName.match(/\.prdts/)) {
+        if (currentFileName.match(/\.prdts|\.prd/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);
           let configJson: any = {};
           if (existsSync(configPath)) {

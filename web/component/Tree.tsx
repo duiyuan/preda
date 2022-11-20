@@ -24,13 +24,11 @@ const Tree = ({ data, name }: TreeData) => {
         areaHeight={400}
         mainAxisNodeSpacing={1.5}
         secondaryAxisNodeSpacing={2}
-        linkShape="quadraticBeziers"
+        // linkShape="quadraticBeziers"
         renderNode={(node: any) => {
             const content = (
               <>
-                <div className='tree-text'>Shard: <strong>{toShard(node.data.tx_info.ShardIndex || 0)}/{(node.data.tx_info.ShardOrder || 0) ** 2 + 1}</strong></div>
-                <div className='tree-text'>Contract: <strong>{node.data.tx_info.Contract}</strong></div>
-                <div className='tree-text'>Function: <strong>{node.data.tx_info.Function}</strong></div>
+                <div className='tree-text'>[#{toShard(node.data.tx_info.ShardIndex || 0)}/{(node.data.tx_info.ShardOrder || 0) ** 2 + 1}]: <strong>{node.data.tx_info.Contract}.{node.data.tx_info.Function}</strong></div>
               </>
             )
             setTimeout(() => {
