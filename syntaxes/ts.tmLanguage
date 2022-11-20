@@ -3,7 +3,7 @@
 <plist version="1.0">
     <dict>
         <key>scopeName</key>
-        <string>source.ts</string>
+        <string>source.prdts</string>
         <key>fileTypes</key>
         <array>
             <string>test script</string>

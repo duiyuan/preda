@@ -134,7 +134,7 @@
         "configuration": "./language-configuration.json"
       },
       {
-        "id": "ts",
+        "id": "prdts",
         "extensions": [
           ".prdts"
         ],
@@ -153,9 +153,9 @@
         "path": "./syntaxes/log.tmLanguage"
       },
       {
-        "language": "ts",
-        "scopeName": "source.ts",
-        "path": "./syntaxes/ts.tmLanguage"
+        "language": "prdts",
+        "scopeName": "source.prdts",
+        "path": "./syntaxes/prdts.tmLanguage.json"
       }
     ],
     "configuration": {
