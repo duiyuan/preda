@@ -74,9 +74,9 @@ const Tree = ({ data, name }: TreeData) => {
         nodeWidth={240}
         nodeHeight={100}
         areaHeight={400}
-        mainAxisNodeSpacing={1.5}
-        secondaryAxisNodeSpacing={2}
-        linkShape="quadraticBeziers"
+        mainAxisNodeSpacing={1.6}
+        secondaryAxisNodeSpacing={1}
+        linkShape="curve"
         renderNode={
           (node: any) => {
             const id = node.data.tx_id
