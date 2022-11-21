@@ -5442,7 +5442,7 @@ const mockdata =
               "tx_id": 10,
               "tx_info": 
               {
-                 "InvokeContextType": "RelayInbound",
+                 "InvokeContextType": "RelayIntra",
                  "Initiator": "mp3epf58esfdwys9zsjgfe9qveacf0j7244tde11pa31xkdjv84t7n70ew",
                  "OriginateHeight": 28,
                  "OriginateShardIndex": 0,
