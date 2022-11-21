@@ -25,10 +25,38 @@ const Tree = ({ data, name }: TreeData) => {
         mainAxisNodeSpacing={1.5}
         secondaryAxisNodeSpacing={2}
         // linkShape="quadraticBeziers"
-        renderNode={(node: any) => {
+        renderNode={
+          (node: any) => {
+            const id = node.data.tx_id
+            const {
+              InvokeContextType,
+              ShardIndex = 0,
+              ShardOrder = 0,
+              Contract,
+              AddressIndex,
+              Function: Fn
+            } = node.data.tx_info
+            const isNormalRelayContent = ['Normal', 'Scheduled'].includes(InvokeContextType)
+            const isIntraOrDispatch = ['RelayIntra', 'Dispatch'].includes(InvokeContextType)
+            console.log(isIntraOrDispatch, InvokeContextType)
+            if (isIntraOrDispatch) {
+              setTimeout(() => {
+                const link = document.querySelector(`path.link:nth-child(${id - 1})`)
+                if (link) {
+                  link.setAttribute('stroke-dasharray', '15 4')
+                }
+              }, 1000)
+            }
             const content = (
               <>
-                <div className='tree-text'>[#{toShard(node.data.tx_info.ShardIndex || 0)}/{(node.data.tx_info.ShardOrder || 0) ** 2 + 1}]: <strong>{node.data.tx_info.Contract}.{node.data.tx_info.Function}</strong></div>
+                {isNormalRelayContent ? (
+                  <div className='tree-text'>
+                    Initiator: <strong>{AddressIndex}</strong>
+                  </div>
+                  ) : null}
+                <div className='tree-text'>
+                  [{toShard(ShardIndex)}/{(ShardOrder) ** 2 + 1}]: <strong>{Contract}.{Fn}</strong>
+                </div>
               </>
             )
             setTimeout(() => {
@@ -49,10 +77,10 @@ const Tree = ({ data, name }: TreeData) => {
                     {content}
                   </Tooltip>
                  ) : content
-              , document.querySelector(`.tree-node.tree-${node.data.tx_id}`))
+              , document.querySelector(`.tree-node.tree-${id}`))
             }, 500)
             return `
-              <div class='tree-node tree-${node.data.tx_id}' key='tree-${node.data.tx_id}' >
+              <div class='tree-node tree-${id}' key='tree-${id}' >
                 
               </div>
             `

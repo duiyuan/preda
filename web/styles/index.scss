@@ -41,12 +41,13 @@
       flex: 1;
       text-align: left;
       padding-left: 6px;
+      word-break: break-all;
     }
   }
   &:not(.tree-1):after {
     content: '>';
     position: absolute;
-    top: 25px;
+    top: 40px;
     left: -17px;
     color: #dddddd;
     font-size: 30px;
