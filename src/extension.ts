@@ -8,11 +8,11 @@ import ViewLoader from "./viewloader";
 import {
   getCurrentActiveFileAndFolder,
   getChsimuFileFloder,
-  outputToChannel,
-} from "./utils/chsimu";
+  findTSByPrdName,
+} from "./utils/finder";
+import { outputToChannel } from "./utils/chsimu";
 
 let terminal: vscode.Terminal | undefined;
-let outputChannel: vscode.OutputChannel;
 
 const CONFIG_NAME = "scriptArgs.json";
 
@@ -30,8 +30,14 @@ export function activate(context: vscode.ExtensionContext) {
     async (uri: vscode.Uri) => {
       try {
         const extessionPath = context.extensionPath;
-        const { currentFileName, currentFolder, currentFilePath } =
-          getCurrentActiveFileAndFolder(uri);
+        const fileContext = getCurrentActiveFileAndFolder(uri);
+        const { currentFolder } = fileContext;
+        let { currentFileName, currentFilePath, exist } = findTSByPrdName(uri);
+
+        if (!exist) {
+          vscode.window.showErrorMessage(`${currentFilePath} not exist`);
+          return;
+        }
 
         if (currentFileName.match(/\.prdts|\.prd/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);
@@ -40,7 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
             delete require.cache[require.resolve(configPath)];
             configJson = require(configPath);
           }
-    
+
           const contractScriptArg = configJson[currentFileName] || "";
 
           try {
@@ -87,8 +93,13 @@ export function activate(context: vscode.ExtensionContext) {
     "Preda.edit",
     async (uri: vscode.Uri) => {
       try {
-        const { currentFileName, currentFolder, currentFilePath } =
-          getCurrentActiveFileAndFolder(uri);
+        const { currentFolder } = getCurrentActiveFileAndFolder(uri);
+        let { currentFileName, currentFilePath, exist } = findTSByPrdName(uri);
+
+        if (!exist) {
+          vscode.window.showErrorMessage(`${currentFilePath} not exist`);
+          return;
+        }
 
         if (currentFileName.match(/\.prdts|\.prd/)) {
           const configPath = path.resolve(currentFolder, CONFIG_NAME);

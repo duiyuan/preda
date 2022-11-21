@@ -64,7 +64,7 @@
             <dict>
                 <!-- Exception (with custom naming and namespacing) -->
                 <key>match</key>
-                <string>\b(?i:((\.)*[a-z]|[0-9])*(compile\s)?(Exception|Error|Failure|Fail))\b</string>
+                <string>\b(?i:((\.)*[a-z]|[0-9])*(compile\s)?(Exception|Error|Failure|Fail(?:ed)?))\b</string>
                 <key>name</key>
                 <string>invalid</string>
             </dict>
@@ -126,7 +126,7 @@
             </dict>
             <dict>
                 <key>match</key>
-                <string>\b(?i:(Down|Error|Failure|Fail|Fatal|false))(\:|\b)</string>
+                <string>\b(?i:(Down|Error|Failure|Fail|Fatal))(\:|\b)</string>
                 <key>name</key>
                 <string>invalid.illegal</string>
             </dict>
@@ -138,7 +138,7 @@
             </dict>
             <dict>
                 <key>match</key>
-                <string>\b(?i:(warning|warn|debug|null|undefined|NaN))(\:|\b)</string>
+                <string>\b(?i:(warning|warn|debug|undefined|NaN))(\:|\b)</string>
                 <key>name</key>
                 <string>invalid.deprecated</string>
             </dict>
