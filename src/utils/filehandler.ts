@@ -6,7 +6,6 @@ import * as path from "path";
 
 interface Params {
   filepath: string;
-  context: vscode.ExtensionContext;
 }
 
 export class File {
@@ -21,12 +20,10 @@ export class File {
 
 export default class FileHandler extends File {
   filepath: string;
-  context: vscode.ExtensionContext;
 
   constructor(params: Params) {
     super();
     this.filepath = params.filepath;
-    this.context = params.context;
   }
 
   async inject(data: KeyValue) {
