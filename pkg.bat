@@ -1,2 +1,2 @@
-vsce package preda.vsix
+vsce package
 
