@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TreevizReact } from 'treeviz-react';
 import Tooltip from './Tooltip'
 import * as reactDom from 'react-dom'
@@ -10,7 +10,59 @@ type TreeData = {
   name: string
 }
 
+
 const Tree = ({ data, name }: TreeData) => {
+
+  useEffect(() => {
+    setTimeout(() => {
+      // console.log(data)
+      const isFather = (fatherId: string, cData: any): boolean => {
+        const fid = Number(fatherId)
+        const cfid = Number(cData.father)
+        // console.log(fid, cfid, cData);
+        if (cfid > 0) {
+          if (fid === cfid) {
+            return true
+          }
+          if (fid < cfid) {
+            const fdata = data.find((d: any) => Number(d.tx_id) === cfid)
+            if (fdata) {
+              return isFather(fatherId, fdata)
+            }
+          }
+          return false
+        }
+        return false
+      }
+      const links = document.querySelectorAll('path.link')
+      const nodes = document.querySelectorAll('.node')
+      data.forEach((d: any, index: number) => {
+        if (d) {
+          const w = (nodes[index]).querySelector('.tree-node')?.clientWidth || 240;
+          const translateX = w - 240;
+          for (let c = index+1;c < nodes.length;c++) {
+            const node = nodes[c] && nodes[c].querySelector('.tree-node')
+            const link = links[c-1]
+            const currentData = data[c]
+            const isCurrentFather = isFather(d.tx_id, currentData)
+            // console.log(isCurrentFather, d.tx_id, currentData.father)
+            if (node && isCurrentFather) {
+              const oldX = Number((node as HTMLElement).style.transform.replace(/[^\d|^\-]/g, ''));
+              const newX = Number(translateX) + Number(oldX);
+              (node as HTMLElement).style.transform = "translateX(" + newX + "px)";
+
+              // console.log(node, translateX, oldX,);
+              if (link) {
+                // const oldX = Number((link[c-1] as HTMLElement).style.transform.replace(/[^\d|^\-]/g, '') || 0);
+                const newX = Number(translateX) + Number(oldX);
+                (link as HTMLElement).style.transform = "translateX(" + newX + "px)";
+              }
+            }
+          }
+        }
+    })
+    }, 1500)
+  }, [data])
 
   return (
     <div className="svg-box">
@@ -24,7 +76,7 @@ const Tree = ({ data, name }: TreeData) => {
         areaHeight={400}
         mainAxisNodeSpacing={1.5}
         secondaryAxisNodeSpacing={2}
-        // linkShape="quadraticBeziers"
+        linkShape="quadraticBeziers"
         renderNode={
           (node: any) => {
             const id = node.data.tx_id
@@ -38,14 +90,13 @@ const Tree = ({ data, name }: TreeData) => {
             } = node.data.tx_info
             const isNormalRelayContent = ['Normal', 'Scheduled'].includes(InvokeContextType)
             const isIntraOrDispatch = ['RelayIntra', 'Dispatch'].includes(InvokeContextType)
-            console.log(isIntraOrDispatch, InvokeContextType)
             if (isIntraOrDispatch) {
               setTimeout(() => {
                 const link = document.querySelector(`path.link:nth-child(${id - 1})`)
                 if (link) {
                   link.setAttribute('stroke-dasharray', '15 4')
                 }
-              }, 1000)
+              }, 2000)
             }
             const content = (
               <>
@@ -55,7 +106,7 @@ const Tree = ({ data, name }: TreeData) => {
                   </div>
                   ) : null}
                 <div className='tree-text'>
-                  [{toShard(ShardIndex)}/{(ShardOrder) ** 2 + 1}]: <strong>{Contract}.{Fn}</strong>
+                  [{toShard(ShardIndex)}/{(ShardOrder) ** 2}]: <strong>{Contract}.{Fn}</strong>
                 </div>
               </>
             )
@@ -81,7 +132,14 @@ const Tree = ({ data, name }: TreeData) => {
             }, 500)
             return `
               <div class='tree-node tree-${id}' key='tree-${id}' >
-                
+                ${isNormalRelayContent ? (
+                  `<div class='tree-text'>
+                    Initiator: <strong>${AddressIndex}</strong>
+                  </div>`
+                  ) : ''}
+                <div class='tree-text'>
+                  [${toShard(ShardIndex)}/${(ShardOrder) ** 2}]: <strong>${Contract}.${Fn}</strong>
+                </div>
               </div>
             `
           }
