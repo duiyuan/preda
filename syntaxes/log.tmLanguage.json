@@ -140,6 +140,10 @@
         },
         {
           "include": "#short-address"
+        },
+        {
+          "name": "constant.numeric.predalog",
+          "match": "\\b\\d+\\)\\s?"
         }
       ]
     },
@@ -161,26 +165,19 @@
     "declare-number": {
       "patterns": [
         {
-          "include": "#number"
+          "include": "#integer"
         },
         {
           "include": "#number-decimal"
-        },
-        {
-          "include": "#number-hex"
         }
       ]
-    },
-    "number": {
-      "match": "((@|\\b)d+)?\\)\\s",
-      "name": "constant.numeric.predalog"
     },
     "number-decimal": {
       "match": "\\b\\d+\\.\\d*?\\b",
       "name": "constant.numeric.predalog"
     },
-    "number-hex": {
-      "match": "\\b(?:(0?x)?[0-9a-f][0-9a-f]+)\\b",
+    "integer": {
+      "match": "\\b\\d+\\b",
       "name": "constant.numeric.predalog"
     },
     "namespace": {
