@@ -154,7 +154,7 @@
       "name": "constant.numeric.predalog"
     },
     "shard-height": {
-      "match": "(#\\d+)?(-\\w+)",
+      "match": "(#[0-9gG]+)?(-\\w+)",
       "name": "constant.numeric.predalog"
     },
 
