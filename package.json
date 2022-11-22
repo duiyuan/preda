@@ -150,7 +150,7 @@
       {
         "language": "predalog",
         "scopeName": "source.predalog",
-        "path": "./syntaxes/log.tmLanguage"
+        "path": "./syntaxes/log.tmLanguage.json"
       },
       {
         "language": "prdts",
