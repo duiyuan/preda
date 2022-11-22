@@ -12,21 +12,57 @@
       "include": "#comments"
     },
     {
+      "include": "#quote"
+    },
+    {
       "include": "#operator"
     },
     {
+      "include": "#filename"
+    },
+    {
       "include": "#declaration"
+    },
+    {
+      "include": "#brackets"
     },
     {
       "include": "#call-function"
     }
   ],
   "repository": {
+    "quote": {
+      "patterns": [
+        {
+          "match": "\\\".*?\\\"",
+          "name": "string.quoted.double.prdts"
+        },
+        {
+          "match": "\\'.*?\\'",
+          "name": "string.quoted.single.prdts"
+        }
+      ]
+    },
+    "brackets": {
+      "patterns": [
+        {
+          "match": "\\$~count\\$",
+          "name": "storage.type.prdts"
+        }
+      ]
+    },
     "call-function": {
       "patterns": [
         {
-          "match": "\\b([a-zA-Z]([a-zA-Z0-9]+)\\.[a-zA-Z0-9]+)\\b",
-          "name": "keyword"
+          "match": "\\b([a-zA-Z](?:[a-zA-Z0-9]*))\\.([a-zA-Z0-9]+)\\b",
+          "captures": {
+            "1": {
+              "name": "variable.other.object.access.prdts"
+            },
+            "2": {
+              "name": "entity.name.function.prdts"
+            }
+          }
         },
         {
           "include": "#buildin-function"
@@ -34,9 +70,22 @@
       ]
     },
 
+    "filename": {
+      "patterns": [
+        {
+          "include": "#contract-file"
+        }
+      ]
+    },
+
+    "contract-file": {
+      "match": "\\w+\\.prd\\s",
+      "name": "support.type.prdts"
+    },
+
     "buildin-function": {
-      "match": "(viz)|(log)",
-      "name": "keyword"
+      "match": "(viz)|(log)(?!\\.)",
+      "name": "variable.other.object.access.prdts"
     },
 
     "declaration": {
@@ -51,8 +100,8 @@
     },
 
     "declare-keypair": {
-      "match": "([a-zA-Z_]+)(?=:)",
-      "name": "support.type"
+      "match": "\\s?([a-zA-Z_]+)(?=:)",
+      "name": "string.double.prdts"
     },
 
     "declare-number": {

@@ -29,6 +29,38 @@
     "string": {
       "patterns": [
         {
+          "match": "(\\[PRD\\]:)(.*)",
+          "name": "markup.raw.predalog",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "include": "#square-bracket"
+                }
+              ]
+            },
+            "2": {
+              "patterns": [
+                {
+                  "include": "#namespace"
+                },
+                {
+                  "include": "#short-address"
+                },
+                {
+                  "include": "#shard-height"
+                },
+                {
+                  "include": "#declare-number"
+                },
+                {
+                  "include": "#key-pairs"
+                }
+              ]
+            }
+          }
+        },
+        {
           "match": "\\b(?:([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))\\b",
           "name": "support.class.predalog"
         },
@@ -39,12 +71,24 @@
         {
           "match": "\\b(?:(hint|info|information|true|log|viz))(:|\\b)",
           "name": "keyword.predalog"
+        },
+        {
+          "match": "^[Ss]topwatch(.*)",
+          "name": "keyword.control.untitled"
+        },
+        {
+          "match": "[\\s\\S]+\\.\\.\\.$",
+          "name": "keyword.control.operator"
         }
       ]
     },
 
     "date-time": {
       "patterns": [
+        {
+          "match": "\\[\\d{2,4}-\\d{2}-\\d{2}(?:\\s\\d{2}:\\d{2}:\\d{2}?)\\]",
+          "name": "constant.numeric.predalog"
+        },
         {
           "match": "\\b(((0|1)?[0-9][1-2]?)|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sept(ember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?))[/|\\-|\\.| ]([0-2]?[0-9]|[3][0-1])[/|\\-|\\.| ]((19|20)?[0-9]{2})\\b",
           "name": "constant.numeric.predalog"
@@ -73,10 +117,6 @@
         {
           "match": "\\b(?:(Down|Error|Failure|Fail|Fatal))(\\:|\\b)",
           "name": "invalid.illegal"
-        },
-        {
-          "match": "\\b(?:(hint|info|information|true|log))(\\:|\\b)",
-          "name": "keyword"
         }
       ]
     },
@@ -97,6 +137,9 @@
       "patterns": [
         {
           "include": "#square-bracket"
+        },
+        {
+          "include": "#short-address"
         }
       ]
     },
@@ -104,6 +147,15 @@
     "square-bracket": {
       "match": "\\[\\w+\\]:",
       "name": "support.function.predalog"
+    },
+
+    "short-address": {
+      "match": "(#\\d+)?\\[[\\w\\:]+\\]",
+      "name": "constant.numeric.predalog"
+    },
+    "shard-height": {
+      "match": "(#\\d+)?(-\\w+)",
+      "name": "constant.numeric.predalog"
     },
 
     "declare-number": {
@@ -120,11 +172,11 @@
       ]
     },
     "number": {
-      "match": "(@?d+)?\\)\\s",
+      "match": "((@|\\b)d+)?\\)\\s",
       "name": "constant.numeric.predalog"
     },
     "number-decimal": {
-      "match": "\\b\\d+\\.?\\d*?\\b",
+      "match": "\\b\\d+\\.\\d*?\\b",
       "name": "constant.numeric.predalog"
     },
     "number-hex": {
@@ -141,7 +193,7 @@
           "match": "((-?[a-zA-Z_]\\s?)|[0-9])+\\:",
           "name": "storage.predalog"
         },
-        { "match": "(\\w+#\\d+)\\:", "name": "storage.predalog" }
+        { "match": "\\b\\w+#\\d+\\:", "name": "storage.predalog" }
       ]
     }
   }
