@@ -158,6 +158,12 @@
         "path": "./syntaxes/prdts.tmLanguage.json"
       }
     ],
+    "snippets": [
+      {
+        "language": "prdts",
+        "path": "./snippets/prdts.code-snippets"
+      }
+    ],
     "configuration": {
       "title": "Preda",
       "properties": {

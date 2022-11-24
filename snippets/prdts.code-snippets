@@ -1,0 +1,7 @@
+{
+  "stopwatch statement": {
+    "prefix": "watch",
+    "body": ["stopwatch.restart", "${0:chain.run}", "stopwatch.report"],
+    "description": "stopwatch start and report"
+  }
+}
