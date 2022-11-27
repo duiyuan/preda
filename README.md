@@ -26,3 +26,22 @@ This is a local toolchain for the PREDA smart contract programming language. PRE
   - or click `PREDA: Run` button in context menu of file explorer
   - a new VSCode Tab will be automatically launched after the execuiton of the PREDA script
     ![Alt text](./resource/images/run.png?raw=true "Run")
+
+## Snippets
+You can use those  snippets  in `.prdts`.
+
+| Trigger      |                     content                      |
+| :----------- | :----------------------------------------------- |
+| set:seed     |               random.reseed {seed}               |
+| set:gas      |               chain.gaslimit {gas}               |
+| set:state    |      state.set scope.contract_name {state}       |
+| chain:run    |                    chain.run                     |
+| chain:info   |                    chain.info                    |
+| chain:deploy |             chain.deploy {contract}              |
+| viz:b        |            viz.block #all,shard:block            |
+| viz:s        |                  viz.shard #g,n                  |
+| viz:a        |              viz.addr @all,random,n              |
+| viz:t        |                  viz.txn {txn}                   |
+| viz:trace    |                 viz.trace {txn}                  |
+| viz:section  |                viz.section {txn}                 |
+| stopwatch    | stopwatch.restart + emptyline + stopwatch.report |
