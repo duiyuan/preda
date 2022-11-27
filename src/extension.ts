@@ -5,6 +5,7 @@ import path = require("path");
 import { existsSync, writeFileSync } from "fs";
 
 import ViewLoader from "./viewloader";
+import PrdtsComplationProvider from "./CompletionProvider/prdts";
 import {
   getCurrentActiveFileAndFolder,
   getChsimuFileFloder,
@@ -216,6 +217,16 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(editChsimuCommand);
   context.subscriptions.push(compileChsimuCommand);
   context.subscriptions.push(viewHtmlCommand);
+
+  // Auto complete
+  context.subscriptions.push(
+    vscode.languages.registerCompletionItemProvider(
+      "prdts",
+      new PrdtsComplationProvider(),
+      ".",
+      "@"
+    )
+  );
 }
 
 // this method is called when your extension is deactivated

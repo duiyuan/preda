@@ -14,10 +14,7 @@
   ],
   "publisher": "PREDADevTeam",
   "activationEvents": [
-    "onCommand:Preda.run",
-    "onCommand:Preda.edit",
-    "onCommand:Preda.compile",
-    "onCommand:Preda.view"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
