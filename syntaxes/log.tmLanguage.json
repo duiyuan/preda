@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "predalog",
   "scopeName": "source.predalog",
   "patterns": [
@@ -136,6 +137,9 @@
     "brackets": {
       "patterns": [
         {
+          "include": "#log-message"
+        },
+        {
           "include": "#square-bracket"
         },
         {
@@ -146,6 +150,34 @@
           "match": "\\b\\d+\\)\\s?"
         }
       ]
+    },
+
+    "log-message": {
+      "patterns": [
+        {
+          "include": "#error-log"
+        },
+        {
+          "include": "#warning-log"
+        },
+        {
+          "include": "#hint-log"
+        }
+      ]
+    },
+
+    "error-log": {
+      "match": "\\[(ERROR|error)\\]:?\\s?.*$",
+      "name": "invalid.predalog"
+    },
+
+    "warning-log": {
+      "match": "\\[(WARNING|warning)\\]:?\\s?.*$",
+      "name": "markup.deleted.predalog"
+    },
+    "hint-log": {
+      "match": "\\[(HINT|INFO|hint|info)\\]:?\\s?.*$",
+      "name": "keyword.predalog"
     },
 
     "square-bracket": {

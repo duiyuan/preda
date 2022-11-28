@@ -39,6 +39,8 @@ You can use those snippets in `.prdts`.
 | chain:run    | chain.run                                        |
 | chain:info   | chain.info                                       |
 | chain:deploy | chain.deploy {contract}                          |
+| log:w        | log.warning {message}                            |
+| log:e        | log.error {message}                              |
 | viz:b        | viz.block #all,shard:block                       |
 | viz:s        | viz.shard #g,n                                   |
 | viz:a        | viz.addr @all,random,n                           |

@@ -33,7 +33,7 @@
   },
   "chain deploy": {
     "prefix": "chain:deploy",
-    "body": ["chain.deploy ${0:contract}"],
+    "body": ["chain.deploy ${0:contract}.prd"],
     "description": "deploy contract"
   },
   "visualize block": {
@@ -65,5 +65,20 @@
     "prefix": "viz:section",
     "body": ["viz.section ${0:section}"],
     "description": "visualize section"
+  },
+  "log hightlight": {
+    "prefix": "log:h",
+    "body": ["log.hightlight ${0:message}"],
+    "description": "hightlight message"
+  },
+  "log warning": {
+    "prefix": "log:w",
+    "body": ["log.warning ${0:message}"],
+    "description": "print warning message"
+  },
+  "log error": {
+    "prefix": "log:e",
+    "body": ["log.error ${0:message}"],
+    "description": "print error message"
   }
 }
