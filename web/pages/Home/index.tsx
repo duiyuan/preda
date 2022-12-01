@@ -346,7 +346,6 @@ export const Home = () => {
           const type = d.type.replace(/(\w)/i, (_, $1) => {
             return $1.toLocaleUpperCase();
           });
-          console.log(type, d.content)
           if (type === LOG_TYPE.RUN) {
             return (
                <p className="run" key={type + i}>
@@ -361,14 +360,14 @@ export const Home = () => {
           if (type === LOG_TYPE.TRACE) {
             return (
               <div className="box-normal"  key={type + i}>
-                {Object.keys(d.content).map(trace => (
-                  <Tree data={(d.content as any)[trace].map((r: any) => {
+                {/* {Object.keys(d.content).map(trace => ( */}
+                  <Tree data={(d.content as any).map((r: any) => {
                     if (!~r.father) {
                       r.father = null
                     }
                     return r
-                  })} name={trace} key={trace} />
-                ))}
+                  })} name='' />
+                {/* ))} */}
               </div>
             )
           }
