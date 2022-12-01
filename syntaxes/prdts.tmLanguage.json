@@ -84,7 +84,7 @@
     },
 
     "buildin-function": {
-      "match": "(viz)|(log)(?!\\.)",
+      "match": "(viz)|(^log)(?!\\.)",
       "name": "variable.other.object.access.prdts"
     },
 

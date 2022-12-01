@@ -176,7 +176,7 @@
       "name": "markup.deleted.predalog"
     },
     "hint-log": {
-      "match": "\\[(HINT|INFO|hint|info)\\]:?\\s?.*$",
+      "match": "\\[(HINT|INFO|hint|info|HIGHLIGHT|highlight)\\]:?\\s?.*$",
       "name": "keyword.predalog"
     },
 

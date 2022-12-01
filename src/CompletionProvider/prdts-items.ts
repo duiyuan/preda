@@ -19,8 +19,8 @@ const completaionItems: Complation[] = [
     match: /\log\.$/,
     items: [
       new vscode.CompletionItem("highlight", vscode.CompletionItemKind.Method),
-      new vscode.CompletionItem("warning", vscode.CompletionItemKind.Method),
-      new vscode.CompletionItem("error", vscode.CompletionItemKind.Method),
+      // new vscode.CompletionItem("warning", vscode.CompletionItemKind.Method),
+      // new vscode.CompletionItem("error", vscode.CompletionItemKind.Method),
     ],
   },
   {
