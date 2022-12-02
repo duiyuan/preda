@@ -4,7 +4,7 @@ import json from "json-bigint";
 import Tree from "../../component/Tree";
 
 import './style.scss';
-import { DeployBox } from "@/component/BoxItem";
+import { DeployBox, AddrBox } from "@/component/BoxItem";
 
 const { useEffect, useState } = React;
 const mockdata = 
@@ -93,18 +93,76 @@ const mockdata =
          }
       ]
    },
-   {"type": "Section", "content": "ABC"}
+   {
+      "type": "Txn",
+      "command": "viz.txn txn5",
+      "content": 
+      [
+         {
+            "InvokeContextType": "Normal",
+            "Target": "j2hskc1hqkqp4f32wh570kp7zqxktkf8zcare8kpj7b3ntdyx0my6wf48g:ed25519",
+            "AddressIndex": "@0",
+            "BuildNum": 1,
+            "Timestamp": 1669969542206,
+            "Contract": "Ballot",
+            "Function": "finalize",
+            "InvokeResult": "Success",
+            "Height": 3,
+            "ShardIndex": 2,
+            "ShardOrder": 2
+         }
+      ]
+   },
+   {
+      "type": "Addr",
+      "command": "viz.addr @0",
+      "content": 
+      [
+         {
+            "Address": "j2hskc1hqkqp4f32wh570kp7zqxktkf8zcare8kpj7b3ntdyx0my6wf48g:ed25519",
+            "AddressIndex": "@0",
+            "States": 
+            [
+               {
+                  "Contract": "Ballot",
+                  "State": {"weight": 11, "voted_case": 1}
+               },
+               {"Contract": "Token", "State": {"balance": "50000000000000"}}
+            ]
+         }
+      ]
+   },
+   {
+      "type": "Addr",
+      "command": "viz.addr @0 Ballot",
+      "content": 
+      [
+         {
+            "Address": "j2hskc1hqkqp4f32wh570kp7zqxktkf8zcare8kpj7b3ntdyx0my6wf48g:ed25519",
+            "AddressIndex": "@0",
+            "States": 
+            [
+               {
+                  "Contract": "Ballot",
+                  "State": {"weight": 11, "voted_case": 1}
+               }
+            ]
+         }
+      ]
+   }
 ];
 
 enum LOG_TYPE {
    RUN = 'Run',
    DEPLOY = 'Deploy',
    SECTION = 'Section',
-   TRACE = 'Trace'
+   TRACE = 'Trace',
+   ADDR = 'Addr'
 }
 
 type VizLog = {
   type: string
+  command?: string
   content: any
 }
 export const Home = () => {
@@ -129,6 +187,11 @@ export const Home = () => {
           if (type === LOG_TYPE.DEPLOY) {
             return (
                <DeployBox data={d.content} title={title} key={type + i} />
+            );
+          } 
+          if (type === LOG_TYPE.ADDR) {
+            return (
+               <AddrBox data={d.content} title={d.command} key={type + i} />
             );
           } 
           if (type === LOG_TYPE.SECTION) {

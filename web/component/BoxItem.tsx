@@ -1,3 +1,4 @@
+import { toShard } from '@/utils/strings';
 import * as React from 'react'
 import MoreSwitch from './MoreSwitch'
 
@@ -51,6 +52,36 @@ export const DeployBox = ({data, key, title}: any) => {
           <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
         </div>
       ) : null}
+    </div>
+  )
+};
+export const AddrBox = ({data, key, title}: any) => {
+  const [more, setMore] = React.useState<boolean>(false)
+
+  const originData = React.useMemo(() => {
+    return  more ? data : [data[0]];
+  }, [data, more]);
+
+  return (
+    <div className="box addr-box" key={key}>
+      <p className="box-title">{title}</p>
+        <div className="box-content" >
+          {originData.map((d: any) => (
+            <div className='addr-item'>
+                <div className="addr-header" key={d.Address}>
+                  Address: {d.AddressIndex}({d.Address})
+                </div>
+                <div className="addr-shard"> 
+                </div>
+            </div>
+          ))}
+          {data.length > 1 ? (
+            <div className='center'>
+              <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
+            </div>
+          ) : null}
+      </div>      
+      
     </div>
   )
 };
