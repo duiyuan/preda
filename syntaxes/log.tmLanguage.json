@@ -155,6 +155,9 @@
     "log-message": {
       "patterns": [
         {
+          "include": "#highlight-log"
+        },
+        {
           "include": "#error-log"
         },
         {
@@ -166,6 +169,10 @@
       ]
     },
 
+    "highlight-log": {
+      "match": "\\[(HIGHLIGHT|highlight)\\]:?\\s?.*$",
+      "name": "support.function.predalog"
+    },
     "error-log": {
       "match": "\\[(ERROR|error)\\]:?\\s?.*$",
       "name": "invalid.predalog"
@@ -176,7 +183,7 @@
       "name": "markup.deleted.predalog"
     },
     "hint-log": {
-      "match": "\\[(HINT|INFO|hint|info|HIGHLIGHT|highlight)\\]:?\\s?.*$",
+      "match": "\\[(HINT|INFO|hint|info)\\]:?\\s?.*$",
       "name": "keyword.predalog"
     },
 
