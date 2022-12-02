@@ -72,6 +72,14 @@ export const AddrBox = ({data, key, title}: any) => {
                   Address: {d.AddressIndex}({d.Address})
                 </div>
                 <div className="addr-shard"> 
+                  {d.States.map((s: any) => (
+                    <div className='addr-state'>
+                      <div className='box-key'>Contract:</div>
+                      <div className='box-val'>{s.Contract}</div>
+                      <div className='box-key'>State:</div>
+                      <div className='box-val'>voredWeights:[{s.State.weight},{s.State.voted_case}]</div>
+                    </div>
+                  ))}
                 </div>
             </div>
           ))}
