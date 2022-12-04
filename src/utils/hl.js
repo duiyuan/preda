@@ -1,3 +1,4 @@
+// https://github.com/jgclark/vscode-todo-highlight.git
 var vscode = require("vscode");
 var os = require("os");
 var window = vscode.window;
@@ -40,15 +41,18 @@ function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
     regex = [],
     reg;
   keywords.forEach((v) => {
-    v = typeof v == "string" ? { text: v } : v;
+    v = typeof v === "string" ? { text: v } : v;
     var text = v.text;
-    if (!text) return; //NOTE: in case of the text is empty
+    if (!text) {
+      //NOTE: in case of the text is empty
+      return;
+    }
 
     if (!isCaseSensitive) {
       text = text.toUpperCase();
     }
 
-    if (text == "TODO:" || text == "FIXME:") {
+    if (text === "TODO:" || text === "FIXME:") {
       v = Object.assign({}, DEFAULT_KEYWORDS[text], v);
     }
     v.diagnosticSeverity = SeverityMap[v.diagnosticSeverity];
@@ -96,13 +100,13 @@ function chooseAnnotationType(availableAnnotationTypes) {
 function getPathes(config) {
   return Array.isArray(config)
     ? "{" + config.join(",") + "}"
-    : typeof config == "string"
+    : typeof config === "string"
     ? config
     : "";
 }
 
 function searchAnnotations(workspaceState, pattern, callback) {
-  var settings = workspace.getConfiguration("todohighlight");
+  var settings = workspace.getConfiguration("predalog-highlight");
   var includePattern = getPathes(settings.get("include")) || "{**/*}";
   var excludePattern = getPathes(settings.get("exclude"));
   var limitationForSearch = settings.get("maxFilesForSearch", 5120);
@@ -198,7 +202,7 @@ function searchAnnotationInFile(file, annotations, annotationList, regexp) {
 
 function annotationsFound(err, annotations, annotationList) {
   if (err) {
-    console.log("todohighlight err:", err);
+    console.log("predalog-highlight err:", err);
     setStatusMsg(defaultIcon, defaultMsg);
     return;
   }
@@ -210,7 +214,9 @@ function annotationsFound(err, annotations, annotationList) {
 }
 
 function showOutputChannel(data) {
-  if (!window.outputChannel) return;
+  if (!window.outputChannel) {
+    return;
+  }
   window.outputChannel.clear();
 
   if (data.length === 0) {
@@ -220,7 +226,7 @@ function showOutputChannel(data) {
     return;
   }
 
-  var settings = workspace.getConfiguration("todohighlight");
+  var settings = workspace.getConfiguration("predalog-highlight");
   var toggleURI = settings.get("toggleURI", false);
   var platform = os.platform();
 
@@ -280,14 +286,14 @@ function createStatusBarItem() {
   );
   statusBarItem.text = defaultIcon + defaultMsg;
   statusBarItem.tooltip = "List annotations";
-  statusBarItem.command = "todohighlight.showOutputChannel";
+  statusBarItem.command = "predalog-highlight.showOutputChannel";
   return statusBarItem;
 }
 
 function errorHandler(err) {
   window.processing = true;
   setStatusMsg(defaultIcon, defaultMsg);
-  console.log("todohighlight err:", err);
+  console.log("predalog-highlight err:", err);
 }
 
 function setStatusMsg(icon, msg, tooltip) {

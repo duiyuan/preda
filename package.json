@@ -2,7 +2,7 @@
   "name": "preda",
   "displayName": "PREDA Language Preview Toolchain",
   "description": "Local development environment for the PREDA smart contract programming language",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "engines": {
     "vscode": "^1.56.0"
   },
@@ -18,7 +18,8 @@
     "onCommand:Preda.edit",
     "onCommand:Preda.compile",
     "onCommand:Preda.view",
-    "onLanguage:prdts"
+    "onLanguage:prdts",
+    "onLanguage:log"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -274,7 +275,7 @@
         },
         "Preda.keywordsPattern": {
           "type": "string",
-          "default": "",
+          "default": "\\[HIGHLIGHT\\].*",
           "description": "Specify keywords via RegExp instead of `Preda.keywords` one by one. NOTE that if this present, `Preda.keywords` will be ignored. REMEMBER to escapse any backslashes in your regexp (using \\\\ instead of single backslash)."
         },
         "Preda.defaultStyle": {
@@ -309,26 +310,15 @@
             }
           },
           "default": {
-            "color": "#2196f3",
-            "backgroundColor": "#ffeb3b"
+            "color": "#000",
+            "backgroundColor": "#ffff00"
           }
         },
         "Preda.include": {
           "description": "Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both performance and to avoid binary files.",
           "type": "array",
           "default": [
-            "**/*.js",
-            "**/*.jsx",
-            "**/*.ts",
-            "**/*.tsx",
-            "**/*.html",
-            "**/*.css",
-            "**/*.scss",
-            "**/*.php",
-            "**/*.rb",
-            "**/*.txt",
-            "**/*.mdown",
-            "**/*.md"
+            "**/*.log"
           ],
           "items": {
             "type": "string"

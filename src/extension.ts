@@ -39,37 +39,32 @@ export function activate(context: vscode.ExtensionContext) {
     (uri: vscode.Uri) => view(uri, context)
   );
 
+  const completionItemProvider = new PrdtsComplationProvider();
+  const provider = vscode.languages.registerCompletionItemProvider(
+    "prdts",
+    completionItemProvider,
+    ".",
+    "@"
+  );
   // 注册到监听队列中
   context.subscriptions.push(runChsimuCommand);
   context.subscriptions.push(editChsimuCommand);
   context.subscriptions.push(compileChsimuCommand);
   context.subscriptions.push(viewHtmlCommand);
-
-  // Auto complete
-  context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider(
-      "prdts",
-      new PrdtsComplationProvider(),
-      ".",
-      "@"
-    )
-  );
+  context.subscriptions.push(provider);
 
   let timeout: any = null;
   let activeEditor = vscode.window.activeTextEditor;
-  let outputChannel: vscode.OutputChannel;
-  let statusBarItem: vscode.StatusBarItem;
   let isCaseSensitive: boolean,
     assembledData: any,
-    decorationTypes: any,
+    decorationTypes: { [key: string]: vscode.TextEditorDecorationType },
     pattern: any,
     styleForRegExp: any,
-    keywordsPattern: any;
-  let workspaceState = context.workspaceState;
+    keywordsPattern: string;
   let settings = vscode.workspace.getConfiguration("Preda");
 
   const diagnostics =
-    vscode.languages.createDiagnosticCollection("todohighlight");
+    vscode.languages.createDiagnosticCollection("Predalog-highlight");
 
   context.subscriptions.push(diagnostics);
 
@@ -90,8 +85,10 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions
   );
 
+  // An event that is emitted when a text document is changed.
+  // This usually happens when the contents changes but also when other things like the dirty-state changes
   vscode.workspace.onDidChangeTextDocument(
-    function (event) {
+    function (event: vscode.TextDocumentChangeEvent) {
       if (activeEditor && event.document === activeEditor.document) {
         triggerUpdateDecorations();
       }
@@ -100,6 +97,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions
   );
 
+  // An event that is emitted when a text document is disposed
+  // or when the language id of a text document has been changed.
   vscode.workspace.onDidCloseTextDocument(
     function (event: any) {
       diagnostics.set(event.document, []);
@@ -108,14 +107,14 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions
   );
 
+  // An event that is emitted when the configuration changed.
   vscode.workspace.onDidChangeConfiguration(
     function () {
       settings = vscode.workspace.getConfiguration("Preda");
-
       //NOTE: if disabled, do not re-initialize the data or we will not be able to clear the style immediatly via 'toggle highlight' command
-      if (!settings.get("isEnable")) {
-        return;
-      }
+      // if (!settings.get("isEnable")) {
+      //   return;
+      // }
 
       init(settings);
       triggerUpdateDecorations();
@@ -125,17 +124,17 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   function createDiagnostic(
-    document: any,
-    range: any,
-    match: any,
+    document: vscode.TextDocument,
+    range: vscode.Range,
+    match: RegExpExecArray | null,
     matchedValue: any
   ) {
-    var lineText = document.lineAt(range.start).text;
-    var content = util.getContent(lineText, match);
+    let lineText = document.lineAt(range.start).text;
+    let content = util.getContent(lineText, match);
     if (content.length > 160) {
       content = content.substring(0, 160).trim() + "...";
     }
-    var severity = assembledData[matchedValue]?.diagnosticSeverity;
+    const severity = assembledData[matchedValue]?.diagnosticSeverity;
     if (severity !== null && severity !== undefined) {
       return new vscode.Diagnostic(range, content, severity);
     }
@@ -146,29 +145,29 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    var problems = [];
-    var postDiagnostics =
+    const problems = [];
+    const postDiagnostics =
       settings.get("isEnable") && settings.get("enableDiagnostics");
 
-    var text = activeEditor.document.getText();
-    var matches: any = {},
-      match;
+    const text = activeEditor.document.getText();
+    const matches: any = {};
+    let match: RegExpExecArray | null;
     while ((match = pattern.exec(text))) {
-      var startPos = activeEditor.document.positionAt(match.index);
-      var endPos = activeEditor.document.positionAt(
+      let startPos = activeEditor.document.positionAt(match.index);
+      let endPos = activeEditor.document.positionAt(
         match.index + match[0].length
       );
 
-      var decoration = {
+      let decoration = {
         range: new vscode.Range(startPos, endPos),
       };
 
-      var matchedValue = match[0];
+      let matchedValue = match[0];
       let patternIndex = match.slice(1).indexOf(matchedValue);
       matchedValue = Object.keys(decorationTypes)[patternIndex] || matchedValue;
 
       if (postDiagnostics) {
-        var problem = createDiagnostic(
+        let problem = createDiagnostic(
           activeEditor.document,
           decoration.range,
           match,
@@ -196,9 +195,9 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     Object.keys(decorationTypes).forEach((v) => {
-      var rangeOption =
+      const rangeOption =
         settings.get("isEnable") && matches[v] ? matches[v] : [];
-      var decorationType = decorationTypes[v];
+      const decorationType = decorationTypes[v];
       activeEditor?.setDecorations(decorationType, rangeOption);
     });
 
@@ -206,16 +205,9 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   function init(settings: any) {
-    var customDefaultStyle = settings.get("defaultStyle");
+    const customDefaultStyle = settings.get("defaultStyle");
     keywordsPattern = settings.get("keywordsPattern");
     isCaseSensitive = settings.get("isCaseSensitive", true);
-
-    if (!statusBarItem) {
-      statusBarItem = util.createStatusBarItem();
-    }
-    if (!outputChannel) {
-      outputChannel = vscode.window.createOutputChannel("preda highlight");
-    }
 
     decorationTypes = {};
 
