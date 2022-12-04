@@ -1,7 +1,7 @@
 // https://code.visualstudio.com/api/language-extensions/programmatic-language-features#show-code-completion-proposals
 
 import * as vscode from "vscode";
-import providers from "./prdts-items";
+import providers from "./items";
 
 export default class PrdtsCompletionItemProvider
   implements vscode.CompletionItemProvider

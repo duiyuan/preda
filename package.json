@@ -172,6 +172,199 @@
           "type": "string",
           "default": "",
           "description": "Run contracts with the local preda environment."
+        },
+        "Preda.isEnable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the highlighting"
+        },
+        "Preda.isCaseSensitive": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specify whether the keywords are case sensitive or not"
+        },
+        "Preda.toggleURI": {
+          "type": "boolean",
+          "default": false,
+          "description": "If the file path within the output channel is not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`"
+        },
+        "Preda.keywords": {
+          "type": "array",
+          "scope": "language-overridable",
+          "markdownDescription": "An array of keywords, and their CSS to customise how they look. See all available properties in the [VSCode doc on DecorationRenderOptions](https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions) section.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "$comment": "text and regex are self defined. The selection of the other properties for autocompletion are the same as for Preda.keywords.",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Custom text to be highlighted."
+                  },
+                  "regex": {
+                    "type": "object",
+                    "properties": {
+                      "pattern": {
+                        "type": "string",
+                        "description": "The RegEx pattern to use for matching instead of the text value. REMEMBER to escape any backslashes in your regexp (using \\\\ instead of single backslash)."
+                      }
+                    }
+                  },
+                  "backgroundColor": {
+                    "type": "string",
+                    "description": "The text background color."
+                  },
+                  "border": {
+                    "type": "string",
+                    "description": "The border style for the highlight, as a CSS string."
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "The text color. "
+                  },
+                  "cursor": {
+                    "type": "string",
+                    "description": "The style for the cursor shown over the highlight, as a CSS property."
+                  },
+                  "isWholeLine": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If true, then the whole line is highlighted, not just the matching text."
+                  },
+                  "overviewRulerColor": {
+                    "type": "string",
+                    "description": "The color of the ruler mark on the scroll bar."
+                  },
+                  "diagnosticSeverity": {
+                    "type": "string",
+                    "default": "information",
+                    "enum": [
+                      "none",
+                      "error",
+                      "warning",
+                      "information"
+                    ],
+                    "description": "If enabled, set the diagnostic severity in the problems view."
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            ]
+          },
+          "default": [
+            {
+              "text": "TODO:",
+              "color": "#fff",
+              "backgroundColor": "#ffbd2a",
+              "overviewRulerColor": "rgba(255,189,42,0.8)"
+            },
+            {
+              "text": "FIXME:",
+              "color": "#fff",
+              "backgroundColor": "#f06292",
+              "overviewRulerColor": "rgba(240,98,146,0.8)"
+            }
+          ]
+        },
+        "Preda.keywordsPattern": {
+          "type": "string",
+          "default": "",
+          "description": "Specify keywords via RegExp instead of `Preda.keywords` one by one. NOTE that if this present, `Preda.keywords` will be ignored. REMEMBER to escapse any backslashes in your regexp (using \\\\ instead of single backslash)."
+        },
+        "Preda.defaultStyle": {
+          "type": "object",
+          "markdownDescription": "Default style for all customized keywords. See all available properties in the [VSCode doc on DecorationRenderOptions](https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions) section.",
+          "$comment": "The selection of properties for autocompletion are the same as for Preda.keywords.",
+          "properties": {
+            "backgroundColor": {
+              "type": "string",
+              "description": "The background color for the highlight."
+            },
+            "border": {
+              "type": "string",
+              "description": "The border style for the highlight, as a CSS string."
+            },
+            "color": {
+              "type": "string",
+              "markdownDescription": "The text color."
+            },
+            "cursor": {
+              "type": "string",
+              "description": "The style for the cursor shown over the highlight, as a CSS property."
+            },
+            "isWholeLine": {
+              "type": "boolean",
+              "default": false,
+              "description": "If true, then the whole line is highlighted, not just the matching text."
+            },
+            "overviewRulerColor": {
+              "type": "string",
+              "description": "The color of the ruler mark on the scroll bar."
+            }
+          },
+          "default": {
+            "color": "#2196f3",
+            "backgroundColor": "#ffeb3b"
+          }
+        },
+        "Preda.include": {
+          "description": "Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both performance and to avoid binary files.",
+          "type": "array",
+          "default": [
+            "**/*.js",
+            "**/*.jsx",
+            "**/*.ts",
+            "**/*.tsx",
+            "**/*.html",
+            "**/*.css",
+            "**/*.scss",
+            "**/*.php",
+            "**/*.rb",
+            "**/*.txt",
+            "**/*.mdown",
+            "**/*.md"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "scope": "resource"
+        },
+        "Preda.exclude": {
+          "description": "Glob pattern that defines files and folders to exclude while listing annotations.",
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/bower_components/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/.vscode/**",
+            "**/.vscode-test/**",
+            "**/.github/**",
+            "**/_output/**",
+            "**/*.min.*",
+            "**/*.map",
+            "**/.next/**"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "scope": "resource"
+        },
+        "Preda.maxFilesForSearch": {
+          "type": "number",
+          "default": 5120,
+          "description": "Max files for searching"
+        },
+        "Preda.enableDiagnostics": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable creating entries in the problems view."
         }
       }
     }
