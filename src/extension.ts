@@ -8,7 +8,7 @@ import editArgs from "./Commands/edit";
 import compile from "./Commands/compile";
 import view from "./Commands/view";
 
-const util = require("./utils/hl");
+import util from "./utils/hl";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
