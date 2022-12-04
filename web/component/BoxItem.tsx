@@ -1,6 +1,8 @@
 import { toShard } from '@/utils/strings';
 import * as React from 'react'
 import MoreSwitch from './MoreSwitch'
+import AddressText from './AddressText'
+import clss from 'classnames'
 
 export const DeployBox = ({data, key, title}: any) => {
   const [more, setMore] = React.useState<boolean>(false)
@@ -63,33 +65,34 @@ export const AddrBox = ({data, key, title}: any) => {
   }, [data, more]);
 
   return (
-    <div className="box addr-box" key={key}>
+    <div className={clss({'mulit': originData.length > 1},"box addr-box")} key={key}>
       <p className="box-title">{title}</p>
         <div className="box-content" >
-          {originData.map((d: any) => (
-            <div className='addr-item'>
-                <div className="addr-header" key={d.Address}>
-                  Address: {d.AddressIndex}({d.Address})
-                </div>
-                <div className="addr-shard"> 
-                  {d.States.map((s: any) => (
-                    <div className='addr-state'>
-                      <div className='box-key'>Contract:</div>
-                      <div className='box-val'>{s.Contract}</div>
-                      <div className='box-key'>State:</div>
-                      <div className='box-val'>voredWeights:[{s.State.weight},{s.State.voted_case}]</div>
-                    </div>
-                  ))}
-                </div>
-            </div>
-          ))}
+          <div>
+            {originData.map((d: any) => (
+              <div className='addr-item'>
+                  <div className="addr-header" key={d.Address}>
+                    Address:&nbsp;<AddressText addr={d.Address} addrIndex={d.AddressIndex} />
+                  </div>
+                  <div className="addr-shard"> 
+                    {d.States.map((s: any) => (
+                      <div className='addr-state'>
+                        <div className='box-key'>Contract:</div>
+                        <div className='box-val'>{s.Contract}</div>
+                        <div className='box-key'>State:</div>
+                        <div className='box-val'>voredWeights:[{s.State.weight},{s.State.voted_case}]</div>
+                      </div>
+                    ))}
+                  </div>
+              </div>
+            ))}
+          </div>
           {data.length > 1 ? (
-            <div className='center'>
+            <div className='center bottom'>
               <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
             </div>
           ) : null}
-      </div>      
-      
+      </div>
     </div>
   )
 };

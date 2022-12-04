@@ -106,7 +106,7 @@ const Tree = ({ data, name }: TreeData) => {
                   </div>
                   ) : null}
                 <div className='tree-text'>
-                  [{toShard(ShardIndex)}/{(ShardOrder) ** 2}]: <strong>{Contract}.{Fn}</strong>
+                  [{toShard(ShardIndex, ShardOrder)}]: <strong>{Contract}.{Fn}</strong>
                 </div>
               </>
             )
@@ -138,7 +138,7 @@ const Tree = ({ data, name }: TreeData) => {
                   </div>`
                   ) : ''}
                 <div class='tree-text'>
-                  [${toShard(ShardIndex)}/${(ShardOrder) ** 2}]: <strong>${Contract}.${Fn}</strong>
+                  [${toShard(ShardIndex, ShardOrder)}]: <strong>${Contract}.${Fn}</strong>
                 </div>
               </div>
             `
