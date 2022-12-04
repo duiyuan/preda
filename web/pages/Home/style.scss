@@ -8,6 +8,7 @@
 .box {
   padding: 20px 0 32px;
   margin: 16px 0 32px 0;
+  position: relative;
   .box-title {
     font-weight: 700;
     font-size: 20px;
@@ -152,7 +153,76 @@
 /** addr **/
 .addr-box {
   .box-content {
-    padding: 20px 32px;
+    padding: 20px 0 0 0;
+  }
+  &.mulit {
+    .box-content {
+      padding-bottom: 0;
+    }
+  }
+  .addr-header {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 24px;
+    .address-flag {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.01em;
+    }
+  }
+  .addr-item {
+    margin: 0 32px;
+    &:not(:last-child) {
+      border-bottom: 0.5px dashed #747474;
+      margin-bottom: 24px;
+    }
+  }
+  .addr-shard {
+    .addr-state {
+      padding: 12px 24px;
+      background: #1E1E1E;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      row-gap: 20px;
+      .box-key {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+      }
+      .box-val {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+      }
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.address-text {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  .address-index {
+    margin-right: 4px;
+  }
+  .address-hash {
+    font-family: menlo;
+  }
+  .address-flag {
+    color: #979797;
+    background: #353535;
+    padding: 2px 8px;
+    margin-left: 4px;
+    margin-right: 4px;
   }
 }
 
@@ -229,4 +299,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &.bottom {
+    width: 100%;
+    height: 56px;
+    border-top: 0.5px solid #414141;
+  }
 }
