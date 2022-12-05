@@ -17,13 +17,8 @@ jobs:
       - name: setup node.jobs
         uses: actions/setup-node@v3
         with:
-          node-version: 14
-
-      - name: configure committer
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-
+          node-version: 1
+          
       - name: npm install, build and test
         run: |
           yarn install --registry https://registry.npmmirror.com/
@@ -58,5 +53,9 @@ jobs:
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     
+      - name: committer
         run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
           git push --follow-tags origin main
