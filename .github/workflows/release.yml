@@ -56,7 +56,7 @@ jobs:
           path: ./*.vsix
 
   release_draft:
-    need: [package]
+    needs: [package]
     permissions:
       contents: write
       pull-requests: write
