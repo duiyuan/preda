@@ -45,7 +45,7 @@ const Tree = ({ data, name }: TreeData) => {
             const link = links[c-1]
             const currentData = data[c]
             const isCurrentFather = isFather(d.tx_id, currentData)
-            // console.log(isCurrentFather, d.tx_id, currentData.father)
+            console.log(node, isCurrentFather, d.tx_id, currentData.father)
             if (node && isCurrentFather) {
               const oldX = Number((node as HTMLElement).style.transform.replace(/[^\d|^\-]/g, ''));
               const newX = Number(translateX) + Number(oldX);
@@ -86,9 +86,11 @@ const Tree = ({ data, name }: TreeData) => {
               ShardOrder = 0,
               Contract,
               AddressIndex,
-              Function: Fn
+              Function: Fn,
+              Height,
             } = node.data.tx_info
-            const isNormalRelayContent = ['Normal', 'Scheduled'].includes(InvokeContextType)
+            // , 'Scheduled'
+            const isNormalRelayContent = ['Normal'].includes(InvokeContextType)
             const isIntraOrDispatch = ['RelayIntra', 'Dispatch'].includes(InvokeContextType)
             if (isIntraOrDispatch) {
               setTimeout(() => {
@@ -98,21 +100,9 @@ const Tree = ({ data, name }: TreeData) => {
                 }
               }, 2000)
             }
-            const content = (
-              <>
-                {isNormalRelayContent ? (
-                  <div className='tree-text'>
-                    Initiator: <strong>{AddressIndex}</strong>
-                  </div>
-                  ) : null}
-                <div className='tree-text'>
-                  [{toShard(ShardIndex, ShardOrder)}]: <strong>{Contract}.{Fn}</strong>
-                </div>
-              </>
-            )
             setTimeout(() => {
-              reactDom.render(
-                node.data.tx_info.Arguments ? (
+              if (node.data.tx_info.Arguments) {
+                reactDom.render(
                   <Tooltip placement={'top'} trigger="hover" overlay={
                     <ReactJson
                       src={node.data.tx_info.Arguments}
@@ -125,10 +115,12 @@ const Tree = ({ data, name }: TreeData) => {
                       name={false}
                       theme="chalk"
                     />}>
-                    {content}
+                      <>
+                        {Contract}.{Fn}
+                      </>
                   </Tooltip>
-                 ) : content
-              , document.querySelector(`.tree-node.tree-${id}`))
+               , document.querySelector(`.tree-node.tree-${id} .fn`))
+              }
             }, 500)
             return `
               <div class='tree-node tree-${id}' key='tree-${id}' >
@@ -137,8 +129,11 @@ const Tree = ({ data, name }: TreeData) => {
                     Initiator: <strong>${AddressIndex}</strong>
                   </div>`
                   ) : ''}
+                <div class='tree-text fn'>
+                  ${Contract}.${Fn}
+                </div>
                 <div class='tree-text'>
-                  [${toShard(ShardIndex, ShardOrder)}]: <strong>${Contract}.${Fn}</strong>
+                  Shard #${ShardIndex}/${ShardOrder ** 2}, Height ${Height}
                 </div>
               </div>
             `
@@ -146,7 +141,7 @@ const Tree = ({ data, name }: TreeData) => {
         }
         onNodeClick={(node) => console.log('you clicked on node ' + node.id)}
         duration={500}
-        linkWidth={(node) => 4}
+        linkWidth={(node) => 2}
       />
 
   </div>

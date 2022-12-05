@@ -37,6 +37,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    &.blue-font {
+      color: #3499F6;
+      cursor: pointer;
+    }
   }
 }
 
@@ -202,6 +206,9 @@
 }
 /** shard **/
 .shard-box {
+  .box-content {
+    padding: 0;
+  }
   .shard-header {
     font-weight: 600;
     font-size: 20px;
@@ -210,8 +217,74 @@
     margin-top: 24px;
   }
   .shard-item {
+    margin: 0 40px;
     &:not(:last-child) {
       border-bottom: 0.5px dashed #414141;;
+    }
+  }
+}
+
+/** txn **/
+.txn-box {
+  .box-content {
+    padding: 0;
+  }
+  .txn-header {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+  }
+  .txn-item {
+    margin: 0 40px;
+    padding-bottom: 24px;
+    &:not(:last-child) {
+      border-bottom: 1px dashed #414141;
+    }
+  }
+  .txn-state {
+    display: grid;
+    row-gap: 24px;
+    grid-template-columns: 264px 1fr;
+  }
+}
+/** block **/
+.block-box {
+  .box-content {
+    padding: 0;
+  }
+  .block-header {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+  }
+  .block-item {
+    margin: 0 40px;
+    padding-bottom: 24px;
+    &:not(:last-child) {
+      border-bottom: 1px dashed #414141;
+    }
+  }
+  .block-state {
+    display: grid;
+    row-gap: 24px;
+    grid-template-columns: 264px 1fr;
+  }
+  .confirm-txn {
+    margin-top: 20px;
+    .confirm-txn-item {
+      background: #1E1E1E;
+      border-radius: 8px;
+      padding: 20px 32px;
+      row-gap: 20px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
     }
   }
 }

@@ -1,9 +1,10 @@
-import { toShard } from '@/utils/strings';
+import { toPrettyNumber, toShard, toUTCTime } from '@/utils/strings';
 import ReactJson from "@dioxide-js/react-json-view";
 import * as React from 'react'
 import MoreSwitch from './MoreSwitch'
 import AddressText from './AddressText'
 import clss from 'classnames'
+import Tooltip from './Tooltip';
 
 const ContractState = (s: any) => {
   return (
@@ -94,8 +95,8 @@ export const AddrBox = ({data, key, title}: any) => {
         <div className="box-content" >
           <div>
             {originData.map((d: any) => (
-              <div className='addr-item'>
-                  <div className="addr-header" key={d.Address}>
+              <div className='addr-item' key={d.Address}>
+                  <div className="addr-header" >
                     Address:&nbsp;<AddressText addr={d.Address} addrIndex={d.AddressIndex} />
                   </div>
                   <div className="addr-shard"> 
@@ -128,8 +129,8 @@ export const ShardBox = ({data, key, title}: any) => {
         <div className="box-content" >
           <div>
             {originData.map((d: any) => (
-              <div className='shard-item'>
-                  <div className="shard-header" key={d.Address}>
+              <div className='shard-item'  key={d.ShardIndex}>
+                  <div className="shard-header">
                     Shard:&nbsp;#&nbsp;{d.ShardIndex.replace('#', '')}{d.ShardIndex === '#g' ? '' : `/${data.length}`}
                   </div>
                   <div className="shard-state"> 
@@ -139,6 +140,221 @@ export const ShardBox = ({data, key, title}: any) => {
                   </div>
               </div>
             ))}
+          </div>
+          {data.length > 1 ? (
+            <div className='center bottom'>
+              <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
+            </div>
+          ) : null}
+      </div>
+    </div>
+  );
+};
+export const TxnBox = ({data, key, title}: any) => {
+  const [more, setMore] = React.useState<boolean>(false)
+
+  const originData = React.useMemo(() => {
+    return  more ? data : [data[0]];
+  }, [data, more]);
+
+  return (
+    <div className="box txn-box" key={key}>
+      <p className="box-title">{title}</p>
+        <div className="box-content" >
+          <div>
+            {originData.map((d: any) => (
+              <div className='txn-item' key={d.Timestamp}>
+                  <div className="txn-header" >
+                    Timestamp: {toUTCTime(d.Timestamp)}
+                  </div>
+                  <div className="txn-state"> 
+                    <div className='box-key'>InvokeContextType:</div>
+                    <div className='box-val'>{d.InvokeContextType}</div>
+                    {d.Target ? (
+                      <>
+                        <div className='box-key'>Target:</div>
+                        <div className='box-val'>
+                          <AddressText addrIndex={d.AddressIndex} addr={d.Target} />
+                        </div>
+                      </>
+                    ) : null}
+                    {d.Initiator ? (
+                      <>
+                        <div className='box-key'>Initiator:</div>
+                        <div className='box-val'>
+                          <AddressText addrIndex={d.AddressIndex} addr={d.Initiator} />
+                        </div>
+                      </>
+                    ) : null}
+                    <div className='box-key'>BuildNum:</div>
+                    <div className='box-val'>{d.BuildNum}</div>
+                    <div className='box-key'>Function:</div>
+                    <div className='box-val blue-font'>
+                      <Tooltip placement={'top'} trigger="hover" overlay={
+                        <ReactJson
+                          src={d.Arguments || {}}
+                          style={{ background: "none" }}
+                          displayObjectSize={false}
+                          enableClipboard={false}
+                          displayDataTypes={false}
+                          displayArrayKey={false}
+                          collapsed={2}
+                          name={false}
+                          theme="chalk"
+                        />}>
+                          <>
+                            {d.Function}.{d.Contract}
+                          </>
+                      </Tooltip>
+                    </div>
+                    <div className='box-key'>Block Height:</div>
+                    <div className='box-val'>{d.Height}</div>
+                    <div className='box-key'>Shard:</div>
+                    <div className='box-val'>{toShard(d.ShardIndex, d.ShardOrder)}</div>
+                    <div className='box-key'>Return Value:</div>
+                    <div className='box-val'>{d.InvokeResult}</div>
+                  </div>
+              </div>
+            ))}
+          </div>
+          {data.length > 1 ? (
+            <div className='center bottom'>
+              <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
+            </div>
+          ) : null}
+      </div>
+    </div>
+  )
+};
+export const BlockBox = ({data, key, title}: any) => {
+  const [more, setMore] = React.useState<boolean>(false)
+
+  const originData = React.useMemo(() => {
+    return  more ? data : [data[0]];
+  }, [data, more]);
+
+  return (
+    <div className="box block-box" key={key}>
+      <p className="box-title">{title}</p>
+        <div className="box-content" >
+          <div>
+            {originData.map((d: any) => (
+              <div className='block-item' key={d.Timestamp}>
+                  <div className="block-header" >
+                    Block Height: #{d.Height}
+                  </div>
+                  <div className="block-state"> 
+                    <div className='box-key'>Shard:</div>
+                    <div className='box-val'>{d.InvokeContextType}</div>
+                    <div className='box-key'>Timestamp:</div>
+                    <div className='box-val'>{toUTCTime(d.Timestamp)}</div>
+                    <div className='box-key'>Miner:</div>
+                    <div className='box-val'>
+                      <AddressText addr={d.Miner} />
+                    </div>
+                    <div className='box-key'>TxnCount:</div>
+                    <div className='box-val'>{d.TxnCount}</div>
+                    <div className='box-key'>Confirm Txn:</div>
+                    <div className='box-val'>{d.TxnCount}</div>
+                  </div>
+                  <div className='confirm-txn'>
+                    {(d.ConfirmTxn || []).map((txn: any) => (
+                      <div className='confirm-txn-item' key={txn.Timestamp}>
+                        <div className='box-key'>Return Value:</div>
+                        <div className='box-val'>{txn.InvokeResult}</div>
+                        <div className='box-key'>GasBurnt:</div>
+                        <div className='box-val'>{txn.GasBurnt}</div>
+                        <div className='box-key'>InvokeContextType:</div>
+                        <div className='box-val'>{txn.InvokeContextType}</div>
+                        {txn.Target ? (
+                          <>
+                            <div className='box-key'>Target:</div>
+                            <div className='box-val'>
+                              <AddressText addr={txn.Target} />
+                            </div>
+                          </>
+                        ) : null}
+                        {txn.Initiator ? (
+                          <>
+                            <div className='box-key'>Initiator:</div>
+                            <div className='box-val'>
+                              <AddressText addr={txn.Initiator} />
+                            </div>
+                          </>
+                        ) : null}
+                        <div className='box-key'>OriginateShardOrder:</div>
+                        <div className='box-val'>{txn.ShardOrder ** 2}</div>
+                        <div className='box-key'>OriginateShardIndex:</div>
+                        <div className='box-val'>{txn.ShardIndex}</div>
+                        <div className='box-key'>BuildNum:</div>
+                        <div className='box-val'>{txn.BuildNum}</div>
+                        <div className='box-key'>Timestamp:</div>
+                        <div className='box-val'>{txn.Timestamp}</div>
+                        <div className='box-key'>Function:</div>
+                        <div className='box-val blue-font'>
+                          <Tooltip placement={'top'} trigger="hover" overlay={
+                            <ReactJson
+                              src={txn.Arguments || {}}
+                              style={{ background: "none" }}
+                              displayObjectSize={false}
+                              enableClipboard={false}
+                              displayDataTypes={false}
+                              displayArrayKey={false}
+                              collapsed={2}
+                              name={false}
+                              theme="chalk"
+                            />}>
+                              <>
+                                {txn.Function}.{txn.Contract}
+                              </>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+              </div>
+            ))}
+          </div>
+          {data.length > 1 ? (
+            <div className='center bottom'>
+              <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
+            </div>
+          ) : null}
+      </div>
+    </div>
+  )
+};
+export const ProfingBox = ({data, key, title}: any) => {
+  const [more, setMore] = React.useState<boolean>(false)
+
+  const originData = React.useMemo(() => {
+    return  more ? data : [data[0]];
+  }, [data, more]);
+
+  return (
+    <div className="box profing-box" key={key}>
+      <p className="box-title">{title}</p>
+        <div className="box-content" >
+          <div className='profing-header'>
+            <div className='profing-header-item'>
+              <div className='box-val'>532784</div>
+              <div className='box-key'>Block Height</div>
+            </div>
+            <div className='profing-header-item'>
+              <div className='box-val'>{toPrettyNumber(45623873)}</div>
+              <div className='box-key'>Overall Transactions</div>
+            </div>
+            <div className='profing-header-item'>
+              <div className='box-val'>466.86&nbsp;TPS</div>
+              <div className='box-key'>Overall Throughput</div>
+            </div>
+          </div>
+          <div>
+            <div className='profing-item'>
+              <div> shard #g </div>
+              <div> {toPrettyNumber('35526565')} </div>
+              <div> 233.43&nbsp;TPS </div>
+            </div>
           </div>
           {data.length > 1 ? (
             <div className='center bottom'>

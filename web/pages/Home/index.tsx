@@ -4,7 +4,7 @@ import json from "json-bigint";
 import Tree from "../../component/Tree";
 
 import './style.scss';
-import { DeployBox, AddrBox, ShardBox } from "@/component/BoxItem";
+import { DeployBox, AddrBox, ShardBox, TxnBox, BlockBox } from "@/component/BoxItem";
 
 const { useEffect, useState } = React;
 const mockdata = 
@@ -94,6 +94,495 @@ const mockdata =
       ]
    },
    {
+      "type": "Trace",
+      "command": "viz.trace txn5",
+      "content": 
+      [
+         {
+            "tx_id": 1,
+            "tx_info": 
+            {
+               "InvokeContextType": "Normal",
+               "Target": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "AddressIndex": "@0",
+               "BuildNum": 1,
+               "Timestamp": 1670209209448,
+               "Contract": "Ballot",
+               "Function": "finalize",
+               "Height": 3,
+               "ShardIndex": 1,
+               "ShardOrder": 2
+            },
+            "father": -1
+         },
+         {
+            "tx_id": 2,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 3,
+               "OriginateShardIndex": 1,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209221404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_4",
+               "Height": 4,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 1
+         },
+         {
+            "tx_id": 3,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 1,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 4,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 2,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 5,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 3,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 6,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 0,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 7,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 1,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [0, 0, 3]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 3
+         },
+         {
+            "tx_id": 8,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 2,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [2, 1, 0]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 4
+         },
+         {
+            "tx_id": 9,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 3,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [0, 2, 1]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 5
+         },
+         {
+            "tx_id": 10,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 0,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [0, 2, 1]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 6
+         }
+      ]
+   },
+   {
+      "type": "Block",
+      "command": "viz.block #0",
+      "content": 
+      [
+         {
+            "Height": 0,
+            "PrevBlock": "0000000000000000000000000000000000000000000000000000",
+            "ShardIndex": "#0",
+            "Timestamp": 1670209206404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 0
+         },
+         {
+            "Height": 1,
+            "PrevBlock": "xkhrf474nszvw000000000000000000000000000000000000000",
+            "ShardIndex": "#0",
+            "Timestamp": 1670209211404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 0
+         },
+         {
+            "Height": 2,
+            "PrevBlock": "x0pfq3vay2knc000000000000000000000000000000000000000",
+            "ShardIndex": "#0",
+            "Timestamp": 1670209216404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 3,
+            "ConfirmTxn": 
+            [
+               {
+                  "InvokeResult": "Success",
+                  "GasBurnt": 1,
+                  "InvokeContextType": "Normal",
+                  "Target": "7hxtdr1s59xw5af9ynm6ghqf6ppv14hmctbw8736ck102xbd9eds6m8ef4:ed25519",
+                  "AddressIndex": "@3",
+                  "BuildNum": 1,
+                  "Timestamp": 1670209209354,
+                  "Contract": "Ballot",
+                  "Function": "vote",
+                  "Arguments": {"proposal_index": 2, "case_num": 1},
+                  "Height": 2,
+                  "ShardIndex": 0,
+                  "ShardOrder": 2
+               },
+               {
+                  "InvokeResult": "Success",
+                  "GasBurnt": 1,
+                  "InvokeContextType": "Normal",
+                  "Target": "00dzss3pgp0vjjg04yawgxx1z2a1wc524rkzaet6n1bek864tbv16164sg:ed25519",
+                  "AddressIndex": "@4",
+                  "BuildNum": 1,
+                  "Timestamp": 1670209209354,
+                  "Contract": "Ballot",
+                  "Function": "vote",
+                  "Arguments": {"proposal_index": 1, "case_num": 1},
+                  "Height": 2,
+                  "ShardIndex": 0,
+                  "ShardOrder": 2
+               },
+               {
+                  "InvokeResult": "Success",
+                  "GasBurnt": 1,
+                  "InvokeContextType": "Normal",
+                  "Target": "658rgdnxvykneq5fm55k6cq60mdd5s3zx78nhbw4h14znszt9j58646wkm:ed25519",
+                  "AddressIndex": "@5",
+                  "BuildNum": 1,
+                  "Timestamp": 1670209209354,
+                  "Contract": "Ballot",
+                  "Function": "vote",
+                  "Arguments": {"proposal_index": 1, "case_num": 1},
+                  "Height": 2,
+                  "ShardIndex": 0,
+                  "ShardOrder": 2
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "type": "Block",
+      "command": "viz.block #2:1",
+      "content": 
+      [
+         {
+            "Height": 1,
+            "PrevBlock": "xkhrf474nszvw000000000000000000000000000000000000000",
+            "ShardIndex": "#2",
+            "Timestamp": 1670209211404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 0
+         }
+      ]
+   },
+   {
+      "type": "Txn",
+      "command": "viz.txn txn1",
+      "content": 
+      [
+         {
+            "InvokeContextType": "Normal",
+            "Target": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "AddressIndex": "@0",
+            "BuildNum": 1,
+            "Timestamp": 1670209209301,
+            "Contract": "Ballot",
+            "Function": "init",
+            "InvokeResult": "Success",
+            "Arguments": {"names": ["Spring", "Yarn", "Combat"]},
+            "Height": 0,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         }
+      ]
+   },
+   {
+      "type": "Txn",
+      "command": "viz.txn txn2[]",
+      "content": 
+      [
+         {
+            "InvokeContextType": "Normal",
+            "Target": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "AddressIndex": "@0",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "qya8a6f9w2ycsah7wgdyc7n5c72sd20t1g24b099pp3d9v6ksawt7xx28r:ed25519",
+            "AddressIndex": "@1",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 2,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "gjc4jh910hbxad3tn0264t9xagrdsrsqy45n51pavm9drswetj0q65fmjc:ed25519",
+            "AddressIndex": "@2",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 3,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "7hxtdr1s59xw5af9ynm6ghqf6ppv14hmctbw8736ck102xbd9eds6m8ef4:ed25519",
+            "AddressIndex": "@3",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 0,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "00dzss3pgp0vjjg04yawgxx1z2a1wc524rkzaet6n1bek864tbv16164sg:ed25519",
+            "AddressIndex": "@4",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 0,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "658rgdnxvykneq5fm55k6cq60mdd5s3zx78nhbw4h14znszt9j58646wkm:ed25519",
+            "AddressIndex": "@5",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 0,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "94zvha23xzcc0m987np0e0847x1me7qp72bt8s8jmpbqta5bs52n61gk04:ed25519",
+            "AddressIndex": "@6",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 0, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 2,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "wb2s0az0sgy44pbw3v4hatpwm6vgc5d0ad0287y8spt1yagg4tnn6t8bpm:ed25519",
+            "AddressIndex": "@7",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 3,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "02kesb1f2mbf4j561b0n3b73evxjst90rkfw86wtj4vbh5esv0cm6s4xj8:ed25519",
+            "AddressIndex": "@8",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 0, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 2,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "t8tjthk6fkb6da6j2mjansqackxwn5jss97tdmq0c860vthvfbqv6h2mkw:ed25519",
+            "AddressIndex": "@9",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 3,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "ykb16zkm3nk5ejh7np83f2tfg3x9bnbpbhg3v2qhdqddbhtvhfg26nsw2g:ed25519",
+            "AddressIndex": "@10",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "tqhmw4kzfyy2pgygqdxf928an5sgv3h6tk5r4a7hnmae4jvsscc578h47r:ed25519",
+            "AddressIndex": "@11",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         }
+      ]
+   },
+   {
       "type": "Shard",
       "command": "viz.shard #all Ballot",
       "content": 
@@ -164,7 +653,9 @@ enum LOG_TYPE {
    SECTION = 'Section',
    TRACE = 'Trace',
    SHARD = 'Shard',
-   ADDR = 'Addr'
+   ADDR = 'Addr',
+   TXN = 'Txn',
+   BLOCK = 'Block',
 }
 
 type VizLog = {
@@ -176,7 +667,7 @@ export const Home = () => {
   return (
     <div className="home">
       { // mockdata PREDA_VIZ_LOG
-        (mockdata as VizLog[]).map((d, i) => {
+        (PREDA_VIZ_LOG as VizLog[]).map((d, i) => {
           const type = d.type.replace(/(\w)/i, (_, $1) => {
             return $1.toLocaleUpperCase();
           });
@@ -204,6 +695,16 @@ export const Home = () => {
           if (type === LOG_TYPE.SHARD) {
             return (
                <ShardBox data={d.content} title={d.command} key={type + i} />
+            );
+          } 
+          if (type === LOG_TYPE.TXN) {
+            return (
+               <TxnBox data={d.content} title={d.command} key={type + i} />
+            );
+          } 
+          if (type === LOG_TYPE.BLOCK) {
+            return (
+               <BlockBox data={d.content} title={d.command} key={type + i} />
             );
           } 
           if (type === LOG_TYPE.SECTION) {
