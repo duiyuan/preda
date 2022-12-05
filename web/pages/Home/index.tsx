@@ -686,7 +686,7 @@ export const Home = () => {
   return (
     <div className="home">
       { // mockdata PREDA_VIZ_LOG
-        (mockdata as VizLog[]).map((d, i) => {
+        (PREDA_VIZ_LOG as VizLog[]).map((d, i) => {
           const type = d.type.replace(/(\w)/i, (_, $1) => {
             return $1.toLocaleUpperCase();
           });
