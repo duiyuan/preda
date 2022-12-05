@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/duiyuan/preda/compare/v0.1.5...v0.1.6) (2022-12-05)
+
+
+### Bug Fixes
+
+* git action ([c49a3b6](https://github.com/duiyuan/preda/commit/c49a3b68115613ecabd86a1ad12bedf5528a4e0e))
+
 ### [0.1.5](https://github.com/duiyuan/preda/compare/v0.0.30...v0.1.5) (2022-12-05)
 
 
