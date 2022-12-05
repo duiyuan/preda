@@ -45,7 +45,7 @@ const Tree = ({ data, name }: TreeData) => {
             const link = links[c-1]
             const currentData = data[c]
             const isCurrentFather = isFather(d.tx_id, currentData)
-            console.log(node, isCurrentFather, d.tx_id, currentData.father)
+            // console.log(node, isCurrentFather, d.tx_id, currentData.father)
             if (node && isCurrentFather) {
               const oldX = Number((node as HTMLElement).style.transform.replace(/[^\d|^\-]/g, ''));
               const newX = Number(translateX) + Number(oldX);
