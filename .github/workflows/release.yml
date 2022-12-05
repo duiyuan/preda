@@ -44,7 +44,8 @@ jobs:
 
       - name: package with vsce
         run: |
-          npx vsce package
+          yarn global add vsce
+          vsce package
 
       - name: upload a build artifact
         uses: actions/upload-artifact@v2.1.4
