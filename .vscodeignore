@@ -13,5 +13,5 @@ typing/**
 test/**
 pkg.sh
 pkg.bat
-.zip
+*.zip
 .vsce

@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { existsSync, ensureDirSync } from "fs-extra";
+import { existsSync } from "fs-extra";
 
 const isWin = process.platform === "win32";
 
