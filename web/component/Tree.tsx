@@ -88,6 +88,7 @@ const Tree = ({ data, name }: TreeData) => {
               AddressIndex,
               Function: Fn,
               Height,
+              Target,
             } = node.data.tx_info
             // , 'Scheduled'
             const isNormalRelayContent = ['Normal'].includes(InvokeContextType)
@@ -135,6 +136,11 @@ const Tree = ({ data, name }: TreeData) => {
                 <div class='tree-text'>
                   Shard #${ShardIndex}/${ShardOrder ** 2}, Height ${Height}
                 </div>
+                ${!isNormalRelayContent && Target ? (
+                    `<div class='tree-text'>
+                      Target: <strong>${AddressIndex}</strong>
+                    </div>`
+                  ) : ''}
               </div>
             `
           }
