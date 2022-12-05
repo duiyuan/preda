@@ -8,8 +8,6 @@ import editArgs from "./Commands/edit";
 import compile from "./Commands/compile";
 import view from "./Commands/view";
 
-import util from "./utils/hl";
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -55,20 +53,13 @@ export function activate(context: vscode.ExtensionContext) {
 
   let timeout: any = null;
   let activeEditor = vscode.window.activeTextEditor;
-  let isCaseSensitive: boolean,
-    assembledData: any,
-    decorationTypes: { [key: string]: vscode.TextEditorDecorationType },
-    pattern: any,
-    styleForRegExp: any,
-    keywordsPattern: string;
-  let settings = vscode.workspace.getConfiguration("Preda");
+  let decorationTypes: { [key: string]: vscode.TextEditorDecorationType };
+  let pattern: any;
+  let styleForRegExp: any;
 
-  const diagnostics =
-    vscode.languages.createDiagnosticCollection("Predalog-highlight");
+  const keywordsPattern = "\\[HIGHLIGHT\\].*";
 
-  context.subscriptions.push(diagnostics);
-
-  init(settings);
+  init();
 
   if (activeEditor) {
     triggerUpdateDecorations();
@@ -97,64 +88,28 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions
   );
 
-  // An event that is emitted when a text document is disposed
-  // or when the language id of a text document has been changed.
-  vscode.workspace.onDidCloseTextDocument(
-    function (event: any) {
-      diagnostics.set(event.document, []);
-    },
-    null,
-    context.subscriptions
-  );
-
   // An event that is emitted when the configuration changed.
   vscode.workspace.onDidChangeConfiguration(
     function () {
-      settings = vscode.workspace.getConfiguration("Preda");
-      //NOTE: if disabled, do not re-initialize the data or we will not be able to clear the style immediatly via 'toggle highlight' command
-      // if (!settings.get("isEnable")) {
-      //   return;
-      // }
-
-      init(settings);
+      init();
       triggerUpdateDecorations();
     },
     null,
     context.subscriptions
   );
 
-  function createDiagnostic(
-    document: vscode.TextDocument,
-    range: vscode.Range,
-    match: RegExpExecArray | null,
-    matchedValue: any
-  ) {
-    let lineText = document.lineAt(range.start).text;
-    let content = util.getContent(lineText, match);
-    if (content.length > 160) {
-      content = content.substring(0, 160).trim() + "...";
-    }
-    const severity = assembledData[matchedValue]?.diagnosticSeverity;
-    if (severity !== null && severity !== undefined) {
-      return new vscode.Diagnostic(range, content, severity);
-    }
-  }
-
   function updateDecorations() {
     if (!activeEditor || !activeEditor.document) {
       return;
     }
 
-    const problems = [];
-    const postDiagnostics =
-      settings.get("isEnable") && settings.get("enableDiagnostics");
-
     const text = activeEditor.document.getText();
     const matches: any = {};
     let match: RegExpExecArray | null;
+
     while ((match = pattern.exec(text))) {
-      let startPos = activeEditor.document.positionAt(match.index);
-      let endPos = activeEditor.document.positionAt(
+      const startPos = activeEditor.document.positionAt(match.index);
+      const endPos = activeEditor.document.positionAt(
         match.index + match[0].length
       );
 
@@ -165,22 +120,6 @@ export function activate(context: vscode.ExtensionContext) {
       let matchedValue = match[0];
       let patternIndex = match.slice(1).indexOf(matchedValue);
       matchedValue = Object.keys(decorationTypes)[patternIndex] || matchedValue;
-
-      if (postDiagnostics) {
-        let problem = createDiagnostic(
-          activeEditor.document,
-          decoration.range,
-          match,
-          matchedValue
-        );
-        if (problem) {
-          problems.push(problem);
-        }
-      }
-
-      if (!isCaseSensitive) {
-        matchedValue = matchedValue.toUpperCase();
-      }
 
       if (matches[matchedValue]) {
         matches[matchedValue].push(decoration);
@@ -195,79 +134,22 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     Object.keys(decorationTypes).forEach((v) => {
-      const rangeOption =
-        settings.get("isEnable") && matches[v] ? matches[v] : [];
+      const rangeOption = matches[v] ? matches[v] : [];
       const decorationType = decorationTypes[v];
       activeEditor?.setDecorations(decorationType, rangeOption);
     });
-
-    diagnostics.set(activeEditor.document.uri, problems);
   }
 
-  function init(settings: any) {
-    const customDefaultStyle = settings.get("defaultStyle");
-    keywordsPattern = settings.get("keywordsPattern");
-    isCaseSensitive = settings.get("isCaseSensitive", true);
-
+  function init() {
     decorationTypes = {};
-
-    if (keywordsPattern.trim()) {
-      styleForRegExp = Object.assign(
-        {},
-        util.DEFAULT_STYLE,
-        customDefaultStyle,
-        {
-          overviewRulerLane: vscode.OverviewRulerLane.Right,
-        }
-      );
-
-      pattern = keywordsPattern;
-    } else {
-      assembledData = util.getAssembledData(
-        settings.get("keywords"),
-        customDefaultStyle,
-        isCaseSensitive
-      );
-      Object.keys(assembledData).forEach((v) => {
-        if (!isCaseSensitive) {
-          v = v.toUpperCase();
-        }
-
-        var mergedStyle = Object.assign(
-          {},
-          {
-            overviewRulerLane: vscode.OverviewRulerLane.Right,
-          },
-          assembledData[v]
-        );
-
-        if (!mergedStyle.overviewRulerColor) {
-          // use backgroundColor as the default overviewRulerColor if not specified by the user setting
-          mergedStyle.overviewRulerColor = mergedStyle.backgroundColor;
-        }
-
-        decorationTypes[v] =
-          vscode.window.createTextEditorDecorationType(mergedStyle);
-      });
-
-      // Give each keyword a group in the pattern
-      pattern = Object.keys(assembledData)
-        .map((v) => {
-          if (!assembledData[v].regex) {
-            return `(${util.escapeRegExp(v)})`;
-          }
-
-          let p = assembledData[v].regex.pattern || v;
-          // Ignore unescaped parantheses to avoid messing with our groups
-          return `(${util.escapeRegExpGroups(p)})`;
-        })
-        .join("|");
-    }
-
-    pattern = new RegExp(pattern, "gi");
-    if (isCaseSensitive) {
-      pattern = new RegExp(pattern, "g");
-    }
+    const style = {
+      color: "#000",
+      backgroundColor: "#ffff00",
+    };
+    styleForRegExp = Object.assign({}, style, {
+      overviewRulerLane: vscode.OverviewRulerLane.Right,
+    });
+    pattern = new RegExp(keywordsPattern, "gi");
   }
 
   function triggerUpdateDecorations() {
