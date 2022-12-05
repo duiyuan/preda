@@ -13,6 +13,7 @@ const mockdata =
       "type": "Run",
       "content": 
       {
+         "ShardOrder": 2,
          "script": "c:\\Users\\IDEA\\Documents\\GitHub\\oxd_preda\\simulator\\contracts\\Ballot.prdts"
       }
    },
@@ -89,6 +90,23 @@ const mockdata =
                   "flag": "InvokeByRelayTransaction",
                   "opcode": 3
                }
+            ]
+         }
+      ]
+   },
+   {
+      "type": "Addr",
+      "command": "viz.addr @0",
+      "content": 
+      [
+         {
+            "Address": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "AddressIndex": "@0",
+            "ShardIndex": "#1",
+            "States": 
+            [
+               {"Contract": "Ballot", "State": {"weight": 1, "voted_case": 1}},
+               {"Contract": "Token", "State": {"balance": "50000000000000"}}
             ]
          }
       ]
@@ -683,10 +701,12 @@ type VizLog = {
   content: any
 }
 export const Home = () => {
+   // PREDA_VIZ_LOG mockdata
+   const originData = (PREDA_VIZ_LOG || []) as VizLog[]
+   const shardOrder = originData[0].content?.ShardOrder
   return (
     <div className="home">
-      { // mockdata PREDA_VIZ_LOG
-        (PREDA_VIZ_LOG as VizLog[]).map((d, i) => {
+      { originData.map((d, i) => {
           const type = d.type.replace(/(\w)/i, (_, $1) => {
             return $1.toLocaleUpperCase();
           });
@@ -708,12 +728,12 @@ export const Home = () => {
           } 
           if (type === LOG_TYPE.ADDR) {
             return (
-               <AddrBox data={d.content} title={d.command} key={type + i} />
+               <AddrBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
             );
           } 
           if (type === LOG_TYPE.SHARD) {
             return (
-               <ShardBox data={d.content} title={d.command} key={type + i} />
+               <ShardBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
             );
           } 
           if (type === LOG_TYPE.TXN) {
@@ -723,7 +743,7 @@ export const Home = () => {
           } 
           if (type === LOG_TYPE.BLOCK) {
             return (
-               <BlockBox data={d.content} title={d.command} key={type + i} />
+               <BlockBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
             );
           } 
           if (type === LOG_TYPE.PROFING) {

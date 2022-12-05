@@ -83,7 +83,7 @@ export const DeployBox = ({data, key, title}: any) => {
     </div>
   )
 };
-export const AddrBox = ({data, key, title}: any) => {
+export const AddrBox = ({data, key, title, shardOrder}: any) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
@@ -100,7 +100,11 @@ export const AddrBox = ({data, key, title}: any) => {
                   <div className="addr-header" >
                     Address:&nbsp;<AddressText addr={d.Address} addrIndex={d.AddressIndex} />
                   </div>
-                  <div className="addr-shard"> 
+                  <div className='addr-shard'>
+                    <div className='box-key'>Shard:</div>
+                    <div className='box-val'>{toShard(d.ShardIndex,shardOrder)}</div>
+                  </div>
+                  <div className="addr-state"> 
                     {d.States.map((s: any) => (
                       <ContractState {...s} key={s.Contract} />
                     ))}
@@ -117,7 +121,7 @@ export const AddrBox = ({data, key, title}: any) => {
     </div>
   )
 };
-export const ShardBox = ({data, key, title}: any) => {
+export const ShardBox = ({data, key, title, shardOrder}: any) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
@@ -132,7 +136,7 @@ export const ShardBox = ({data, key, title}: any) => {
             {originData.map((d: any) => (
               <div className='shard-item'  key={d.ShardIndex}>
                   <div className="shard-header">
-                    Shard:&nbsp;#&nbsp;{d.ShardIndex.replace('#', '')}{d.ShardIndex === '#g' ? '' : `/${data.length}`}
+                    Shard:&nbsp;{toShard(d.ShardIndex, shardOrder)}
                   </div>
                   <div className="shard-state"> 
                     {d.States.map((s: any) => (
@@ -227,7 +231,7 @@ export const TxnBox = ({data, key, title}: any) => {
     </div>
   )
 };
-export const BlockBox = ({data, key, title}: any) => {
+export const BlockBox = ({data, key, title, shardOrder}: any) => {
   const [more, setMore] = React.useState<boolean>(false);
   const [originData, setOriginData] = React.useState<any>([]);
 
@@ -247,7 +251,7 @@ export const BlockBox = ({data, key, title}: any) => {
                   </div>
                   <div className="block-state"> 
                     <div className='box-key'>Shard:</div>
-                    <div className='box-val'>{d.InvokeContextType}</div>
+                    <div className='box-val'>{toShard(d.ShardIndex, shardOrder)}</div>
                     <div className='box-key'>Timestamp:</div>
                     <div className='box-val'>{toUTCTime(d.Timestamp)}</div>
                     <div className='box-key'>Miner:</div>

@@ -184,6 +184,11 @@
       margin-bottom: 24px;
     }
   }
+  .addr-shard {
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 264px 1fr;
+  }
 }
 
 .address-text {
