@@ -17,7 +17,7 @@ jobs:
       - name: setup node.jobs
         uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 14
           registry-url: "https://registry.npmjs.org"
 
       - name: configure committer
