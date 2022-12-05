@@ -5,6 +5,7 @@ import MoreSwitch from './MoreSwitch'
 import AddressText from './AddressText'
 import clss from 'classnames'
 import Tooltip from './Tooltip';
+import { TaskPanelKind } from 'vscode';
 
 const ContractState = (s: any) => {
   return (
@@ -227,10 +228,11 @@ export const TxnBox = ({data, key, title}: any) => {
   )
 };
 export const BlockBox = ({data, key, title}: any) => {
-  const [more, setMore] = React.useState<boolean>(false)
+  const [more, setMore] = React.useState<boolean>(false);
+  const [originData, setOriginData] = React.useState<any>([]);
 
-  const originData = React.useMemo(() => {
-    return  more ? data : [data[0]];
+  React.useEffect(() => {
+    setOriginData(more ? data : [data[0]])
   }, [data, more]);
 
   return (
@@ -238,7 +240,7 @@ export const BlockBox = ({data, key, title}: any) => {
       <p className="box-title">{title}</p>
         <div className="box-content" >
           <div>
-            {originData.map((d: any) => (
+            {originData.map((d: any, index: number) => (
               <div className='block-item' key={d.Timestamp}>
                   <div className="block-header" >
                     Block Height: #{d.Height}
@@ -255,63 +257,73 @@ export const BlockBox = ({data, key, title}: any) => {
                     <div className='box-key'>TxnCount:</div>
                     <div className='box-val'>{d.TxnCount}</div>
                     <div className='box-key'>Confirm Txn:</div>
-                    <div className='box-val'>{d.TxnCount}</div>
+                    <div className='box-val'>
+                      {d.ConfirmTxn ? (
+                        <MoreSwitch onChange={(s: boolean) => {
+                          originData[index].showConfirm = !d.showConfirm;
+                          setOriginData([...originData]);
+                          console.log(originData, index, d.showConfirm)
+                        }} value={!!d.showConfirm}/> 
+                      ) : 0}
+                    </div>
                   </div>
-                  <div className='confirm-txn'>
-                    {(d.ConfirmTxn || []).map((txn: any) => (
-                      <div className='confirm-txn-item' key={txn.Timestamp}>
-                        <div className='box-key'>Return Value:</div>
-                        <div className='box-val'>{txn.InvokeResult}</div>
-                        <div className='box-key'>GasBurnt:</div>
-                        <div className='box-val'>{txn.GasBurnt}</div>
-                        <div className='box-key'>InvokeContextType:</div>
-                        <div className='box-val'>{txn.InvokeContextType}</div>
-                        {txn.Target ? (
-                          <>
-                            <div className='box-key'>Target:</div>
-                            <div className='box-val'>
-                              <AddressText addr={txn.Target} />
-                            </div>
-                          </>
-                        ) : null}
-                        {txn.Initiator ? (
-                          <>
-                            <div className='box-key'>Initiator:</div>
-                            <div className='box-val'>
-                              <AddressText addr={txn.Initiator} />
-                            </div>
-                          </>
-                        ) : null}
-                        <div className='box-key'>OriginateShardOrder:</div>
-                        <div className='box-val'>{txn.ShardOrder ** 2}</div>
-                        <div className='box-key'>OriginateShardIndex:</div>
-                        <div className='box-val'>{txn.ShardIndex}</div>
-                        <div className='box-key'>BuildNum:</div>
-                        <div className='box-val'>{txn.BuildNum}</div>
-                        <div className='box-key'>Timestamp:</div>
-                        <div className='box-val'>{txn.Timestamp}</div>
-                        <div className='box-key'>Function:</div>
-                        <div className='box-val blue-font'>
-                          <Tooltip placement={'top'} trigger="hover" overlay={
-                            <ReactJson
-                              src={txn.Arguments || {}}
-                              style={{ background: "none" }}
-                              displayObjectSize={false}
-                              enableClipboard={false}
-                              displayDataTypes={false}
-                              displayArrayKey={false}
-                              collapsed={2}
-                              name={false}
-                              theme="chalk"
-                            />}>
-                              <>
-                                {txn.Function}.{txn.Contract}
-                              </>
-                          </Tooltip>
+                  {(d.showConfirm && d.ConfirmTxn) ? (
+                    <div className='confirm-txn'>
+                      {(d.ConfirmTxn || []).map((txn: any) => (
+                        <div className='confirm-txn-item' key={txn.Timestamp}>
+                          <div className='box-key'>Return Value:</div>
+                          <div className='box-val'>{txn.InvokeResult}</div>
+                          <div className='box-key'>GasBurnt:</div>
+                          <div className='box-val'>{txn.GasBurnt}</div>
+                          <div className='box-key'>InvokeContextType:</div>
+                          <div className='box-val'>{txn.InvokeContextType}</div>
+                          {txn.Target ? (
+                            <>
+                              <div className='box-key'>Target:</div>
+                              <div className='box-val'>
+                                <AddressText addr={txn.Target} />
+                              </div>
+                            </>
+                          ) : null}
+                          {txn.Initiator ? (
+                            <>
+                              <div className='box-key'>Initiator:</div>
+                              <div className='box-val'>
+                                <AddressText addr={txn.Initiator} />
+                              </div>
+                            </>
+                          ) : null}
+                          <div className='box-key'>OriginateShardOrder:</div>
+                          <div className='box-val'>{txn.ShardOrder ** 2}</div>
+                          <div className='box-key'>OriginateShardIndex:</div>
+                          <div className='box-val'>{txn.ShardIndex}</div>
+                          <div className='box-key'>BuildNum:</div>
+                          <div className='box-val'>{txn.BuildNum}</div>
+                          <div className='box-key'>Timestamp:</div>
+                          <div className='box-val'>{txn.Timestamp}</div>
+                          <div className='box-key'>Function:</div>
+                          <div className='box-val blue-font'>
+                            <Tooltip placement={'top'} trigger="hover" overlay={
+                              <ReactJson
+                                src={txn.Arguments || {}}
+                                style={{ background: "none" }}
+                                displayObjectSize={false}
+                                enableClipboard={false}
+                                displayDataTypes={false}
+                                displayArrayKey={false}
+                                collapsed={2}
+                                name={false}
+                                theme="chalk"
+                              />}>
+                                <>
+                                  {txn.Function}.{txn.Contract}
+                                </>
+                            </Tooltip>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                    ) : null}
               </div>
             ))}
           </div>
@@ -324,12 +336,28 @@ export const BlockBox = ({data, key, title}: any) => {
     </div>
   )
 };
-export const ProfingBox = ({data, key, title}: any) => {
-  const [more, setMore] = React.useState<boolean>(false)
 
-  const originData = React.useMemo(() => {
-    return  more ? data : [data[0]];
-  }, [data, more]);
+type ProfingType = {
+  BlockHeight: number
+  ShardIndex: string
+  TxnCount: number
+  TPS: number
+}
+export const ProfingBox = ({data, key, title}: any) => {
+
+  const maxHeight = React.useMemo(() => {
+    return  Math.max(...(data.map((d: ProfingType) => d.BlockHeight)));
+  }, [data]);
+
+  const [totalTxn, totalTPS] = React.useMemo(() => {
+    let tTxn = 0
+    let tTPS = 0
+    data.forEach((d: ProfingType) => {
+      tTxn = tTxn + Number(d.TxnCount)
+      tTPS = tTPS + Number(d.TPS)
+    })
+    return  [tTxn, tTPS]
+  }, [data]);
 
   return (
     <div className="box profing-box" key={key}>
@@ -337,30 +365,25 @@ export const ProfingBox = ({data, key, title}: any) => {
         <div className="box-content" >
           <div className='profing-header'>
             <div className='profing-header-item'>
-              <div className='box-val'>532784</div>
+              <div className='box-val'>{maxHeight}</div>
               <div className='box-key'>Block Height</div>
             </div>
             <div className='profing-header-item'>
-              <div className='box-val'>{toPrettyNumber(45623873)}</div>
+              <div className='box-val'>{toPrettyNumber(totalTxn)}</div>
               <div className='box-key'>Overall Transactions</div>
             </div>
             <div className='profing-header-item'>
-              <div className='box-val'>466.86&nbsp;TPS</div>
+              <div className='box-val'>{totalTPS}&nbsp;TPS</div>
               <div className='box-key'>Overall Throughput</div>
             </div>
           </div>
-          <div>
-            <div className='profing-item'>
-              <div> shard #g </div>
-              <div> {toPrettyNumber('35526565')} </div>
-              <div> 233.43&nbsp;TPS </div>
+         {(data || []).map((d: ProfingType) => (
+            <div className='profing-item' key={d.ShardIndex}>
+              <div> shard #{d.ShardIndex}, Height {d.BlockHeight} </div>
+              <div> {toPrettyNumber(d.TxnCount)} </div>
+              <div> {d.TPS}&nbsp;TPS </div>
             </div>
-          </div>
-          {data.length > 1 ? (
-            <div className='center bottom'>
-              <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
-            </div>
-          ) : null}
+          ))}
       </div>
     </div>
   )

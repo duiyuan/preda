@@ -4,7 +4,7 @@ import json from "json-bigint";
 import Tree from "../../component/Tree";
 
 import './style.scss';
-import { DeployBox, AddrBox, ShardBox, TxnBox, BlockBox } from "@/component/BoxItem";
+import { DeployBox, AddrBox, ShardBox, TxnBox, BlockBox, ProfingBox } from "@/component/BoxItem";
 
 const { useEffect, useState } = React;
 const mockdata = 
@@ -645,6 +645,24 @@ const mockdata =
          }
       ]
    },
+   {
+      "type": "Profing",
+      "content": 
+      [
+         {
+           BlockHeight: 4,
+           TxnCount: 999999,
+           TPS: 466.86,
+           ShardIndex: 1,
+         },
+         {
+           BlockHeight: 5,
+           TxnCount: 999999,
+           TPS: 466.86,
+           ShardIndex: 1,
+         }
+       ]
+   },
 ];
 
 enum LOG_TYPE {
@@ -656,6 +674,7 @@ enum LOG_TYPE {
    ADDR = 'Addr',
    TXN = 'Txn',
    BLOCK = 'Block',
+   PROFING = 'Profing',
 }
 
 type VizLog = {
@@ -667,7 +686,7 @@ export const Home = () => {
   return (
     <div className="home">
       { // mockdata PREDA_VIZ_LOG
-        (PREDA_VIZ_LOG as VizLog[]).map((d, i) => {
+        (mockdata as VizLog[]).map((d, i) => {
           const type = d.type.replace(/(\w)/i, (_, $1) => {
             return $1.toLocaleUpperCase();
           });
@@ -705,6 +724,11 @@ export const Home = () => {
           if (type === LOG_TYPE.BLOCK) {
             return (
                <BlockBox data={d.content} title={d.command} key={type + i} />
+            );
+          } 
+          if (type === LOG_TYPE.PROFING) {
+            return (
+               <ProfingBox data={d.content} title={title} key={type + i} />
             );
           } 
           if (type === LOG_TYPE.SECTION) {
