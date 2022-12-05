@@ -6,7 +6,7 @@ on:
     branches: [main]
 jobs:
   release:
-    name: package PREDA language preview toolchain
+    name: package PREDA
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -52,5 +52,5 @@ jobs:
       - name: upload a build artifact
         uses: actions/upload-artifact@v2.1.4
         with:
-          name: AL Test Runner
+          name: preda
           path: ./*.vsix
