@@ -170,6 +170,7 @@
     font-size: 20px;
     line-height: 24px;
     margin-bottom: 24px;
+    flex-wrap: wrap;
     .address-flag {
       font-weight: 400;
       font-size: 14px;
@@ -195,6 +196,7 @@
   display: flex;
   align-items: center;
   font-size: inherit;
+  flex-wrap: wrap;
   .address-index {
     margin-right: 4px;
   }
