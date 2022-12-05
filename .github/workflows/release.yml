@@ -1,0 +1,53 @@
+name: preda-release
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: setup node.jobs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12
+          registry-url: "https://registry.npmjs.org"
+
+      - name: configure committer
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: npm install, build and test
+        run: |
+          yarn install --registry=https://registry.npmmirror.com/
+          npm run build --if-present
+          npm test --if-present
+
+      - name: make tag and update change.log
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx standard-version
+          git push --follow-tags origin main
+
+      - name: clear local
+        run: |
+          rm -rf out/*
+
+      - name: package with vsce
+        run: |
+          npx vsce package
+
+      - name: upload a build artifact
+        uses: actions/upload-artifact@v2.1.4
+        with:
+          name: AL Test Runner
+          path: ./*.vsix
