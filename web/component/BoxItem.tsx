@@ -1,8 +1,32 @@
 import { toShard } from '@/utils/strings';
+import ReactJson from "@dioxide-js/react-json-view";
 import * as React from 'react'
 import MoreSwitch from './MoreSwitch'
 import AddressText from './AddressText'
 import clss from 'classnames'
+
+const ContractState = (s: any) => {
+  return (
+    <div className='state-item'>
+      <div className='box-key'>Contract:</div>
+      <div className='box-val'>{s.Contract}</div>
+      <div className='box-key'>State:</div>
+      <div className='box-val'>
+        <ReactJson
+          src={(s.State as object)}
+          style={{ background: "none" }}
+          displayObjectSize={false}
+          enableClipboard={false}
+          displayDataTypes={false}
+          displayArrayKey={false}
+          collapsed={false}
+          name={false}
+          theme="chalk"
+        />
+      </div>
+    </div>
+  )
+}
 
 export const DeployBox = ({data, key, title}: any) => {
   const [more, setMore] = React.useState<boolean>(false)
@@ -76,12 +100,41 @@ export const AddrBox = ({data, key, title}: any) => {
                   </div>
                   <div className="addr-shard"> 
                     {d.States.map((s: any) => (
-                      <div className='addr-state'>
-                        <div className='box-key'>Contract:</div>
-                        <div className='box-val'>{s.Contract}</div>
-                        <div className='box-key'>State:</div>
-                        <div className='box-val'>voredWeights:[{s.State.weight},{s.State.voted_case}]</div>
-                      </div>
+                      <ContractState {...s} key={s.Contract} />
+                    ))}
+                  </div>
+              </div>
+            ))}
+          </div>
+          {data.length > 1 ? (
+            <div className='center bottom'>
+              <MoreSwitch onChange={(s: boolean) => setMore(s)} value={more} />
+            </div>
+          ) : null}
+      </div>
+    </div>
+  )
+};
+export const ShardBox = ({data, key, title}: any) => {
+  const [more, setMore] = React.useState<boolean>(false)
+
+  const originData = React.useMemo(() => {
+    return  more ? data : [data[0]];
+  }, [data, more]);
+
+  return (
+    <div className="box shard-box" key={key}>
+      <p className="box-title">{title}</p>
+        <div className="box-content" >
+          <div>
+            {originData.map((d: any) => (
+              <div className='shard-item'>
+                  <div className="shard-header" key={d.Address}>
+                    Shard:&nbsp;#&nbsp;{d.ShardIndex.replace('#', '')}{d.ShardIndex === '#g' ? '' : `/${data.length}`}
+                  </div>
+                  <div className="shard-state"> 
+                    {d.States.map((s: any) => (
+                      <ContractState {...s} key={s.Contract} />
                     ))}
                   </div>
               </div>

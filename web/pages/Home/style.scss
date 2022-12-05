@@ -6,7 +6,6 @@
 }
 
 .box {
-  padding: 20px 0 32px;
   margin: 16px 0 32px 0;
   position: relative;
   .box-title {
@@ -181,30 +180,6 @@
       margin-bottom: 24px;
     }
   }
-  .addr-shard {
-    .addr-state {
-      padding: 12px 24px;
-      background: #1E1E1E;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      row-gap: 20px;
-      .box-key {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
-      }
-      .box-val {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
-      }
-      &:not(:last-child) {
-        margin-bottom: 20px;
-      }
-    }
-  }
 }
 
 .address-text {
@@ -225,7 +200,21 @@
     margin-right: 4px;
   }
 }
-
+/** shard **/
+.shard-box {
+  .shard-header {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 12px;
+    margin-top: 24px;
+  }
+  .shard-item {
+    &:not(:last-child) {
+      border-bottom: 0.5px dashed #414141;;
+    }
+  }
+}
 /** trace **/
 .svg-box {
   & > div, svg {
@@ -303,5 +292,29 @@
     width: 100%;
     height: 56px;
     border-top: 0.5px solid #414141;
+  }
+}
+
+
+.state-item {
+  padding: 12px 24px;
+  background: #1E1E1E;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  row-gap: 20px;
+  .box-key {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .box-val {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &:not(:last-child) {
+    margin-bottom: 20px;
   }
 }
