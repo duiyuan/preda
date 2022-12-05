@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.12](https://github.com/duiyuan/preda/compare/v0.1.11...v0.1.12) (2022-12-05)
+
+
+### Features
+
+* add release_draft job ([c21fadc](https://github.com/duiyuan/preda/commit/c21fadca00d04cd3c0b054aa1784b8ad76bae833))
+* add release_draft job ([4012619](https://github.com/duiyuan/preda/commit/401261920309db7d0e4fc545b17cdce8ea4d329d))
+
 ### [0.1.11](https://github.com/duiyuan/preda/compare/v0.1.10...v0.1.11) (2022-12-05)
 
 
