@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.19](https://github.com/duiyuan/preda/compare/v0.1.18...v0.1.19) (2022-12-06)
+
+
+### Features
+
+* add global shardorder ([7950b07](https://github.com/duiyuan/preda/commit/7950b071d7cf37f0f27f5a98262c6b98c12818f2))
+* add profing ui ([e1c0542](https://github.com/duiyuan/preda/commit/e1c05425b5350a226b58b112f05d584851a4dd0a))
+* add shard ui ([9112d29](https://github.com/duiyuan/preda/commit/9112d29fc98cff41bc2360bf406bab542e4632d5))
+* add trace target ([ca73692](https://github.com/duiyuan/preda/commit/ca73692f216ea15042b7423469d5228401989536))
+* add txn block trace ui ([81a5933](https://github.com/duiyuan/preda/commit/81a5933b522782ee94a8e792f35d3d7289a38ee9))
+* del log ([e32a112](https://github.com/duiyuan/preda/commit/e32a112d6f25a487257a59171f53d1f9d04064ef))
+* update addr ui ([d3a32f4](https://github.com/duiyuan/preda/commit/d3a32f4fb4ac80b238306577c389a50d7a38616c))
+* update release.yml ([86ed585](https://github.com/duiyuan/preda/commit/86ed58518570d1c21dc90ba628cedc3ffb5e60e3))
+* update release.yml ([0231087](https://github.com/duiyuan/preda/commit/02310871e5388d9151f6bb236b2c53aec6cdfe6e))
+* use PREDA_VIZ_LOG render ([e3a06be](https://github.com/duiyuan/preda/commit/e3a06be9e7efa0953d44009d45e6c790ad5e6374))
+
+
+### Bug Fixes
+
+* fix deploy flag ui ([fb9191c](https://github.com/duiyuan/preda/commit/fb9191c32871b5487818c571bf0aeba919250813))
+
 ### [0.1.18](https://github.com/duiyuan/preda/compare/v0.1.17...v0.1.18) (2022-12-06)
 
 
