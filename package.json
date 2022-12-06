@@ -2,7 +2,7 @@
   "name": "preda",
   "displayName": "PREDA Language Preview Toolchain",
   "description": "Local development environment for the PREDA smart contract programming language",
-  "version": "0.1.6",
+  "version": "0.1.15",
   "engines": {
     "vscode": "^1.56.0"
   },
@@ -186,11 +186,13 @@
     "compile": "npm-run-all compile:*",
     "compile:extension": "tsc -p ./",
     "compile:view": "cd web && cross-env NODE_ENV=production webpack --mode production",
-    "pretest": "yarn run compile && yarn run lint",
+    "test": "echo ''",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.2",
+    "@commitlint/config-conventional": "^16.0.0",
     "@types/ejs": "^3.1.1",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^7.2.0",
@@ -206,6 +208,7 @@
     "eslint": "^8.20.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "glob": "^8.0.3",
+    "husky": "^8.0.0",
     "less": "^4.1.1",
     "less-loader": "^8.1.1",
     "mocha": "^10.0.0",
