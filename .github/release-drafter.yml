@@ -22,12 +22,7 @@ categories:
     labels:
       - "test"
       - "tests"
-exclude-labels:
-  - reverted
-  - no-changelog
-  - skip-changelog
-  - invalid
-change-template: "* $TITLE (#$NUMBER) @$AUTHOR"
+change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
 change-title-escapes: '\<*_&'
 version-resolver:
   major:
