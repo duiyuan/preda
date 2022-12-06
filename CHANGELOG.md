@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/duiyuan/preda/compare/v0.1.12...v0.1.13) (2022-12-06)
+
+
+### Bug Fixes
+
+* update release-drafter.yml ([b5cbf2e](https://github.com/duiyuan/preda/commit/b5cbf2ea94c46f75e5da814b2018edb174c60e83))
+
 ### [0.1.12](https://github.com/duiyuan/preda/compare/v0.1.11...v0.1.12) (2022-12-05)
 
 
