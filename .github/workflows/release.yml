@@ -54,14 +54,6 @@ jobs:
         with:
           name: preda-${{ steps.package-version.outputs.current-version }}
           path: ./*.vsix
-
-      - name: upload to release
-        uses: svenstaro/upload-release-action@v1-release
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./*.vsix
-          asset_name: ${{ matrix.release_name }}
-          tag: ${{ github.ref }}
      
       - name: committer
         run: |
