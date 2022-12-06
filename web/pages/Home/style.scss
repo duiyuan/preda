@@ -85,8 +85,8 @@
   }
   .deploy-header {
     padding: 20px 40px;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 175px 312px 1fr;
     border-bottom: 1px solid #414141;
     .deploy-header-item {
       position: relative;
@@ -105,11 +105,7 @@
         width: 1px;
         height: 100%;
       }
-      &:nth-child(1) {
-        width: 195px;
-      }
       &:nth-child(2) {
-        width: 192px;
         padding-left: 120px;
       }
       &:nth-child(3) {
@@ -132,11 +128,11 @@
       border-bottom: 1px solid #414141;
       margin-bottom: 18px;
       display: grid;
-      grid-template-columns: 360px 1fr 180px;
+      grid-template-columns: 300px 1fr 180px;
     }
     .deploy-fn-list {
       display: grid;
-      grid-template-columns: 360px 1fr 180px;
+      grid-template-columns: 300px 1fr 180px;
       row-gap: 37px;
     }
   }

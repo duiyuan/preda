@@ -34,3 +34,10 @@ export const toPrettyNumber = (value: number | string) => {
   }
   return value.toLocaleString();
 };
+
+export const toDeployFlag = (flag: string) => {
+  if (!flag) {
+    return '';
+  }
+  return flag.split('|').join(' | ');
+};

@@ -1,4 +1,4 @@
-import { toPrettyNumber, toShard, toUTCTime } from '@/utils/strings';
+import { toDeployFlag, toPrettyNumber, toShard, toUTCTime } from '@/utils/strings';
 import ReactJson from "@dioxide-js/react-json-view";
 import * as React from 'react'
 import MoreSwitch from './MoreSwitch'
@@ -53,7 +53,7 @@ export const DeployBox = ({data, key, title}: any) => {
               </div>
               <div className='deploy-header-item'>
                 <p className="box-key">Flag</p>
-                <p className="box-val">{d.flag}</p>
+                <p className="box-val">{toDeployFlag(d.flag)}</p>
               </div>
           </div>
           <div className="deploy-function">
@@ -67,7 +67,7 @@ export const DeployBox = ({data, key, title}: any) => {
                 {d.functions.map((fn: any) => (
                   <>
                     <div className='box-val'>{fn.name}</div>
-                    <div className='box-val'>{fn.flag}</div>
+                    <div className='box-val'>{toDeployFlag(fn.flag)}</div>
                     <div className='box-val'>{fn.opcode}</div>
                   </>
                 ))}
