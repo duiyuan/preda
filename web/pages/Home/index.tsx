@@ -4,7 +4,7 @@ import json from "json-bigint";
 import Tree from "../../component/Tree";
 
 import './style.scss';
-import { DeployBox, AddrBox } from "@/component/BoxItem";
+import { DeployBox, AddrBox, ShardBox, TxnBox, BlockBox, ProfingBox } from "@/component/BoxItem";
 
 const { useEffect, useState } = React;
 const mockdata = 
@@ -13,6 +13,7 @@ const mockdata =
       "type": "Run",
       "content": 
       {
+         "ShardOrder": 2,
          "script": "c:\\Users\\IDEA\\Documents\\GitHub\\oxd_preda\\simulator\\contracts\\Ballot.prdts"
       }
    },
@@ -94,212 +95,592 @@ const mockdata =
       ]
    },
    {
-      "type": "Txn",
-      "command": "viz.txn txn5",
-      "content": 
-      [
-         {
-            "InvokeContextType": "Normal",
-            "Target": "j2hskc1hqkqp4f32wh570kp7zqxktkf8zcare8kpj7b3ntdyx0my6wf48g:ed25519",
-            "AddressIndex": "@0",
-            "BuildNum": 1,
-            "Timestamp": 1669969542206,
-            "Contract": "Ballot",
-            "Function": "finalize",
-            "InvokeResult": "Success",
-            "Height": 3,
-            "ShardIndex": 2,
-            "ShardOrder": 2
-         }
-      ]
-   },
-   {
       "type": "Addr",
       "command": "viz.addr @0",
       "content": 
       [
          {
-            "Address": "j2hskc1hqkqp4f32wh570kp7zqxktkf8zcare8kpj7b3ntdyx0my6wf48g:ed25519",
+            "Address": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
             "AddressIndex": "@0",
+            "ShardIndex": "#1",
             "States": 
             [
-               {
-                  "Contract": "Ballot",
-                  "State": {"weight": 11, "voted_case": 1}
-               },
+               {"Contract": "Ballot", "State": {"weight": 1, "voted_case": 1}},
                {"Contract": "Token", "State": {"balance": "50000000000000"}}
             ]
          }
       ]
    },
    {
-    "type": "Addr",
-    "content": 
-    [
-       {
-          "Address": "am91spnb3d138ybc6vepj0yk4pdy9dt4bz9nk43s8sdd9qjnh55a7qwpbr:ed25519",
-          "AddressIndex": "@11",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "10000000000000"}}
-          ]
-       },
-       {
-          "Address": "v0tnfyzyz0sy4aajgme369y5ae0mg16z2kwtyh19c9d1te97ab0n70x1g4:ed25519",
-          "AddressIndex": "@10",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "50000000000000"}}
-          ]
-       },
-       {
-          "Address": "vxmdsv1vwv368f9h7h24rm108d3et2dnxnfw6n1v15gfvj8yemdn6zhptg:ed25519",
-          "AddressIndex": "@6",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "20000000000000"}}
-          ]
-       },
-       {
-          "Address": "7e54xe61g0n22hs87wn8t8vphcgbayrqrdhtb6nfp1wrj5hcfs0p6axrjg:ed25519",
-          "AddressIndex": "@3",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "20000000000000"}}
-          ]
-       },
-       {
-          "Address": "8jn4a6phyv26r4vpzf4vmpw1vp7adbn1j7wtqrret6z7ztvcytbp7jdgwc:ed25519",
-          "AddressIndex": "@7",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "20000000000000"}}
-          ]
-       },
-       {
-          "Address": "zhc476eawyfm1463qdjtkf63163617wjp40syn6k0xqcpss47h9c61g3zw:ed25519",
-          "AddressIndex": "@5",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "10000000000000"}}
-          ]
-       },
-       {
-          "Address": "9f3dvgvwqrkxwdn5ef9k36fay2r74waq2cgnr2bgmzmct5fwe8e877xvqm:ed25519",
-          "AddressIndex": "@4",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "20000000000000"}}
-          ]
-       },
-       {
-          "Address": "9mtmgq5drnfxfcs2msv3p00q23w3t1a5j0pkab85nrcw64yc6y1w79b4pm:ed25519",
-          "AddressIndex": "@1",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "20000000000000"}}
-          ]
-       },
-       {
-          "Address": "ep70fb55k3myzc7rybmer007dw71ds01m6w06yjyqrf965b4rc8f62b3zg:ed25519",
-          "AddressIndex": "@0",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "50000000000000"}}
-          ]
-       },
-       {
-          "Address": "9ghz12df2mx9rrna3339841rj06daf169qg3zcmkc2vjs2wxhgr66jtvz0:ed25519",
-          "AddressIndex": "@9",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "20000000000000"}}
-          ]
-       },
-       {
-          "Address": "ba27nq4x3khzgtg3ttnzr52ybar7erfgre61yvpfdx15mpdh1a236zektr:ed25519",
-          "AddressIndex": "@8",
-          "States": 
-          [
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             },
-             {"Contract": "Token", "State": {"balance": "10000000000000"}}
-          ]
-       },
-       {
-          "Address": "fq2bp5qskx569ht9mvh2190afx1hxh2f0ktbpzmfc7hahdes7ntj7f29yw:ed25519",
-          "AddressIndex": "@2",
-          "States": 
-          [
-             {"Contract": "Token", "State": {"balance": "10000000000000"}},
-             {
-                "Contract": "Ballot",
-                "State": {"weight": 14, "voted_case": 1}
-             }
-          ]
-       }
-    ]
- },
-   {
-      "type": "Addr",
-      "command": "viz.addr @0 Ballot",
+      "type": "Trace",
+      "command": "viz.trace txn5",
       "content": 
       [
          {
-            "Address": "j2hskc1hqkqp4f32wh570kp7zqxktkf8zcare8kpj7b3ntdyx0my6wf48g:ed25519",
-            "AddressIndex": "@0",
-            "States": 
+            "tx_id": 1,
+            "tx_info": 
+            {
+               "InvokeContextType": "Normal",
+               "Target": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "AddressIndex": "@0",
+               "BuildNum": 1,
+               "Timestamp": 1670209209448,
+               "Contract": "Ballot",
+               "Function": "finalize",
+               "Height": 3,
+               "ShardIndex": 1,
+               "ShardOrder": 2
+            },
+            "father": -1
+         },
+         {
+            "tx_id": 2,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 3,
+               "OriginateShardIndex": 1,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209221404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_4",
+               "Height": 4,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 1
+         },
+         {
+            "tx_id": 3,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 1,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 4,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 2,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 5,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 3,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 6,
+            "tx_info": 
+            {
+               "InvokeContextType": "Scheduled",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": "g",
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_5",
+               "Height": 4,
+               "ShardIndex": 0,
+               "ShardOrder": 2
+            },
+            "father": 2
+         },
+         {
+            "tx_id": 7,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 1,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [0, 0, 3]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 3
+         },
+         {
+            "tx_id": 8,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 2,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [2, 1, 0]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 4
+         },
+         {
+            "tx_id": 9,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 3,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [0, 2, 1]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 5
+         },
+         {
+            "tx_id": 10,
+            "tx_info": 
+            {
+               "InvokeContextType": "RelayInbound",
+               "Initiator": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+               "OriginateHeight": 4,
+               "OriginateShardIndex": 0,
+               "OriginateShardOrder": 2,
+               "BuildNum": 1,
+               "Timestamp": 1670209226404,
+               "Contract": "Ballot",
+               "Function": "__relaylambda_6",
+               "Arguments": {"shardVotes": [0, 2, 1]},
+               "Height": 5,
+               "ShardIndex": "g",
+               "ShardOrder": 2
+            },
+            "father": 6
+         }
+      ]
+   },
+   {
+      "type": "Block",
+      "command": "viz.block #0",
+      "content": 
+      [
+         {
+            "Height": 0,
+            "PrevBlock": "0000000000000000000000000000000000000000000000000000",
+            "ShardIndex": "#0",
+            "Timestamp": 1670209206404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 0
+         },
+         {
+            "Height": 1,
+            "PrevBlock": "xkhrf474nszvw000000000000000000000000000000000000000",
+            "ShardIndex": "#0",
+            "Timestamp": 1670209211404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 0
+         },
+         {
+            "Height": 2,
+            "PrevBlock": "x0pfq3vay2knc000000000000000000000000000000000000000",
+            "ShardIndex": "#0",
+            "Timestamp": 1670209216404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 3,
+            "ConfirmTxn": 
             [
                {
+                  "InvokeResult": "Success",
+                  "GasBurnt": 1,
+                  "InvokeContextType": "Normal",
+                  "Target": "7hxtdr1s59xw5af9ynm6ghqf6ppv14hmctbw8736ck102xbd9eds6m8ef4:ed25519",
+                  "AddressIndex": "@3",
+                  "BuildNum": 1,
+                  "Timestamp": 1670209209354,
                   "Contract": "Ballot",
-                  "State": {"weight": 11, "voted_case": 1}
+                  "Function": "vote",
+                  "Arguments": {"proposal_index": 2, "case_num": 1},
+                  "Height": 2,
+                  "ShardIndex": 0,
+                  "ShardOrder": 2
+               },
+               {
+                  "InvokeResult": "Success",
+                  "GasBurnt": 1,
+                  "InvokeContextType": "Normal",
+                  "Target": "00dzss3pgp0vjjg04yawgxx1z2a1wc524rkzaet6n1bek864tbv16164sg:ed25519",
+                  "AddressIndex": "@4",
+                  "BuildNum": 1,
+                  "Timestamp": 1670209209354,
+                  "Contract": "Ballot",
+                  "Function": "vote",
+                  "Arguments": {"proposal_index": 1, "case_num": 1},
+                  "Height": 2,
+                  "ShardIndex": 0,
+                  "ShardOrder": 2
+               },
+               {
+                  "InvokeResult": "Success",
+                  "GasBurnt": 1,
+                  "InvokeContextType": "Normal",
+                  "Target": "658rgdnxvykneq5fm55k6cq60mdd5s3zx78nhbw4h14znszt9j58646wkm:ed25519",
+                  "AddressIndex": "@5",
+                  "BuildNum": 1,
+                  "Timestamp": 1670209209354,
+                  "Contract": "Ballot",
+                  "Function": "vote",
+                  "Arguments": {"proposal_index": 1, "case_num": 1},
+                  "Height": 2,
+                  "ShardIndex": 0,
+                  "ShardOrder": 2
                }
             ]
          }
       ]
-   }
+   },
+   {
+      "type": "Block",
+      "command": "viz.block #2:1",
+      "content": 
+      [
+         {
+            "Height": 1,
+            "PrevBlock": "xkhrf474nszvw000000000000000000000000000000000000000",
+            "ShardIndex": "#2",
+            "Timestamp": 1670209211404,
+            "Miner": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "TxnCount": 0
+         }
+      ]
+   },
+   {
+      "type": "Txn",
+      "command": "viz.txn txn1",
+      "content": 
+      [
+         {
+            "InvokeContextType": "Normal",
+            "Target": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "AddressIndex": "@0",
+            "BuildNum": 1,
+            "Timestamp": 1670209209301,
+            "Contract": "Ballot",
+            "Function": "init",
+            "InvokeResult": "Success",
+            "Arguments": {"names": ["Spring", "Yarn", "Combat"]},
+            "Height": 0,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         }
+      ]
+   },
+   {
+      "type": "Txn",
+      "command": "viz.txn txn2[]",
+      "content": 
+      [
+         {
+            "InvokeContextType": "Normal",
+            "Target": "d5tbzx0kbcwvste7t69d6hwackc5nrhf7a3hjfrk6ye3m54dvns578436g:ed25519",
+            "AddressIndex": "@0",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "qya8a6f9w2ycsah7wgdyc7n5c72sd20t1g24b099pp3d9v6ksawt7xx28r:ed25519",
+            "AddressIndex": "@1",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 2,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "gjc4jh910hbxad3tn0264t9xagrdsrsqy45n51pavm9drswetj0q65fmjc:ed25519",
+            "AddressIndex": "@2",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 3,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "7hxtdr1s59xw5af9ynm6ghqf6ppv14hmctbw8736ck102xbd9eds6m8ef4:ed25519",
+            "AddressIndex": "@3",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 0,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "00dzss3pgp0vjjg04yawgxx1z2a1wc524rkzaet6n1bek864tbv16164sg:ed25519",
+            "AddressIndex": "@4",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 0,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "658rgdnxvykneq5fm55k6cq60mdd5s3zx78nhbw4h14znszt9j58646wkm:ed25519",
+            "AddressIndex": "@5",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 0,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "94zvha23xzcc0m987np0e0847x1me7qp72bt8s8jmpbqta5bs52n61gk04:ed25519",
+            "AddressIndex": "@6",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 0, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 2,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "wb2s0az0sgy44pbw3v4hatpwm6vgc5d0ad0287y8spt1yagg4tnn6t8bpm:ed25519",
+            "AddressIndex": "@7",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 3,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "02kesb1f2mbf4j561b0n3b73evxjst90rkfw86wtj4vbh5esv0cm6s4xj8:ed25519",
+            "AddressIndex": "@8",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 0, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 2,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "t8tjthk6fkb6da6j2mjansqackxwn5jss97tdmq0c860vthvfbqv6h2mkw:ed25519",
+            "AddressIndex": "@9",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 1, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 3,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "ykb16zkm3nk5ejh7np83f2tfg3x9bnbpbhg3v2qhdqddbhtvhfg26nsw2g:ed25519",
+            "AddressIndex": "@10",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         },
+         {
+            "InvokeContextType": "Normal",
+            "Target": "tqhmw4kzfyy2pgygqdxf928an5sgv3h6tk5r4a7hnmae4jvsscc578h47r:ed25519",
+            "AddressIndex": "@11",
+            "BuildNum": 1,
+            "Timestamp": 1670209209354,
+            "Contract": "Ballot",
+            "Function": "vote",
+            "InvokeResult": "Success",
+            "Arguments": {"proposal_index": 2, "case_num": 1},
+            "Height": 2,
+            "ShardIndex": 1,
+            "ShardOrder": 2
+         }
+      ]
+   },
+   {
+      "type": "Shard",
+      "command": "viz.shard #all Ballot",
+      "content": 
+      [
+         {
+            "ShardIndex": "#0",
+            "States": [{"Contract": "Ballot", "State": {"votedWeights": [0, 2, 1]}}]
+         },
+         {
+            "ShardIndex": "#1",
+            "States": [{"Contract": "Ballot", "State": {"votedWeights": [0, 0, 3]}}]
+         },
+         {
+            "ShardIndex": "#2",
+            "States": [{"Contract": "Ballot", "State": {"votedWeights": [2, 1, 0]}}]
+         },
+         {
+            "ShardIndex": "#3",
+            "States": [{"Contract": "Ballot", "State": {"votedWeights": [0, 2, 1]}}]
+         }
+      ]
+   },
+   {
+      "type": "Shard",
+      "command": "viz.shard #g",
+      "content": 
+      [
+         {
+            "ShardIndex": "#g",
+            "States": 
+            [
+               {
+                  "Contract": "Ballot",
+                  "State": 
+                  {
+                     "controller": "0000000000000000000000000000000000000000000000000000000000:unknown",
+                     "current_case": 1,
+                     "proposals": 
+                     [
+                        {"name": "Spring", "totalVotedWeight": 2},
+                        {"name": "Yarn", "totalVotedWeight": 5},
+                        {"name": "Combat", "totalVotedWeight": 5}
+                     ],
+                     "last_result": {"topVoted": "Yarn", "case": 1},
+                     "shardGatherRatio": 2147483648
+                  }
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "type": "Shard",
+      "command": "viz.shard #0",
+      "content": 
+      [
+         {
+            "ShardIndex": "#0",
+            "States": [{"Contract": "Ballot", "State": {"votedWeights": [0, 2, 1]}}]
+         }
+      ]
+   },
+   {
+      "type": "Profing",
+      "content": 
+      [
+         {
+           BlockHeight: 4,
+           TxnCount: 999999,
+           TPS: 466.86,
+           ShardIndex: 1,
+         },
+         {
+           BlockHeight: 5,
+           TxnCount: 999999,
+           TPS: 466.86,
+           ShardIndex: 1,
+         }
+       ]
+   },
 ];
 
 enum LOG_TYPE {
@@ -307,7 +688,11 @@ enum LOG_TYPE {
    DEPLOY = 'Deploy',
    SECTION = 'Section',
    TRACE = 'Trace',
-   ADDR = 'Addr'
+   SHARD = 'Shard',
+   ADDR = 'Addr',
+   TXN = 'Txn',
+   BLOCK = 'Block',
+   PROFING = 'Profing',
 }
 
 type VizLog = {
@@ -316,10 +701,12 @@ type VizLog = {
   content: any
 }
 export const Home = () => {
+   // PREDA_VIZ_LOG mockdata
+   const originData = (PREDA_VIZ_LOG || []) as VizLog[]
+   const shardOrder = originData[0].content?.ShardOrder
   return (
     <div className="home">
-      { // mockdata PREDA_VIZ_LOG
-        (mockdata as VizLog[]).map((d, i) => {
+      { originData.map((d, i) => {
           const type = d.type.replace(/(\w)/i, (_, $1) => {
             return $1.toLocaleUpperCase();
           });
@@ -341,7 +728,27 @@ export const Home = () => {
           } 
           if (type === LOG_TYPE.ADDR) {
             return (
-               <AddrBox data={d.content} title={d.command} key={type + i} />
+               <AddrBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
+            );
+          } 
+          if (type === LOG_TYPE.SHARD) {
+            return (
+               <ShardBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
+            );
+          } 
+          if (type === LOG_TYPE.TXN) {
+            return (
+               <TxnBox data={d.content} title={d.command} key={type + i} />
+            );
+          } 
+          if (type === LOG_TYPE.BLOCK) {
+            return (
+               <BlockBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
+            );
+          } 
+          if (type === LOG_TYPE.PROFING) {
+            return (
+               <ProfingBox data={d.content} title={title} key={type + i} />
             );
           } 
           if (type === LOG_TYPE.SECTION) {

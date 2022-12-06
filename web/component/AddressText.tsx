@@ -12,8 +12,8 @@ const AddressText = ({
   return (
     <div className="address-text">
       {addrIndex ? <span className="address-index">{addrIndex}</span> : null}
-      <span  className="address-hash">({addrHash}</span>
-      <span className="address-flag">{addrFlag}</span>)
+      <span  className="address-hash">{addrIndex ? '(' : null}{addrHash}</span>
+      <span className="address-flag">{addrFlag}</span>{addrIndex ? ')' : null}
     </div>
   );
 };
