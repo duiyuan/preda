@@ -4,6 +4,7 @@ import Tooltip from './Tooltip'
 import * as reactDom from 'react-dom'
 import ReactJson from "@dioxide-js/react-json-view";
 import {toShard} from '@/utils/strings'
+import clss from 'classnames'
 
 type TreeData = {
   data: any
@@ -34,8 +35,9 @@ const Tree = ({ data, name }: TreeData) => {
         }
         return false
       }
-      const links = document.querySelectorAll('path.link')
-      const nodes = document.querySelectorAll('.node')
+      const links = document.querySelectorAll(`.${name} path.link`);
+      const nodes = document.querySelectorAll(`.${name} .node`);
+
       data.forEach((d: any, index: number) => {
         if (d) {
           const w = (nodes[index]).querySelector('.tree-node')?.clientWidth || 240;
@@ -65,8 +67,8 @@ const Tree = ({ data, name }: TreeData) => {
   }, [data])
 
   return (
-    <div className="svg-box">
-      <p style={{marginBottom: '10px'}}>{name}</p>
+    <div className={clss(name, "svg-box")}>
+      {/* <p style={{marginBottom: '10px'}}>{name}</p> */}
       <TreevizReact
         data={data}
         idKey={'tx_id'}

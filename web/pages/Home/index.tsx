@@ -757,15 +757,14 @@ export const Home = () => {
           if (type === LOG_TYPE.TRACE) {
             return (
               <div className="box"  key={type + i}>
+               <p className="box-title">{d.command}</p>
                <div className="box-content">
-                {/* {Object.keys(d.content).map(trace => ( */}
                   <Tree data={(d.content as any).map((r: any) => {
-                    if (!~r.father) {
-                      r.father = null
-                    }
-                    return r
-                  })} name='' />
-                {/* ))} */}
+                     if (!~r.father) {
+                        r.father = null;
+                     }
+                     return r;
+                  })} name={String(d.command).replace(/\s|\.|#|\[|\]/g, '') + i} />
                </div>
               </div>
             )
