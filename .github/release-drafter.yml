@@ -1,9 +1,11 @@
 name-template: "v$RESOLVED_VERSION 🌈"
 tag-template: "v$RESOLVED_VERSION"
+version-template: $MAJOR.$MINOR.$PATCH
 categories:
   - title: "🚀 Features"
     labels:
       - "feature"
+      - "feat"
       - "enhancement"
   - title: "🐛 Bug Fixes"
     labels:
@@ -12,6 +14,14 @@ categories:
       - "bug"
   - title: "🧰 Maintenance"
     label: "chore"
+  - title: 📝 Documentation updates
+    labels:
+      - "documentation"
+      - "doc"
+  - title: 🚦 Tests
+    labels:
+      - "test"
+      - "tests"
 change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
 change-title-escapes: '\<*_&'
 version-resolver:
