@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.16](https://github.com/duiyuan/preda/compare/v0.1.15...v0.1.16) (2022-12-06)
+
+
+### Features
+
+* change realse-drafter.yml ([ce6ce00](https://github.com/duiyuan/preda/commit/ce6ce0038a676af67accba02c57cac0f65ee6b09))
+
 ### [0.1.15](https://github.com/duiyuan/preda/compare/v0.1.14...v0.1.15) (2022-12-06)
 
 ### [0.1.14](https://github.com/duiyuan/preda/compare/v0.1.13...v0.1.14) (2022-12-06)
