@@ -48,7 +48,7 @@ jobs:
       - name: upload a build artifact
         uses: actions/upload-artifact@v2.1.4
         with:
-          name: preda_${{ github.ref }}
+          name: preda-${{ github.event.release.tag_name }}
           path: ./*.vsix
      
       - name: committer
