@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.20](https://github.com/duiyuan/preda/compare/v0.0.31...v0.1.20) (2022-12-06)
+
+
+### Features
+
+* udpate  release.yml ([70fc69b](https://github.com/duiyuan/preda/commit/70fc69be83168915d46cd6f2fc9078a3e4bdd8ec))
+* update release.yml ([f558738](https://github.com/duiyuan/preda/commit/f5587382a8551d0773aefdc60aabcde79349567e))
+* update release.yml ([8e77c93](https://github.com/duiyuan/preda/commit/8e77c93eaac8ee4b2cc6d5165d0af4d3c8851d1b))
+* update release.yml ([fa70589](https://github.com/duiyuan/preda/commit/fa7058919fcefb725afff6cd111fb5dc49d9861d))
+
 ### [0.1.19](https://github.com/duiyuan/preda/compare/v0.1.18...v0.1.19) (2022-12-06)
 
 
