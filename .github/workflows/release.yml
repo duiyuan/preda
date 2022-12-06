@@ -45,10 +45,14 @@ jobs:
           yarn global add vsce
           vsce package
 
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+
       - name: upload a build artifact
         uses: actions/upload-artifact@v2.1.4
         with:
-          name: preda_${{ github.ref }}
+          name: preda-${{ steps.package-version.outputs.current-version }}
           path: ./*.vsix
      
       - name: committer
