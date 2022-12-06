@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.21](https://github.com/duiyuan/preda/compare/v0.1.20...v0.1.21) (2022-12-06)
+
+
+### Bug Fixes
+
+* add trace title and support mulit trace ([cb09004](https://github.com/duiyuan/preda/commit/cb0900474ebb5cb1fab7571678307f38eb976d12))
+
 ### [0.1.20](https://github.com/duiyuan/preda/compare/v0.0.31...v0.1.20) (2022-12-06)
 
 
