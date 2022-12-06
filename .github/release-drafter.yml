@@ -22,7 +22,7 @@ categories:
     labels:
       - "test"
       - "tests"
-change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
+change-template: "- $TITLE @$AUTHOR $BODY"
 change-title-escapes: '\<*_&'
 version-resolver:
   major:
