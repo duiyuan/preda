@@ -692,7 +692,7 @@ enum LOG_TYPE {
    ADDR = 'Addr',
    TXN = 'Txn',
    BLOCK = 'Block',
-   PROFING = 'Profing',
+   PROFILING = 'Profiling',
 }
 
 type VizLog = {
@@ -746,7 +746,7 @@ export const Home = () => {
                <BlockBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
             );
           } 
-          if (type === LOG_TYPE.PROFING) {
+          if (type === LOG_TYPE.PROFILING) {
             return (
                <ProfingBox data={d.content} title={title} key={type + i} />
             );

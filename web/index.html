@@ -12,6 +12,30 @@
       contract: "{{{contract}}}",
     };
   </script>
+  <script>
+    const style = document.createElement('style')
+    function decodeHtml(html) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    }
+    const path = decodeHtml('{{staticPath}}')
+    style.innerHTML= `
+      @font-face {
+        font-family: "inter-regular";
+        src: url(${path}/inter-regular.ttf);
+      }
+      @font-face {
+        font-family: "inter-bold";
+        src: url(${path}/inter-bold.ttf);
+      }
+      @font-face {
+        font-family: "menlo";
+        src: url(${path}/menlo-regular.ttf);
+      }
+    `
+    document.head.appendChild(style)
+  </script>
 </head>
 <body><div id="root" class="wrap"></div></body>
 

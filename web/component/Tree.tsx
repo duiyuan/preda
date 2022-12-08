@@ -119,7 +119,7 @@ const Tree = ({ data, name }: TreeData) => {
                       theme="chalk"
                     />}>
                       <>
-                        {Contract}.{Fn}
+                        {Fn}@{Contract}
                       </>
                   </Tooltip>
                , document.querySelector(`.tree-node.tree-${id} .fn`))
@@ -133,7 +133,7 @@ const Tree = ({ data, name }: TreeData) => {
                   </div>`
                   ) : ''}
                 <div class='tree-text fn'>
-                  ${Contract}.${Fn}
+                  ${Fn}@${Contract}
                 </div>
                 <div class='tree-text'>
                   Shard #${ShardIndex}/${ShardOrder ** 2}, Height ${Height}
