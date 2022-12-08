@@ -1,0 +1,63 @@
+{
+  "declare contract": {
+    "prefix": "contract",
+    "body": ["contract ${1:MyContract} {", "\t${2}", "}"],
+    "description": "declare contract"
+  },
+  "declare struct": {
+    "prefix": "struct",
+    "body": ["struct ${0:Mystruct} {", "\t${1:TypeA} ${2:memberA};", "}"],
+    "description": "declare struct type"
+  },
+  "Import Statement": {
+    "prefix": "import",
+    "body": ["import { $0 } from \"${1:module}\";"],
+    "description": "Import external module"
+  },
+  "For Loop": {
+    "prefix": "for",
+    "body": [
+      "for (uint32 ${1:index} = 0u; ${1:index} < ${2:array}.length(); ${1:index}++)",
+      "{",
+      "\t${3:element} = ${2:array}[${1:index}];",
+      "\t$TM_SELECTED_TEXT:$0",
+      "}"
+    ],
+    "description": "For Loop"
+  },
+  "While Statement": {
+    "prefix": "while",
+    "body": ["while (${1:condition}) {", "\t$TM_SELECTED_TEXT$0", "}"],
+    "description": "While Statement"
+  },
+  "Do-While Statement": {
+    "prefix": "dowhile",
+    "body": ["do {", "\t$TM_SELECTED_TEXT$0", "} while (${1:condition});"],
+    "description": "Do-While Statement"
+  },
+  "Function Statement": {
+    "prefix": "function",
+    "body": [
+      "function ${4:type} ${1:name}(${2:paramsType} ${3:params}) export {",
+      "\t$TM_SELECTED_TEXT$0",
+      "}"
+    ],
+    "description": "Function Statement"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": ["if (${1:condition}) {", "\t$TM_SELECTED_TEXT$0", "}"],
+    "description": "If Statement"
+  },
+  "If-Else Statement": {
+    "prefix": "ifelse",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$TM_SELECTED_TEXT$0",
+      "} else {",
+      "\t",
+      "}"
+    ],
+    "description": "If-Else Statement"
+  }
+}

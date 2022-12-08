@@ -164,6 +164,10 @@
       {
         "language": "prdts",
         "path": "./snippets/prdts.code-snippets"
+      },
+      {
+        "language": "preda",
+        "path": "./snippets/preda.code-snippets"
       }
     ],
     "configuration": {
