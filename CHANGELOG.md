@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.22](https://github.com/duiyuan/preda/compare/v0.1.21...v0.1.22) (2022-12-08)
+
+
+### Features
+
+* ui update , fix font url ([60acbda](https://github.com/duiyuan/preda/commit/60acbdacefb65f5960c5672eb27f42aa529eaf8d))
+* update profiling title,decode font link ([d1fde13](https://github.com/duiyuan/preda/commit/d1fde13e7277cce950d41e2877ec9cd3a088aeab))
+
 ### [0.1.21](https://github.com/duiyuan/preda/compare/v0.1.20...v0.1.21) (2022-12-06)
 
 
