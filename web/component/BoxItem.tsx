@@ -208,7 +208,7 @@ export const TxnBox = ({data, key, title}: any) => {
                           theme="chalk"
                         />}>
                           <>
-                            {d.Function}.{d.Contract}
+                            {d.Function}@{d.Contract}
                           </>
                       </Tooltip>
                     </div>
@@ -304,7 +304,7 @@ export const BlockBox = ({data, key, title, shardOrder}: any) => {
                           <div className='box-key'>BuildNum:</div>
                           <div className='box-val'>{txn.BuildNum}</div>
                           <div className='box-key'>Timestamp:</div>
-                          <div className='box-val'>{txn.Timestamp}</div>
+                          <div className='box-val'>{toUTCTime(txn.Timestamp)}</div>
                           <div className='box-key'>Function:</div>
                           <div className='box-val blue-font'>
                             <Tooltip placement={'top'} trigger="hover" overlay={
@@ -320,7 +320,7 @@ export const BlockBox = ({data, key, title, shardOrder}: any) => {
                                 theme="chalk"
                               />}>
                                 <>
-                                  {txn.Function}.{txn.Contract}
+                                  {txn.Function}@{txn.Contract}
                                 </>
                             </Tooltip>
                           </div>

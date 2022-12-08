@@ -1,3 +1,19 @@
+.dash-border {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(to right, #747474 0%, #747474 55%, transparent 50%);
+    background-repeat: repeat-x;
+    background-size: 18px 1px;
+  }
+}
+
 .home {
   padding: 8px 40px;
   margin-top: -16px;
@@ -144,8 +160,12 @@
   font-weight: 700;
   font-size: 28px;
   line-height: 34px;
-  border-top: 1px dashed #747474;
   margin-top: 20px;
+  @extend .dash-border;
+  &::after {
+    bottom: unset;
+    top: 0;
+  }
 }
 
 
@@ -177,7 +197,7 @@
   .addr-item {
     margin: 0 32px;
     &:not(:last-child) {
-      border-bottom: 0.5px dashed #747474;
+      @extend .dash-border;
       margin-bottom: 24px;
     }
   }
@@ -222,7 +242,7 @@
   .shard-item {
     margin: 0 40px;
     &:not(:last-child) {
-      border-bottom: 0.5px dashed #414141;;
+      @extend .dash-border;
     }
   }
 }
@@ -243,7 +263,7 @@
     margin: 0 40px;
     padding-bottom: 24px;
     &:not(:last-child) {
-      border-bottom: 1px dashed #414141;
+      @extend .dash-border;
     }
   }
   .txn-state {
@@ -269,7 +289,7 @@
     margin: 0 40px;
     padding-bottom: 24px;
     &:not(:last-child) {
-      border-bottom: 1px dashed #414141;
+      @extend .dash-border;
     }
   }
   .block-state {
