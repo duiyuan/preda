@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.24](https://github.com/duiyuan/preda/compare/v0.1.23...v0.1.24) (2022-12-09)
+
+
+### Features
+
+* add minwidth, fix flex text ([5b189d3](https://github.com/duiyuan/preda/commit/5b189d3ee54553997345ff03c0f73b7470521f3b))
+
 ### [0.1.23](https://github.com/duiyuan/preda/compare/v0.1.22...v0.1.23) (2022-12-08)
 
 
