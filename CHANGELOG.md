@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.31](https://github.com/duiyuan/preda/compare/v0.1.30...v0.1.31) (2022-12-09)
+
+
+### Features
+
+* add more snippets for preda ([cd42be7](https://github.com/duiyuan/preda/commit/cd42be74890b983c304b3c2fcb8f634493e23d84))
+* impl preda completation provider ([4ad3a59](https://github.com/duiyuan/preda/commit/4ad3a597be1162667c3262e3e52c602ede136b8e))
+
 ### [0.1.30](https://github.com/duiyuan/preda/compare/v0.1.29...v0.1.30) (2022-12-09)
 
 
