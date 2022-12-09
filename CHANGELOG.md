@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.30](https://github.com/duiyuan/preda/compare/v0.1.29...v0.1.30) (2022-12-09)
+
+
+### Bug Fixes
+
+* address hash max width :bug: ([43358bf](https://github.com/duiyuan/preda/commit/43358bf61eefa8ed70c1674f41f39105fc1be18a))
+
 ### [0.1.29](https://github.com/duiyuan/preda/compare/v0.1.28...v0.1.29) (2022-12-09)
 
 
