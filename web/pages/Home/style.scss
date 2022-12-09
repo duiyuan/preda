@@ -19,6 +19,7 @@
   margin-top: -16px;
   font-family: "inter-regular";
   color: #ffffff;
+  min-width: 900px;
 }
 
 .box {
@@ -102,7 +103,7 @@
   .deploy-header {
     padding: 20px 40px;
     display: grid;
-    grid-template-columns: 175px 312px 1fr;
+    grid-template-columns: 175px 312px calc(100% - 487px);
     border-bottom: 1px solid #414141;
     .deploy-header-item {
       position: relative;
@@ -217,7 +218,12 @@
     margin-right: 4px;
   }
   .address-hash {
+    flex: 1;
     font-family: menlo;
+    // max-width: calc(100% - 130px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .address-flag {
     color: #979797;
