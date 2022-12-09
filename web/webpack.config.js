@@ -11,6 +11,7 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const extenstionPath = path.resolve(__dirname, "..", "out", "web");
 
 const optimization = !isProd
   ? {
@@ -130,12 +131,20 @@ module.exports = {
             // its runtime that would otherwise be processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+            exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx|ttf)$/, /\.html$/, /\.json$/],
             type: "asset/resource",
             generator: {
               filename: "[name][ext]",
             },
           },
+          {
+            test: /\.(ttf)$/,
+            type:  "asset/resource",
+            generator: {
+              filename: "[name][ext]",
+              publicPath: "https://file%2B.vscode-resource.vscode-cdn.net" + extenstionPath + path.sep
+            },
+          }
         ],
       },
     ],
