@@ -1,7 +1,7 @@
 {
   "declare contract": {
     "prefix": "contract",
-    "body": ["contract ${1:MyContract} {", "\t${2}", "}"],
+    "body": ["contract ${1:MyContract} {", "\t$TM_SELECTED_TEXT$0", "}"],
     "description": "declare contract"
   },
   "declare struct": {
@@ -16,7 +16,7 @@
       "for (uint32 ${1:index} = 0u; ${1:index} < ${2:array}.length(); ${1:index}++)",
       "{",
       "\t${3:element} = ${2:array}[${1:index}];",
-      "\t$TM_SELECTED_TEXT:$0",
+      "\t$TM_SELECTED_TEXT$0",
       "}"
     ],
     "description": "For Loop"
@@ -56,13 +56,39 @@
     ],
     "description": "If-Else Statement"
   },
+  "Relay global statement": {
+    "prefix": "relay@global",
+    "body": "relay@global ${1:functionName}(${2:params})",
+    "description": "Relay global statement"
+  },
+  "Relay shard statement": {
+    "prefix": "relay@shard",
+    "body": "relay@shard ${1:functionName}(${2:params})",
+    "description": "Relay shard statement"
+  },
   "Relay statement": {
-    "prefix": "relay@",
-    "body": "relay@${1|shard,global,address|} ${2:functionName}(${3:params})",
-    "description": "Relay statement"
+    "prefix": "relay@address",
+    "body": "relay@${1:address} ${2:functionName}(${3:params})",
+    "description": "Relay address statement"
   },
   "Supply statement": {
     "prefix": "supply",
     "body": "supply ${1:TokenIdentifier} using ${2:factoryName}"
+  },
+
+  "Block context statement": {
+    "prefix": "__block",
+    "body": "__block",
+    "description": "the block context"
+  },
+  "transaction context statement": {
+    "prefix": "__transaction",
+    "body": "__transaction",
+    "description": "the transaction context"
+  },
+  "debug context statement": {
+    "prefix": "__debug",
+    "body": "__debug",
+    "description": "the debug context (debug only)"
   }
 }
