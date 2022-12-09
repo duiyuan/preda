@@ -30,7 +30,21 @@ const ContractState = (s: any) => {
   )
 }
 
-export const DeployBox = ({data, key, title}: any) => {
+type BoxItemType = {
+  data: any, 
+  key: string, 
+  title: string,
+  shardOrder?: string
+}
+
+type ProfingType = {
+  BlockHeight: number
+  ShardIndex: string
+  TxnCount: number
+  TPS: number
+}
+
+export const DeployBox = ({data, key, title}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
@@ -83,7 +97,7 @@ export const DeployBox = ({data, key, title}: any) => {
     </div>
   )
 };
-export const AddrBox = ({data, key, title, shardOrder}: any) => {
+export const AddrBox = ({data, key, title, shardOrder = '0'}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
@@ -121,7 +135,7 @@ export const AddrBox = ({data, key, title, shardOrder}: any) => {
     </div>
   )
 };
-export const ShardBox = ({data, key, title, shardOrder}: any) => {
+export const ShardBox = ({data, key, title, shardOrder = '0'}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
@@ -155,7 +169,7 @@ export const ShardBox = ({data, key, title, shardOrder}: any) => {
     </div>
   );
 };
-export const TxnBox = ({data, key, title}: any) => {
+export const TxnBox = ({data, key, title}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
@@ -231,7 +245,7 @@ export const TxnBox = ({data, key, title}: any) => {
     </div>
   )
 };
-export const BlockBox = ({data, key, title, shardOrder}: any) => {
+export const BlockBox = ({data, key, title, shardOrder = '0'}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false);
   const [originData, setOriginData] = React.useState<any>([]);
 
@@ -341,13 +355,7 @@ export const BlockBox = ({data, key, title, shardOrder}: any) => {
   )
 };
 
-type ProfingType = {
-  BlockHeight: number
-  ShardIndex: string
-  TxnCount: number
-  TPS: number
-}
-export const ProfingBox = ({data, key, title}: any) => {
+export const ProfingBox = ({data, key, title}: BoxItemType) => {
 
   const maxHeight = React.useMemo(() => {
     return  Math.max(...(data.map((d: ProfingType) => d.BlockHeight)));
@@ -383,7 +391,7 @@ export const ProfingBox = ({data, key, title}: any) => {
           </div>
          {(data || []).map((d: ProfingType) => (
             <div className='profing-item' key={d.ShardIndex}>
-              <div> shard #{d.ShardIndex}, Height {d.BlockHeight} </div>
+              <div> shard {d.ShardIndex}, Height {d.BlockHeight} </div>
               <div> {toPrettyNumber(d.TxnCount)} </div>
               <div> {d.TPS}&nbsp;TPS </div>
             </div>

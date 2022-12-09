@@ -728,22 +728,22 @@ export const Home = () => {
           } 
           if (type === LOG_TYPE.ADDR) {
             return (
-               <AddrBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
+               <AddrBox data={d.content} title={d.command || title} key={type + i} shardOrder={shardOrder} />
             );
           } 
           if (type === LOG_TYPE.SHARD) {
             return (
-               <ShardBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
+               <ShardBox data={d.content} title={d.command || title} key={type + i} shardOrder={shardOrder} />
             );
           } 
           if (type === LOG_TYPE.TXN) {
             return (
-               <TxnBox data={d.content} title={d.command} key={type + i} />
+               <TxnBox data={d.content} title={d.command || title} key={type + i} />
             );
           } 
           if (type === LOG_TYPE.BLOCK) {
             return (
-               <BlockBox data={d.content} title={d.command} key={type + i} shardOrder={shardOrder} />
+               <BlockBox data={d.content} title={d.command || title} key={type + i} shardOrder={shardOrder} />
             );
           } 
           if (type === LOG_TYPE.PROFILING) {
@@ -757,7 +757,7 @@ export const Home = () => {
           if (type === LOG_TYPE.TRACE) {
             return (
               <div className="box"  key={type + i}>
-               <p className="box-title">{d.command}</p>
+               <p className="box-title">{d.command || title}</p>
                <div className="box-content">
                   <Tree data={(d.content as any).map((r: any) => {
                      if (!~r.father) {
