@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.27](https://github.com/duiyuan/preda/compare/v0.1.26...v0.1.27) (2022-12-09)
+
+
+### Bug Fixes
+
+* add iife to script ([df1459a](https://github.com/duiyuan/preda/commit/df1459a8e6a343f6fe84fa5a05e80e225043c398))
+
 ### [0.1.26](https://github.com/duiyuan/preda/compare/v0.1.25...v0.1.26) (2022-12-09)
 
 
