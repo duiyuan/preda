@@ -16,7 +16,7 @@ const completaionItems: Complation[] = [
     ],
   },
   {
-    match: /\log\.$/,
+    match: /\blog\.$/,
     items: [
       new vscode.CompletionItem("highlight", vscode.CompletionItemKind.Method),
       // new vscode.CompletionItem("warning", vscode.CompletionItemKind.Method),
@@ -32,6 +32,7 @@ const completaionItems: Complation[] = [
       new vscode.CompletionItem("addr", vscode.CompletionItemKind.Method),
       new vscode.CompletionItem("section", vscode.CompletionItemKind.Method),
       new vscode.CompletionItem("trace", vscode.CompletionItemKind.Method),
+      new vscode.CompletionItem("profiling", vscode.CompletionItemKind.Method),
     ],
   },
   {

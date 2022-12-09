@@ -2,7 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
-import PrdtsComplationProvider from "./CompletionProvider/predats";
+import completationProvider from "./CompletionProvider/predats";
+import predaCompletationProvider from "./CompletionProvider/preda";
 import runPreda from "./Commands/run";
 import editArgs from "./Commands/edit";
 import compile from "./Commands/compile";
@@ -37,19 +38,13 @@ export function activate(context: vscode.ExtensionContext) {
     (uri: vscode.Uri) => view(uri, context)
   );
 
-  const completionItemProvider = new PrdtsComplationProvider();
-  const provider = vscode.languages.registerCompletionItemProvider(
-    "prdts",
-    completionItemProvider,
-    ".",
-    "@"
-  );
   // 注册到监听队列中
   context.subscriptions.push(runChsimuCommand);
   context.subscriptions.push(editChsimuCommand);
   context.subscriptions.push(compileChsimuCommand);
   context.subscriptions.push(viewHtmlCommand);
-  context.subscriptions.push(provider);
+  context.subscriptions.push(completationProvider);
+  context.subscriptions.push(predaCompletationProvider);
 
   let timeout: any = null;
   let activeEditor = vscode.window.activeTextEditor;
