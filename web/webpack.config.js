@@ -12,6 +12,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 const extenstionPath = path.resolve(__dirname, "..", "out", "web");
+const extenstionURLPath = extenstionPath.split(path.sep).filter(i => i).join('/');
 
 const optimization = !isProd
   ? {
@@ -142,7 +143,7 @@ module.exports = {
             type:  "asset/resource",
             generator: {
               filename: "[name][ext]",
-              publicPath: "https://file%2B.vscode-resource.vscode-cdn.net" + extenstionPath + path.sep
+              publicPath: "https://file%2B.vscode-resource.vscode-cdn.net/" + extenstionURLPath + '/'
             },
           }
         ],
@@ -151,7 +152,7 @@ module.exports = {
   },
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "..", "out", "web"),
+    path: extenstionPath,
     publicPath: "{{staticPath}}",
   },
   optimization,
