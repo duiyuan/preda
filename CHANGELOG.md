@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.29](https://github.com/duiyuan/preda/compare/v0.1.28...v0.1.29) (2022-12-09)
+
+
+### Bug Fixes
+
+* extension url path hack ([95c1e5a](https://github.com/duiyuan/preda/commit/95c1e5a965d7222d76331e1ee80ba0ccd9cc9a31))
+
 ### [0.1.28](https://github.com/duiyuan/preda/compare/v0.1.27...v0.1.28) (2022-12-09)
 
 
