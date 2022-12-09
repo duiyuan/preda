@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.28](https://github.com/duiyuan/preda/compare/v0.1.27...v0.1.28) (2022-12-09)
+
+
+### Bug Fixes
+
+* resolve asset url with relative path ([c054b98](https://github.com/duiyuan/preda/commit/c054b98354a637a188e8cb153fcb22d67d525f2c))
+
 ### [0.1.27](https://github.com/duiyuan/preda/compare/v0.1.26...v0.1.27) (2022-12-09)
 
 
