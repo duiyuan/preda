@@ -9,11 +9,7 @@
     "body": ["struct ${0:Mystruct} {", "\t${1:TypeA} ${2:memberA};", "}"],
     "description": "declare struct type"
   },
-  "Import Statement": {
-    "prefix": "import",
-    "body": ["import { $0 } from \"${1:module}\";"],
-    "description": "Import external module"
-  },
+
   "For Loop": {
     "prefix": "for",
     "body": [
@@ -59,5 +55,14 @@
       "}"
     ],
     "description": "If-Else Statement"
+  },
+  "Relay statement": {
+    "prefix": "relay@",
+    "body": "relay@${1|shard,global,address|} ${2:functionName}(${3:params})",
+    "description": "Relay statement"
+  },
+  "Supply statement": {
+    "prefix": "supply",
+    "body": "supply ${1:TokenIdentifier} using ${2:factoryName}"
   }
 }

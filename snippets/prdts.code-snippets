@@ -61,6 +61,11 @@
     "body": ["viz.trace ${0:txn_name}"],
     "description": "visualize trace"
   },
+  "visualize profile": {
+    "prefix": "viz:profile",
+    "body": ["viz.profiling"],
+    "description": "visualize profile"
+  },
   "visualize section": {
     "prefix": "viz:section",
     "body": ["viz.section ${0:section}"],
