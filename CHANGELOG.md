@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.26](https://github.com/duiyuan/preda/compare/v0.1.25...v0.1.26) (2022-12-09)
+
+
+### Bug Fixes
+
+* profiling shardindex ([84393b5](https://github.com/duiyuan/preda/commit/84393b52c37bc7a577618bde59bc5c944d7bb64f))
+
 ### [0.1.25](https://github.com/duiyuan/preda/compare/v0.1.24...v0.1.25) (2022-12-09)
 
 
