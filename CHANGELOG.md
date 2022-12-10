@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.32](https://github.com/duiyuan/preda/compare/v0.1.31...v0.1.32) (2022-12-10)
+
+
+### Features
+
+* add the scope modifier ([aa32306](https://github.com/duiyuan/preda/commit/aa323062a69cccf577e427f4f4206ba1017e0ef3))
+
+
+### Bug Fixes
+
+* remove build from scripts ([a8104d2](https://github.com/duiyuan/preda/commit/a8104d2a877d88399a16699d3000821496dbd292))
+
 ### [0.1.31](https://github.com/duiyuan/preda/compare/v0.1.30...v0.1.31) (2022-12-09)
 
 
