@@ -24,7 +24,6 @@ jobs:
           yarn install --registry https://registry.npmmirror.com/
           cd -
           npm run compile --if-present
-          npm test --if-present
 
       - name: make tag and update change.log
         env:
