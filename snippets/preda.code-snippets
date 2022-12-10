@@ -34,7 +34,7 @@
   "Function Statement": {
     "prefix": "function",
     "body": [
-      "function ${4:type} ${1:name}(${2:paramsType} ${3:params}) export {",
+      "function ${4:returnType} ${1:name}(${2:paramsType} ${3:params}) ${5|export,public|} {",
       "\t$TM_SELECTED_TEXT$0",
       "}"
     ],
@@ -81,14 +81,29 @@
     "body": "__block",
     "description": "the block context"
   },
-  "transaction context statement": {
+  "Transaction context statement": {
     "prefix": "__transaction",
     "body": "__transaction",
     "description": "the transaction context"
   },
-  "debug context statement": {
+  "Debug context statement": {
     "prefix": "__debug",
     "body": "__debug",
     "description": "the debug context (debug only)"
+  },
+  "Shard scope": {
+    "prefix": "@shard",
+    "body": "@shard $TM_SELECTED_TEXT$0",
+    "description": "Shard scope"
+  },
+  "Global scope": {
+    "prefix": "@global",
+    "body": "@global $TM_SELECTED_TEXT$0",
+    "description": "global scope"
+  },
+  "Address scope": {
+    "prefix": "@address",
+    "body": "@address $TM_SELECTED_TEXT$0",
+    "description": "address scope"
   }
 }

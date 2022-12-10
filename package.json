@@ -190,7 +190,7 @@
     "compile": "npm-run-all compile:*",
     "compile:extension": "tsc -p ./",
     "compile:view": "cd web && cross-env NODE_ENV=production webpack --mode production",
-    "test": "echo ''",
+    "test": "node ./out/test/runTest.js",
     "lint": "eslint src --ext ts",
     "prepare": "husky install"
   },
