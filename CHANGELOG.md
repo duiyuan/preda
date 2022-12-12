@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.33](https://github.com/duiyuan/preda/compare/v0.1.32...v0.1.33) (2022-12-12)
+
+
+### Features
+
+* fix font static path ([56095a3](https://github.com/duiyuan/preda/commit/56095a3ce08faada4461c2bc18c90ff20db3f985))
+
 ### [0.1.32](https://github.com/duiyuan/preda/compare/v0.1.31...v0.1.32) (2022-12-10)
 
 
