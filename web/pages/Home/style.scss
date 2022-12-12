@@ -247,6 +247,7 @@
   }
   .shard-item {
     margin: 0 40px;
+    overflow: hidden;
     &:not(:last-child) {
       @extend .dash-border;
     }
