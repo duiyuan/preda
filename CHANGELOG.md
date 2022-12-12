@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.35](https://github.com/duiyuan/preda/compare/v0.1.34...v0.1.35) (2022-12-12)
+
+
+### Bug Fixes
+
+* share item add BFC ([18e1647](https://github.com/duiyuan/preda/commit/18e1647efa17992ad910ccef9f5bfb98442f724f))
+
 ### [0.1.34](https://github.com/duiyuan/preda/compare/v0.1.33...v0.1.34) (2022-12-12)
 
 
