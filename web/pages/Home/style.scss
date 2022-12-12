@@ -207,6 +207,9 @@
     display: grid;
     grid-template-columns: 264px 1fr;
   }
+  .address-text .address-hash {
+    max-width: 713px;
+  }
 }
 
 .address-text {
