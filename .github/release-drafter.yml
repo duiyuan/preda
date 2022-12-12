@@ -1,5 +1,5 @@
-name-template: "v$MAJOR.$MINOR.$PATCH 🌈"
-tag-template: "v$MAJOR.$MINOR.$PATCH"
+name-template: "v$RESOLVED_VERSION 🌈"
+tag-template: "v$RESOLVED_VERSION"
 version-template: $MAJOR.$MINOR.$PATCH
 categories:
   - title: "🚀 Features"

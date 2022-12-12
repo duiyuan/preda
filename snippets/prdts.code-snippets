@@ -36,10 +36,20 @@
     "body": ["chain.deploy ${0:contract}.prd"],
     "description": "deploy contract"
   },
-  "visualize block": {
-    "prefix": "viz:b",
-    "body": ["viz.block #${1|all,shard:block|}"],
-    "description": "visualize block"
+  "visualize all block": {
+    "prefix": "viz:b#all",
+    "body": ["viz.block #all"],
+    "description": "visualize all block"
+  },
+  "visualize specified block in shard": {
+    "prefix": "viz:b#shard:block",
+    "body": ["viz.block #${1:0}:${2:0}", "$TM_SELECTED_TEXT$0"],
+    "description": "visualize specified block in shard"
+  },
+  "visualize all shard block": {
+    "prefix": "viz:b#shard",
+    "body": ["viz.block #${1|g,0|}"],
+    "description": "visualize all shard block"
   },
   "visualize shard": {
     "prefix": "viz:s",
@@ -62,7 +72,7 @@
     "description": "visualize trace"
   },
   "visualize profile": {
-    "prefix": "viz:profile",
+    "prefix": "viz:p",
     "body": ["viz.profiling"],
     "description": "visualize profile"
   },
@@ -75,15 +85,5 @@
     "prefix": "log:h",
     "body": ["log.hightlight ${0:message}"],
     "description": "hightlight message"
-  },
-  "log warning": {
-    "prefix": "log:w",
-    "body": ["log.warning ${0:message}"],
-    "description": "print warning message"
-  },
-  "log error": {
-    "prefix": "log:e",
-    "body": ["log.error ${0:message}"],
-    "description": "print error message"
   }
 }
