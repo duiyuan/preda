@@ -12,8 +12,11 @@
       contract: "{{{contract}}}",
     };
   </script>
-  <script>
-    (function () {
+</head>
+<body>
+
+  <script type="text/javascript">
+    !(function () {
       var style = document.createElement('style')
       function decodeHtml(html) {
           var txt = document.createElement("textarea");
@@ -38,7 +41,6 @@
       document.head.appendChild(style)
     })();
   </script>
-</head>
-<body><div id="root" class="wrap"></div></body>
-
+  <div id="root" class="wrap"></div>
+</body>
 </html>
