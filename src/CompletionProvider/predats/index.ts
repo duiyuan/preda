@@ -1,25 +1,17 @@
 // https://code.visualstudio.com/api/language-extensions/programmatic-language-features#show-code-completion-proposals
-
 import * as vscode from "vscode";
-import providers from "./items";
+import Provider from "../provider";
+import completations from "./items";
 
-export default class PrdtsCompletionItemProvider
-  implements vscode.CompletionItemProvider
-{
-  provideCompletionItems(
-    document: vscode.TextDocument,
-    position: vscode.Position
-  ) {
-    const linePrefix = document
-      .lineAt(position)
-      .text.substr(0, position.character);
-
-    for (let i = 0; i < providers.length; i++) {
-      const provider = providers[i];
-      if (provider.match.test(linePrefix)) {
-        return provider.items;
-      }
-    }
-    return [];
+class CompletationProvider extends Provider {
+  constructor() {
+    super(completations);
   }
 }
+
+export default vscode.languages.registerCompletionItemProvider(
+  "prdts",
+  new CompletationProvider(),
+  ".",
+  "@"
+);

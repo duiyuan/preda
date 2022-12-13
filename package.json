@@ -2,7 +2,7 @@
   "name": "preda",
   "displayName": "PREDA Language Preview Toolchain",
   "description": "Local development environment for the PREDA smart contract programming language",
-  "version": "0.1.29",
+  "version": "0.1.40",
   "engines": {
     "vscode": "^1.56.0"
   },
@@ -190,7 +190,7 @@
     "compile": "npm-run-all compile:*",
     "compile:extension": "tsc -p ./",
     "compile:view": "cd web && cross-env NODE_ENV=production webpack --mode production",
-    "test": "echo ''",
+    "test": "npm run compile:extension && node ./out/test/runTest.js",
     "lint": "eslint src --ext ts",
     "prepare": "husky install"
   },

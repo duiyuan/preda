@@ -16,15 +16,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-          
+
       - name: npm install, build and test
         run: |
           yarn install --registry https://registry.npmmirror.com/
           cd web 
           yarn install --registry https://registry.npmmirror.com/
           cd -
-          npm run build --if-present
-          npm test --if-present
+          npm run compile --if-present
 
       - name: make tag and update change.log
         env:
@@ -52,11 +51,11 @@ jobs:
         with:
           name: preda-${{ steps.package-version.outputs.current-version }}
           path: ./*.vsix
-     
+
       - name: committer
         run: |
           git push --follow-tags origin main
-          
+
       - uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

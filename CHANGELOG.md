@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.40](https://github.com/duiyuan/preda/compare/v0.1.39...v0.1.40) (2022-12-13)
+
+
+### Features
+
+* del txn gasburnt label ([a0deef3](https://github.com/duiyuan/preda/commit/a0deef350226306dd618dcf618dbb94bbaa5329f))
+
+### [0.1.39](https://github.com/duiyuan/preda/compare/v0.1.38...v0.1.39) (2022-12-13)
+
+
+### Bug Fixes
+
+* fix addr item ui ([35dd056](https://github.com/duiyuan/preda/commit/35dd056fe3288e681b15f0a898d1bae5ea40e882))
+
+### [0.1.38](https://github.com/duiyuan/preda/compare/v0.1.37...v0.1.38) (2022-12-12)
+
+
+### Bug Fixes
+
+* addr header hash width ([904c43a](https://github.com/duiyuan/preda/commit/904c43a4c7c091c94025352af9165669bf54f772))
+
+### [0.1.37](https://github.com/duiyuan/preda/compare/v0.1.36...v0.1.37) (2022-12-12)
+
+
+### Bug Fixes
+
+* update snippets for prdts ([1c65155](https://github.com/duiyuan/preda/commit/1c651558d6d8d919dac243a615f3c80b3a9c5868))
+
+### [0.1.36](https://github.com/duiyuan/preda/compare/v0.1.35...v0.1.36) (2022-12-12)
+
+### [0.1.35](https://github.com/duiyuan/preda/compare/v0.1.34...v0.1.35) (2022-12-12)
+
+
+### Bug Fixes
+
+* share item add BFC ([18e1647](https://github.com/duiyuan/preda/commit/18e1647efa17992ad910ccef9f5bfb98442f724f))
+
+### [0.1.34](https://github.com/duiyuan/preda/compare/v0.1.33...v0.1.34) (2022-12-12)
+
+
+### Bug Fixes
+
+* fix html warn ([4036f10](https://github.com/duiyuan/preda/commit/4036f10496006597de96876b30d473a496689687))
+
+### [0.1.33](https://github.com/duiyuan/preda/compare/v0.1.32...v0.1.33) (2022-12-12)
+
+
+### Features
+
+* fix font static path ([56095a3](https://github.com/duiyuan/preda/commit/56095a3ce08faada4461c2bc18c90ff20db3f985))
+
+### [0.1.32](https://github.com/duiyuan/preda/compare/v0.1.31...v0.1.32) (2022-12-10)
+
+
+### Features
+
+* add the scope modifier ([aa32306](https://github.com/duiyuan/preda/commit/aa323062a69cccf577e427f4f4206ba1017e0ef3))
+
+
+### Bug Fixes
+
+* remove build from scripts ([a8104d2](https://github.com/duiyuan/preda/commit/a8104d2a877d88399a16699d3000821496dbd292))
+
+### [0.1.31](https://github.com/duiyuan/preda/compare/v0.1.30...v0.1.31) (2022-12-09)
+
+
+### Features
+
+* add more snippets for preda ([cd42be7](https://github.com/duiyuan/preda/commit/cd42be74890b983c304b3c2fcb8f634493e23d84))
+* impl preda completation provider ([4ad3a59](https://github.com/duiyuan/preda/commit/4ad3a597be1162667c3262e3e52c602ede136b8e))
+
+### [0.1.30](https://github.com/duiyuan/preda/compare/v0.1.29...v0.1.30) (2022-12-09)
+
+
+### Bug Fixes
+
+* address hash max width :bug: ([43358bf](https://github.com/duiyuan/preda/commit/43358bf61eefa8ed70c1674f41f39105fc1be18a))
+
 ### [0.1.29](https://github.com/duiyuan/preda/compare/v0.1.28...v0.1.29) (2022-12-09)
 
 
