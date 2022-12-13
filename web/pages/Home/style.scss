@@ -197,6 +197,7 @@
   }
   .addr-item {
     margin: 0 32px;
+    overflow: hidden;
     &:not(:last-child) {
       @extend .dash-border;
       margin-bottom: 24px;
