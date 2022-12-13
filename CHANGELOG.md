@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.41](https://github.com/duiyuan/preda/compare/v0.1.40...v0.1.41) (2022-12-13)
+
+
+### Bug Fixes
+
+* udpate profiling text ui ([7680869](https://github.com/duiyuan/preda/commit/7680869d79a04f7a4f5ab77a3034f1be86f4dd7f))
+
 ### [0.1.40](https://github.com/duiyuan/preda/compare/v0.1.39...v0.1.40) (2022-12-13)
 
 
