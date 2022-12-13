@@ -291,8 +291,8 @@ export const BlockBox = ({data, key, title, shardOrder = '0'}: BoxItemType) => {
                         <div className='confirm-txn-item' key={txn.Timestamp}>
                           <div className='box-key'>Return Value:</div>
                           <div className='box-val'>{txn.InvokeResult}</div>
-                          <div className='box-key'>GasBurnt:</div>
-                          <div className='box-val'>{txn.GasBurnt}</div>
+                          {/* <div className='box-key'>GasBurnt:</div>
+                          <div className='box-val'>{txn.GasBurnt}</div> */}
                           <div className='box-key'>InvokeContextType:</div>
                           <div className='box-val'>{txn.InvokeContextType}</div>
                           {txn.Target ? (
