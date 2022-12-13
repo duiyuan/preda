@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.39](https://github.com/duiyuan/preda/compare/v0.1.38...v0.1.39) (2022-12-13)
+
+
+### Bug Fixes
+
+* fix addr item ui ([35dd056](https://github.com/duiyuan/preda/commit/35dd056fe3288e681b15f0a898d1bae5ea40e882))
+
 ### [0.1.38](https://github.com/duiyuan/preda/compare/v0.1.37...v0.1.38) (2022-12-12)
 
 
