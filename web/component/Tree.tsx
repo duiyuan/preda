@@ -15,7 +15,7 @@ type TreeData = {
 const Tree = ({ data, name }: TreeData) => {
 
   useEffect(() => {
-    setTimeout(() => {
+    const t = setInterval(() => {
       // console.log(data)
       const isFather = (fatherId: string, cData: any): boolean => {
         const fid = Number(fatherId)
@@ -37,34 +37,41 @@ const Tree = ({ data, name }: TreeData) => {
       }
       const links = document.querySelectorAll(`.${name} path.link`);
       const nodes = document.querySelectorAll(`.${name} .node`);
-
-      data.forEach((d: any, index: number) => {
-        if (d) {
-          const w = (nodes[index]).querySelector('.tree-node')?.clientWidth || 240;
-          const translateX = w - 240;
-          for (let c = index+1;c < nodes.length;c++) {
-            const node = nodes[c] && nodes[c].querySelector('.tree-node')
-            const link = links[c-1]
-            const currentData = data[c]
-            const isCurrentFather = isFather(d.tx_id, currentData)
-            // console.log(node, isCurrentFather, d.tx_id, currentData.father)
-            if (node && isCurrentFather) {
-              const oldX = Number((node as HTMLElement).style.transform.replace(/[^\d|^\-]/g, ''));
-              const newX = Number(translateX) + Number(oldX);
-              (node as HTMLElement).style.transform = "translateX(" + newX + "px)";
-
-              // console.log(node, translateX, oldX,);
-              if (link) {
-                // const oldX = Number((link[c-1] as HTMLElement).style.transform.replace(/[^\d|^\-]/g, '') || 0);
+      if (links.length && nodes.length) {
+        data.forEach((d: any, index: number) => {
+          if (d) {
+            const w = (nodes[index]).querySelector('.tree-node')?.clientWidth || 240;
+            const translateX = w - 240;
+            for (let c = index+1;c < nodes.length;c++) {
+              const node = nodes[c] && nodes[c].querySelector('.tree-node')
+              const link = links[c-1]
+              const currentData = data[c]
+              const isCurrentFather = isFather(d.tx_id, currentData)
+              // console.log(node, isCurrentFather, d.tx_id, currentData.father)
+              if (node && isCurrentFather) {
+                const oldX = Number((node as HTMLElement).style.transform.replace(/[^\d|^\-]/g, ''));
                 const newX = Number(translateX) + Number(oldX);
-                (link as HTMLElement).style.transform = "translateX(" + newX + "px)";
+                (node as HTMLElement).style.transform = "translateX(" + newX + "px)";
+  
+                // console.log(node, translateX, oldX,);
+                if (link) {
+                  // const oldX = Number((link[c-1] as HTMLElement).style.transform.replace(/[^\d|^\-]/g, '') || 0);
+                  const newX = Number(translateX) + Number(oldX);
+                  (link as HTMLElement).style.transform = "translateX(" + newX + "px)";
+                }
               }
             }
           }
-        }
-    })
-    }, 1500)
-  }, [data])
+        });
+        clearInterval(t);
+      } else {
+        // console.log(t, name);
+      }
+    }, 1000);
+    return () => {
+      clearInterval(t);
+    };
+  }, [data]);
 
   return (
     <div className={clss(name, "svg-box")}>
