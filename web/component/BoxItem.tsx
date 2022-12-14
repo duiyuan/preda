@@ -5,7 +5,6 @@ import MoreSwitch from './MoreSwitch'
 import AddressText from './AddressText'
 import clss from 'classnames'
 import Tooltip from './Tooltip';
-import { TaskPanelKind } from 'vscode';
 
 const ContractState = (s: any) => {
   return (
@@ -48,10 +47,10 @@ export const DeployBox = ({data, key, title}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
-    return  more ? data : [data[0]];
+    return  more ? data : data[0] ? [data[0]] : [];
   }, [data, more]);
 
-  return (
+  return !originData.length ? null : (
     <div className="box deploy-box" key={key}>
       <p className="box-title">{title}</p>
       {originData.map((d: any) => (
@@ -101,10 +100,10 @@ export const AddrBox = ({data, key, title, shardOrder = '0'}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
-    return  more ? data : [data[0]];
+    return  more ? data : data[0] ? [data[0]] : [];
   }, [data, more]);
 
-  return (
+  return !originData.length ? null : (
     <div className={clss({'mulit': originData.length > 1},"box addr-box")} key={key}>
       <p className="box-title">{title}</p>
         <div className="box-content" >
@@ -139,10 +138,10 @@ export const ShardBox = ({data, key, title, shardOrder = '0'}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
-    return  more ? data : [data[0]];
+    return  more ? data : data[0] ? [data[0]] : [];
   }, [data, more]);
 
-  return (
+  return !originData.length ? null : (
     <div className="box shard-box" key={key}>
       <p className="box-title">{title}</p>
         <div className="box-content" >
@@ -173,10 +172,10 @@ export const TxnBox = ({data, key, title}: BoxItemType) => {
   const [more, setMore] = React.useState<boolean>(false)
 
   const originData = React.useMemo(() => {
-    return  more ? data : [data[0]];
+    return  more ? data : data[0] ? [data[0]] : [];
   }, [data, more]);
 
-  return (
+  return !originData.length ? null : (
     <div className="box txn-box" key={key}>
       <p className="box-title">{title}</p>
         <div className="box-content" >
@@ -250,10 +249,11 @@ export const BlockBox = ({data, key, title, shardOrder = '0'}: BoxItemType) => {
   const [originData, setOriginData] = React.useState<any>([]);
 
   React.useEffect(() => {
-    setOriginData(more ? data : [data[0]])
+    setOriginData(more ? data : data[0] ? [data[0]] : [])
   }, [data, more]);
 
-  return (
+  
+  return !originData.length ? null : (
     <div className="box block-box" key={key}>
       <p className="box-title">{title}</p>
         <div className="box-content" >
@@ -371,7 +371,7 @@ export const ProfingBox = ({data, key, title}: BoxItemType) => {
     return  [tTxn, tTPS]
   }, [data]);
 
-  return (
+  return !data.length ? null : (
     <div className="box profing-box" key={key}>
       <p className="box-title">{title}</p>
         <div className="box-content" >
