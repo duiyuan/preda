@@ -103,15 +103,18 @@ const Tree = ({ data, name }: TreeData) => {
             const isNormalRelayContent = ['Normal'].includes(InvokeContextType)
             const isIntraOrDispatch = ['RelayIntra', 'Dispatch'].includes(InvokeContextType)
             if (isIntraOrDispatch) {
-              setTimeout(() => {
-                const link = document.querySelector(`path.link:nth-child(${id - 1})`)
+              const t = setInterval(() => {
+                const link = document.querySelector(`.${name} path.link:nth-child(${id - 1})`)
                 if (link) {
                   link.setAttribute('stroke-dasharray', '15 4')
+                  clearInterval(t)
                 }
-              }, 2000)
+                console.log(1111, link)
+              }, 1000)
             }
-            setTimeout(() => {
-              if (node.data.tx_info.Arguments) {
+            const t = setInterval(() => {
+              const fnElement = document.querySelector(`.${name} .tree-node.tree-${id} .fn`);
+              if (node.data.tx_info.Arguments && fnElement) {
                 reactDom.render(
                   <Tooltip placement={'top'} trigger="hover" overlay={
                     <ReactJson
@@ -129,7 +132,10 @@ const Tree = ({ data, name }: TreeData) => {
                         {Fn}@{Contract}
                       </>
                   </Tooltip>
-               , document.querySelector(`.tree-node.tree-${id} .fn`))
+               , fnElement)
+               clearInterval(t);
+              } else {
+                clearInterval(t)
               }
             }, 500)
             return `
