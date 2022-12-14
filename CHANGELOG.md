@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.43](https://github.com/duiyuan/preda/compare/v0.1.42...v0.1.43) (2022-12-14)
+
+
+### Bug Fixes
+
+* trace tree argument tooltip ([28101d3](https://github.com/duiyuan/preda/commit/28101d32e4ddb760a03f3d3f045b906411bc2c7e))
+* trace tree argument tooltip ([22a6ab9](https://github.com/duiyuan/preda/commit/22a6ab92215f6a75144a01e131bcca654564d220))
+
 ### [0.1.42](https://github.com/duiyuan/preda/compare/v0.1.41...v0.1.42) (2022-12-13)
 
 
