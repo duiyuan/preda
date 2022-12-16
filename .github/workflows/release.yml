@@ -60,6 +60,8 @@ jobs:
         id: drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          version: ${{ steps.package-version.outputs.current-version }}
 
       - name: print upload url
         run: echo ${{ steps.drafter.outputs.upload_url }}

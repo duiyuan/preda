@@ -42,9 +42,11 @@ autolabeler:
   - label: 'bug'
     branch:
       - '/fix\/.+/'
+      - '/bug\/.+/'
   - label: 'feature'
     branch:
-      - '/[feature|feat]\/.+/'
+      - '/feature\/.+/'
+      - '/feat\/.+/'
   - label: 'chore'
     branch:
       - '/chore\/.+/'
