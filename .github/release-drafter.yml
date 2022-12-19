@@ -39,20 +39,32 @@ autolabeler:
   - label: 'documentation'
     branch:
       - '/doc\/.+/'
+    title:
+      - '/^doc/i'
   - label: 'bug'
     branch:
       - '/fix\/.+/'
       - '/bug\/.+/'
+    title:
+      - '/^fix/i'
+      - '/^bug/i'
   - label: 'feature'
     branch:
       - '/feature\/.+/'
       - '/feat\/.+/'
+    title:
+      - '/^feature/i'
+      - '/^feat/i'
   - label: 'chore'
     branch:
       - '/chore\/.+/'
+    title:
+      - '/^chore/i'
   - label: 'test'
     branch:
       - '/test\/.+/'
+    title:
+      - '/^test/i'
 template: |
   ## Changes
 
