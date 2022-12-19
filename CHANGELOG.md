@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.51](https://github.com/duiyuan/preda/compare/v0.1.50...v0.1.51) (2022-12-19)
+
 ### [0.1.50](https://github.com/duiyuan/preda/compare/v0.1.49...v0.1.50) (2022-12-19)
 
 
