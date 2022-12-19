@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.50](https://github.com/duiyuan/preda/compare/v0.1.49...v0.1.50) (2022-12-19)
+
+
+### Bug Fixes
+
+* add title regx with autolabeler ([fcc6801](https://github.com/duiyuan/preda/commit/fcc6801824562c88010362c091d42d15c92198fd))
+* add title regx with autolabeler ([0af7fda](https://github.com/duiyuan/preda/commit/0af7fda32a559ef60b1754aaccfc344de98a1bc7))
+
 ### [0.1.49](https://github.com/duiyuan/preda/compare/v0.1.48...v0.1.49) (2022-12-16)
 
 ### [0.1.48](https://github.com/duiyuan/preda/compare/v0.1.47...v0.1.48) (2022-12-16)
